@@ -1,0 +1,6 @@
+#/bin/sh
+
+BINDIR=`dirname $0`
+cd $BINDIR/../..
+echo $PWD
+tar -czf DeadByZombie-Mac-source-backup.tgz DeadByZombie

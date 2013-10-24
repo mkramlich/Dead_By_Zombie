@@ -1,0 +1,12 @@
+#!/bin/sh
+
+PROJ='DeadByZombie'
+
+DIST='DeadByZombie-Linux.tgz'
+
+cd ..
+tar -czf $DIST --exclude-from $PROJ/bin/dist-exclude-patterns $PROJ/README.txt $PROJ/CHANGES.txt $PROJ/PLAY.command $PROJ/src $PROJ/conf $PROJ/data $PROJ/logs $PROJ/saves $PROJ/credits.txt
+
+chmod 644 $DIST
+
+mv $DIST $PROJ/uploads

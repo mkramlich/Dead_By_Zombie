@@ -1,0 +1,12 @@
+<b>15.</b> player feedback section; world event descriptions and user command input feedback will be shown here as they occur; (NOTE: the Inventory and Things Here buttons will also toggle open/close some stuff here, listing things in their respective categories, when opened; every thing in such lists will have zero or more buttons associated with it, which are the actions/commands you can perform with/on the particular thing)
+<b>16.</b> site footer; everything below the horizontal ruler line is part of the website footer, and thus is not really part of this game, though is useful at times
+<b>17.</b> site logo; the logo image is also a link that will take you to the site's front page
+<b>18.</b> game name
+<b>19.</b> site user/account used by the current player
+<b>20.</b> whether logged-in or not, using a site account
+<b>21.</b> whether subscriber or not; a non-subscriber will at best likely be restricted to only a drastically limited subset of the full game play experience
+<b>22.</b> count of messages waiting in the current site user's inbox
+<b>23.</b> count of user's multi-player games underway on the site
+<b>24.</b> login/logout link (what it shows depends on whether you're logged in/out currently)
+<b>25.</b> Console: freeform user/action command input controls; for advanced users, not really supported yet; we recommend you not use this for now
+<b>26.</b> help link; takes you to the game's Help page (which is probably where you saw the example screenshot and accompanying Key!)

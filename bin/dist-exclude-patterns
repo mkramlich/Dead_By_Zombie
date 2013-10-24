@@ -1,0 +1,6 @@
+src/deadbyzombie/*.py
+src/deadbyzombie/pdb_dbz.pyc
+PDB.command
+.pdbrc
+*.swp
+.DS_Store

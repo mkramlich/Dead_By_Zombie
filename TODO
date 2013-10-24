@@ -1,0 +1,25 @@
+TODO
+
+elim all refs/support for Windows
+
+elim/rename GROGDJANGO
+
+elim refs to and distinction between Demo and Premium/License modes (demo vs full in initstate filenames)
+
+rename core engine from webhack
+
+elim remaining vestiges of the original web UI version (Django refs, etc.)
+
+extract core engine from DBZ into separate public github repo?
+
+NetHack movement dir keys
+
+upgrade/bump to Python 2.7 or higher
+
+support larger window sizes (map view subset should get bigger, dynamically/auto-detect, if not already)
+
+migrate forward all ideas worth keeping & relevant from my original offline TODO files, into this TODO
+
+elim use of dateutil package?
+
+migrate to using GUI lib (like Pygame/SDL) since more freedom in choosing UI appearance

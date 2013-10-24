@@ -1,0 +1,7 @@
+<b>Directed Actions:</b>
+<b>open/close:</b> open or close a door
+<b>lock/unlock:</b> lock or unlock a closed door
+<b>pick:</b> pick a locked door (try to, anyway)
+<b>ask (not) follow:</b> ask an NPC to follow you (or not)
+<b>ask (not) not move:</b> ask an NPC to not move (to stay where they are, in other words) (or not)
+<b>attack:</b> attack something (typically a lifeform, like a zombie or NPC human, or, an inanimate but destructible object, like a window or closed door)

@@ -1,0 +1,7 @@
+#!/bin/sh
+
+BURNSRC='DBZ_Demo_CD.fpbf'
+
+cp README.txt $BURNSRC
+cp uploads/DeadByZombie-MacOSX.tgz $BURNSRC
+cp uploads/DeadByZombie-Linux.tgz $BURNSRC

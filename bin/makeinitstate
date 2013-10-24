@@ -1,0 +1,11 @@
+#!/bin/sh
+
+#. ./setenv.sh
+
+#/Users/mkramlich/projects/mine/DeadByZombie
+#export GROGDJANGO='/Users/michaelkramlich/Desktop/code/DeadByZombie'
+export SITELOGFILE="makeinitstate-site.log"
+export WHLOGFILE="makeinitstate-wh.log"
+
+makeinitstate.py ZombieHack demo default.zh.demo.gamestate
+makeinitstate.py ZombieHack full default.zh.full.gamestate

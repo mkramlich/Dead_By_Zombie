@@ -1,0 +1,14 @@
+<b>KEY:</b>
+<b>1.</b> game logo
+<b>2.</b> level name
+<b>3.</b> region name
+<b>4.</b> time-of-day
+<b>5.</b> map (POV is from above looking down)
+<b>6.</b> you, your location (the blue @ symbol)
+<b>7.</b> current time (called tock because arbitrary; could represent seconds, minutes, hours, etc.)
+<b>8.</b> your health (HP stands for Hit Points or Health Points); you die if this reaches 0)
+<b>9.</b> stomach content amount or nutritional energy avail (comes from eating food; if reaches 0 you will begin starving to death)
+<b>10.</b> your location coordinates on the map as (row,column); top-left map cell is (0,0); the cell that is 2 below that and 1 to the right would be (2,1)
+<b>11.</b> when you last saved your game to disk, if ever (don't worry about this for now -- you never need to 'save' as long as the server stays running)
+<b>12.</b> movement controls: press one of the 8 buttons to move 1 cell in that relative direction ('<' means west/left; the topleft '\\' means north-west, etc.)
+<b>13.</b> directed action controls: press one of the 8 buttons to perform the selected action in that relative direction (works similarly to the movement controls); unlike movement controls, here you can use the dropdown box to select the particular action you wish to perform; if you do not select one, the currently selected one will be performed; the action is only performed when you press one of the 8 direction buttons that surround the dropdown box, NOT when you change the selected action

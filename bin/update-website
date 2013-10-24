@@ -1,0 +1,9 @@
+#!/bin/sh
+
+BINDIR=`dirname $0`
+WEBDEV='website/siteroot/webroot'
+
+cd $BINDIR/..
+cp uploads/DeadByZombie-MacOSX.tgz $WEBDEV/downloads
+cp uploads/DeadByZombie-Linux.tgz $WEBDEV/downloads
+cp README.txt $WEBDEV/downloads

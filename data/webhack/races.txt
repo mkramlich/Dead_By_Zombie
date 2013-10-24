@@ -1,0 +1,5 @@
+white
+black
+asian
+hispanic
+Native American

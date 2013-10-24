@@ -1,0 +1,19 @@
+black
+blue
+bronze
+brown
+chrome
+dark grey
+green
+grey
+indigo
+light grey
+orange
+pink
+purple
+red
+silver
+tan
+violet
+white
+yellow
