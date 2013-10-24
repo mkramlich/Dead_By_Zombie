@@ -10,13 +10,17 @@ ver 1.1
 Night is for the Dead"
 ------------------------
 
-This is an open source snapshot of the previously close sourced and original commercial Rogue-like game about a zombie apocalypse, Dead By Zombie. We also used to officially support Windows but have dropped that platform as not worth the effort. The creator prefers and therefore focuses on the Linux and Mac ecosystems. Trust me: life's better with Mac or Linux. We're also going to begin implementing a series of upgrades to the game and the core engine as we have time, and making those changes available here in the open sourced repo on GitHub.
+This is an open source snapshot of my 100% originally-created but previously close-sourced, commercial Python-based Rogue-like game about a zombie apocalypse, Dead By Zombie.
 
-I'm not taking code contributations at the moment, so don't bother issuing pull requests. That may change in the future.
+I'm not taking code contributations at the moment, so don't bother issuing pull requests. That may change in the future. Feel free to email.
 
-All rights reserved worldwide.
+We also used to officially support Windows but have dropped that platform as not worth the effort. The creator prefers and therefore focuses on the Linux and Mac ecosystems. Trust me: life's better with Mac or Linux.
+
+We're going to begin implementing a series of upgrades to the game and the core engine as we have time, and making those changes available here in the open sourced repo on GitHub.
 
 Feel free to play it. And feel free to make modifications to the code that run only on your own machine. You may not distribute this game, its code or your own modified versions of it to other parties without my explicit prior permission. Feel free to throw money at me. I love LEGO. And Advanced Squad Leader.
+
+All rights reserved worldwide.
 
 
 Requirements:

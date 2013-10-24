@@ -1,6 +1,6 @@
 TODO
 
-elim all refs/support for Windows
+elim all refs/support for Windows (reminder: web32 refs in the code; my Console wrapper/emu)
 
 elim/rename GROGDJANGO
 
@@ -8,7 +8,7 @@ elim refs to and distinction between Demo and Premium/License modes (demo vs ful
 
 rename core engine from webhack
 
-elim remaining vestiges of the original web UI version (Django refs, etc.)
+elim remaining vestiges of the original web UI version (Django refs, HtmlColors, HTML snippets, web-somethings, etc.)
 
 extract core engine from DBZ into separate public github repo?
 
@@ -23,3 +23,17 @@ migrate forward all ideas worth keeping & relevant from my original offline TODO
 elim use of dateutil package?
 
 migrate to using GUI lib (like Pygame/SDL) since more freedom in choosing UI appearance
+
+merge those 3 lib modules together and elim unused/redund
+
+elim refs to adult/adultsonly if truly no longer used
+
+fix any imperfections that happen after you die
+
+make the world much larger
+
+change all zombiehack/zh refs to DeadByZombie/dbz
+
+elim refs to Wolfenhack
+
+delete all commented-out code
