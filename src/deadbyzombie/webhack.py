@@ -8793,7 +8793,6 @@ def add_thing_class_to_group(thingclass, group_name):
 
 thing_classes = get_instantiable_thing_classes(globals())
 for cl in thing_classes:
-    global master_layoutmap #TODO line seems unneeded. why did i do this?
     master_layoutmap[cl.char] = cl
     debug('put %s in master_layoutmap for %s' % (cl, cl.char))
     if issubclass(cl,RndStuff) and 'abstract' not in vars(cl):
