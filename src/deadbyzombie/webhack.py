@@ -3069,9 +3069,12 @@ class Route(Thing):
         return False
 
     def execute_route(self, route_event):
+        debug('execute_route')
         event = route_event
         who = event.who
         self.wh.geo.move_this_from_here_to_there(who, self.destloc, movedesc='route travelling')
+        self.wh.make_you_level_active_and_focus_ui()
+        self.wh.update_seen_cells()
         s = who.describe() + ' took the path to %s' % self.get_destdesc()
         self.wh.feedbacksen(s)
 

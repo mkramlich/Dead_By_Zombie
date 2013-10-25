@@ -249,7 +249,7 @@ class DefaultMode(Mode):
     def render_tock(self):
         wh = cur_state()
         tock = wh.ev.tock
-        self.addstr(2, 0, 'tock: %s' % tock)
+        self.addstr(2, 0, 'time: %s' % tock)
         
     def render_locinfo(self):
         wh = cur_state()
@@ -1143,7 +1143,8 @@ class AboutScreen(Mode):
             '',
             'version %s' % ver,
             '',
-            'DeadByZombie.com',
+            'https://github.com/mkramlich/Dead_By_Zombie',
+            'http://synisma.neocities.org/deadbyzombie.html',
             '',
             'design, writing & programming by Mike Kramlich',
             '',

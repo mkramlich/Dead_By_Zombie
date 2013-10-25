@@ -1,5 +1,13 @@
 TODO
 
+topmost issues are generally highest priority and/or coming up next in my work queue
+
+------------------------------------
+
+fix 'has' to 'have' and capitalize 'you': "you lost 1 hp due to starvation and now has 0 hp"
+
+a way for player to learn about the status of the world, what's happening with the zombie apocalypse
+
 elim all refs/support for Windows (reminder: web32 refs in the code; my Console wrapper/emu)
 
 elim remaining vestiges of the original web UI version (Django refs, HtmlColors, HTML snippets, web-somethings, etc.)
