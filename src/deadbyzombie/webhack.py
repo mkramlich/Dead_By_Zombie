@@ -72,7 +72,7 @@ from ai_system import AiSystem
 from belief_system import BeliefSystem, HasBeliefs
 from event_system import EventSystem, Event, TickEvent
 from fact_system import FactSystem, HasFacts
-from geo_system import * #TODO instead do explicit imports
+from geo_system import GeoSystem, GeoSystemPlugin, Location, HasLocation, FuzzyLocation, Level, Zone, Water, StringLevelRenderer
 from goal_system import GoalSystem
 from has_mind import HasMind
 from id_system import IdSystem, HasID
