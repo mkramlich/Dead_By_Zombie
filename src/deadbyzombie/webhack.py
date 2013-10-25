@@ -67,9 +67,6 @@ def envcfg(key):
 
 def makehtmlsafe(txt): return txt
 
-def is_adultmode(request):
-    return False
-
 
 # WebHack Game Subsystems
 from ai_system import AiSystem
@@ -129,12 +126,9 @@ DATADIR = GROGDJANGO + '/data/webhack/'
 #TODO refactor to: class MetaKey: AUTOUI = 'autoui'; DEVONLY = 'devonly', etc.
 AUTOUI_METAKEY = 'autoui'
 DEVONLY_METAKEY = 'devonly'
-ADULTONLY_METAKEY = 'adultonly'
 DIRECTIONAL_METAKEY = 'directional'
 MOVECMD_METAKEY = 'movecmd'
 INVENTORYTHINGUSERCMD_METAKEY = 'inventorythingusercmd'
-
-ADULTSONLY = 'adultsonly'
 
 USERCMD_PREFIX = 'usercmd_'
 
@@ -150,7 +144,6 @@ class HtmlColors(lib.HtmlColors):
     BG         = lib.HtmlColors.WHITE
     YOU        = lib.HtmlColors.BLUE
     FRIEND     = '#00BB00'
-    ADULT      = lib.HtmlColors.PINK
     DEVONLY    = lib.HtmlColors.BLUE
     USDOLLAR   = lib.HtmlColors.DARKGREEN
     MONEY      = USDOLLAR
@@ -161,10 +154,6 @@ class Colors(lib.HtmlColors):
     WHITE = lib.HtmlColors.BLACK
     FG = WHITE
     BG = BLACK
-
-class AdultsOnly:
-    adultsonly = True
-    charcolor = HtmlColors.ADULT
 
 # Thoughts
 THINK_SHOULD_FOLLOW_YOU = 'I should follow You.'
@@ -276,7 +265,6 @@ class GameMode:
     def is_restart_limit(self): pass #TODO max num of restarts allowed per user/visitor
     def get_restart_limit(self): pass #TODO
     def restart_throttle_rate(self): pass #TODO
-    def adultmode_allowed(self): pass
     def request_throttle_rate(self): pass #TODO
     def again_command_allowed(self): pass
     def console_input_allowed(self): pass
@@ -303,7 +291,6 @@ class DemoGameMode(GameMode):
     def is_restart_limit(self): return True
     def get_restart_limit(self): return 10
     def restart_throttle_rate(self): return 60 # no more than once per 60 min
-    def adultmode_allowed(self): return False
     def request_throttle_rate(self): return 30 # no more than 30 requests per minute
     def again_command_allowed(self): return False
     def console_input_allowed(self): return False
@@ -328,7 +315,6 @@ class FullGameMode(GameMode):
     def is_restart_limit(self): return False
     def get_restart_limit(self): return None #TODO raise ex?
     def restart_throttle_rate(self): return 10 # no more than once per 10 min
-    def adultmode_allowed(self): return True
     def request_throttle_rate(self): return 120 # no more than 120 requests per minute
     def again_command_allowed(self): return True
     def console_input_allowed(self): return True
@@ -353,7 +339,6 @@ class ZombieHackDemoGameMode(DemoGameMode):
         cfg = wh.cfg
         log = wh.log
 
-        log('init_game_first_part(): adultmode in self.config %s; adultmode: %s' % ('adultmode' in wh.config, cfg('adultmode')))
         wh.changed_since_last_render = True
         watch = StopWatch('%s.init_game_first_part(): ' % self.__class__.__name__)
         wh.gamedatasubdir = 'zombiehack/'
@@ -365,8 +350,6 @@ class ZombieHackDemoGameMode(DemoGameMode):
         wh.init_textpools()
         wh.init_ai()
         wh.init_feedback()
-
-        log('adultmode: %s' % cfg('adultmode'))
 
         # convenience aliases:
         ai = wh.ai
@@ -942,12 +925,6 @@ def is_devmode_allowed(request):
 def is_devmode_allowed(request):
     return False
 
-def is_adultmode_allowed(request):
-    return is_adultmode(request) and is_staff(request.user)
-
-def is_adultmode_allowed(request):
-    return False
-
 def wh_cacheper_content_report():
     items = wh_cacheper_content_list()
     s = 'size %s' % len(items)
@@ -1052,19 +1029,17 @@ def wh_play_viewfn_helper(request, game, whsesskey, whsubclass, whhelp_viewfn, w
         #TODO: WARNING: BE VERY CAREFUL WITH DISABLING GC!!!
         if gc.isenabled(): gc.disable()
         wh = None
-        adultmode = is_adultmode(request)
-        adultmode_allowed = is_adultmode_allowed(request)
         devmode_allowed = is_devmode_allowed(request)
         gameclass, modeclass = determine_gameclass_modeclass(request,game)
         if not force_reset and does_persisted_state_exist(request,game,whsesskey):
             wh = fetch_state(request,game,whsesskey)
-            set_adultmode_and_devmode(wh,adultmode,adultmode_allowed,devmode_allowed)
+            set_devmode(wh,devmode_allowed)
             set_gameclass_modeclass_for_reset(wh,gameclass,modeclass)
         else:
             debug('no persisted state found for game %s, user %s, so will load canned initstate', game.id, request.user.id)
             wh = return_new_wh_from_canned_initstates_chosen_randomly(gameclass,modeclass)
             wh.changed_since_last_render = True
-            set_adultmode_and_devmode(wh,adultmode,adultmode_allowed,devmode_allowed)
+            set_devmode(wh,devmode_allowed)
             set_gameclass_modeclass_for_reset(wh,gameclass,modeclass)
             persist_state(request, game, whsesskey, wh, disk_persist=False)
         wh.help_viewfn = whhelp_viewfn
@@ -1097,15 +1072,9 @@ def determine_gameclass_modeclass(request, game):
 def determine_gameclass_modeclass(request, game):
     return ZombieHack, ZombieHackFullGameMode
 
-def set_adultmode_and_devmode(wh, adultmode, adultmode_allowed, devmode_allowed):
-    adultmode = adultmode and adultmode_allowed
-    adultmode = adultmode and wh.gamemode.adultmode_allowed()
+def set_devmode(wh, devmode_allowed):
     #TODO the above log msgs should be done automaticaly inside body of the set_cfg() method:
-    log('setting adultmode to %s' % adultmode)
-    log('setting adultmode_allowed to %s' % adultmode_allowed)
     log('setting devmode_allowed to %s' % devmode_allowed)
-    wh.set_cfg('adultmode', adultmode)
-    wh.set_cfg('adultmode_allowed', adultmode_allowed)
     wh.set_cfg('devmode_allowed', devmode_allowed)
 
 class Persister:
@@ -1479,8 +1448,6 @@ def wh_usercmd_viewfn_helper(request, whsesskey):
     return response
 
 def subfn_wh_usercmd_viewfn_helper(request, whsesskey, watchmsgpre):
-    adultmode_allowed = is_adultmode_allowed(request)
-    adultmode = is_adultmode(request)
     devmode_allowed = is_devmode_allowed(request)
 
     if not is_loggedin(request.user):
@@ -1515,7 +1482,7 @@ def subfn_wh_usercmd_viewfn_helper(request, whsesskey, watchmsgpre):
     # Signal to the UI that it should re-render the page on next page request
     wh.changed_since_last_render = True
 
-    set_adultmode_and_devmode(wh,adultmode,adultmode_allowed,devmode_allowed)
+    set_devmode(wh,devmode_allowed)
 
     watch = StopWatch('building cmd params from req POST params: ')
     params = {}
@@ -1545,7 +1512,6 @@ def subfn_wh_usercmd_viewfn_helper(request, whsesskey, watchmsgpre):
 
     log('params: %s' % params)
 
-    log('before calling dispatch_usercmd, adultmode is %s' % wh.cfg('adultmode'))
     watch = StopWatch('dispatch_usercmd(\''+str(cmd)+'\',...): ')
     success, reason, should_persist_to_disk, replace_wh_with = wh.dispatch_usercmd(cmd,params)
     log(watch.stop())
@@ -1586,13 +1552,11 @@ def wh_help_viewfn_helper(request, whsesskey):
     try:
         #TODO: WARNING: BE VERY CAREFUL WITH DISABLING GC!!!
         if gc.isenabled(): gc.disable()
-        adultmode = is_adultmode(request)
         gameid = int(request.GET['gameid'])
         game = Game.objects.get(id=gameid)
         s = header(request, views.playwebgame, title=game.name) + EOL
         if does_persisted_state_exist(request,game,whsesskey):
             wh = fetch_state(request,game,whsesskey)
-            wh.set_cfg('adultmode', adultmode)
             s += wh.get_help_blurb() + EOL + EOL
             s += link(site_url(views.playwebgame.makeviewurlfn(game)),'back') + EOL
         else:
@@ -1620,13 +1584,11 @@ class RndStuff: pass
 ######################################
 
 #TODO deprecated function; can't delete it until I get all callers of it switched to new system
-def class_prep(klass, ch=None, color=None, adultsonly=False):
+def class_prep(klass, ch=None, color=None):
     if ch is not None:
         klass.char = ch
     if color is not None:
         klass.charcolor = color
-    if adultsonly:
-        adultclass(klass)
 
 def get_instantiable_thing_classes(namespace, alsoklass=None):
     classes = set()
@@ -1644,21 +1606,8 @@ def get_instantiable_thing_classes(namespace, alsoklass=None):
                     classes.add(v)
     return classes
 
-def adultclass(klass):
-    setattr(klass,ADULTSONLY,True) 
-    return klass
-
-def is_adult_only(obj):
-    #obj could be a class (Thing subclass or otherwise), or, an instance of a class (Thing subclass or otherwise)
-    if hasattr(obj,ADULTSONLY):
-        return getattr(obj,ADULTSONLY)
-    else: return False
-
 def is_devonly(obj):
     return has_meta_with_value(obj,DEVONLY_METAKEY,True)
-
-def is_adultonly(obj):
-    return has_meta_with_value(obj,ADULTONLY_METAKEY,True)
 
 def has_meta_with_value(obj, metakey, value):
     if hasattr(obj,'meta') and obj.meta is not None:
@@ -4008,12 +3957,6 @@ class WebHack:
         self.set_cfg('trace',False)
         if not self.has_cfg('devmode'):
             self.set_cfg('devmode',False)
-        self.log('reset_config(): adultmode in cfg is %s, has_cfg says %s' % ('adultmode' in self.config, self.has_cfg('adultmode')))
-        if not self.has_cfg('adultmode'):
-            self.set_cfg('adultmode',False)
-        adultmode = self.cfg('adultmode')
-        adultmode = adultmode and self.gamemode.adultmode_allowed()
-        self.set_cfg('adultmode',adultmode)
         self.set_cfg('you_always_hit',False)
         self.set_cfg('you_always_do_kill_dmg',False)
         self.set_cfg('no_npc_move',False)
@@ -4118,11 +4061,6 @@ class WebHack:
     def devonly(fn):
         meta = getattr_withlazyinit(fn,'meta',{})
         meta[DEVONLY_METAKEY] = True
-        return fn
-
-    def adultonly(fn):
-        meta = getattr_withlazyinit(fn,'meta',{})
-        meta[ADULTONLY_METAKEY] = True
         return fn
 
     def is_usercmd_allowed(self, cmd_name):
@@ -4734,8 +4672,6 @@ class WebHack:
 
         for k in keys:
             cl = ddict[k]
-            if is_adult_only(cl) and not self.cfg('adultmode'):
-                continue
             #k is the thing class's name:
             if len(k) >= 4 and k[2] == '_' and not k.startswith(self.thing_class_prefix):
                 continue
@@ -4762,8 +4698,6 @@ class WebHack:
                 traits += ' (AN)'
             if issubclass(cl,Corpse):
                 traits += ' (CO)'
-            if issubclass(cl,AdultsOnly) or hasattr(cl,ADULTSONLY):
-                traits += ' (AO)'
             #charchunk = '<font color="%s">%s</font>' % (color, cl.char)
             row = build_row(k,traits,cl,self)
             data.append(row)
@@ -4774,8 +4708,6 @@ class WebHack:
         s += EOL + 'Code Key:'
         data = []
         data.append(['(AN)','animal'])
-        if self.cfg('adultmode'):
-            data.append(['(AO)','adultmode-only'])
         data.append(['(CL)','clothing/wearable'])
         data.append(['(CO)','corpse'])
         data.append(['(E)', 'edible'])
@@ -4842,17 +4774,6 @@ class WebHack:
         else:
             self.feedback('devmode not allowed')
     devonly(autoui(usercmd_devmode))
-
-    def usercmd_adultmode(self):
-        toggle_allowed = True
-        if not self.cfg('adultmode'):
-            toggle_allowed = self.cfg('adultmode_allowed')
-        if toggle_allowed:
-            v = self.toggle_cfg('adultmode')
-            self.feedback('adultmode: ' + str(v))
-        else:
-            self.feedback('adultmode not allowed')
-    devonly(autoui(usercmd_adultmode))
 
     def usercmd_win_game(self):
         self.gamewin = not self.gamewin
@@ -4960,8 +4881,7 @@ class WebHack:
         '''lists all user/action commands available to you via the Console'''
         s = 'avail commands:\n\n'
         withdev = self.cfg('devmode')
-        withadult = self.cfg('adultmode')
-        cmdlist = self.get_usercmd_list(devonly=withdev, adultonly=withadult)
+        cmdlist = self.get_usercmd_list(devonly=withdev)
         s += '\n'.join(cmdlist)
         self.feedback(s)
     autoui(usercmd_commands)
@@ -4980,20 +4900,6 @@ class WebHack:
         self.feedback(s)
     devonly(usercmd_nondevcmds)
 
-    def usercmd_adultcmds(self):
-        s = 'adultonly commands:\n\n'
-        cmdlist = self.get_usercmd_list(adultonly=True)
-        s += '\n'.join(cmdlist)
-        self.feedback(s)
-    devonly(usercmd_adultcmds)
-
-    def usercmd_nonadultcmds(self):
-        s = 'non-adultonly commands:\n\n'
-        cmdlist = self.get_usercmd_list(nonadultonly=True)
-        s += '\n'.join(cmdlist)
-        self.feedback(s)
-    devonly(usercmd_nonadultcmds)
-
     def usercmd_autouicmds(self):
         s = 'autoui commands:\n\n'
         cmdlist = self.get_usercmd_list(autoui=True)
@@ -5008,9 +4914,9 @@ class WebHack:
         self.feedback(s)
     devonly(usercmd_nonautouicmds)
 
-    def get_usercmd_list(self, devonly=None, nondevonly=None, adultonly=None, nonadultonly=None, autoui=None, nonautoui=None):
+    def get_usercmd_list(self, devonly=None, nondevonly=None, autoui=None, nonautoui=None):
         default_include = True
-        if devonly is not None or nondevonly is not None or adultonly is not None or nonadultonly is not None or autoui is not None or nonautoui is not None:
+        if devonly is not None or nondevonly is not None or autoui is not None or nonautoui is not None:
             default_include = False
         usercmds = []
         attribs = dir(self)
@@ -5018,10 +4924,6 @@ class WebHack:
         for a in attribs:
             if a.startswith(USERCMD_PREFIX):
                 include = default_include
-                if self.does_method_have_meta_value(a,ADULTONLY_METAKEY,True):
-                    if adultonly is not None: include = adultonly
-                else:
-                    if nonadultonly is not None: include = nonadultonly
                 if self.does_method_have_meta_value(a,DEVONLY_METAKEY,True):
                     if devonly is not None: include = devonly
                 else:
@@ -5051,8 +4953,6 @@ class WebHack:
                 if has_meta(a,DIRECTIONAL_METAKEY,True) and \
                         has_meta(a,MOVECMD_METAKEY,True):
                     bare_cmd = a[len(USERCMD_PREFIX):]
-                    if self.is_banned_usercmd_due_to_adultmode_status(bare_cmd):
-                        continue
                     v.append(bare_cmd)
         return v
 
@@ -5065,15 +4965,8 @@ class WebHack:
                 if has_meta(a,DIRECTIONAL_METAKEY,True) and \
                         not has_meta(a,MOVECMD_METAKEY,True):
                     bare_cmd = a[len(USERCMD_PREFIX):]
-                    if self.is_banned_usercmd_due_to_adultmode_status(bare_cmd):
-                        continue
                     v.append(bare_cmd)
         return v
-
-    def is_banned_usercmd_due_to_adultmode_status(self, cmd):
-        methodname = USERCMD_PREFIX + cmd
-        method = getattr(self, methodname)
-        return is_adultonly(method) and not self.cfg('adultmode')
 
     def usercmd_again(self):
         '''this is a meta-command that will execute again the last command/action you performed (this is only useful if you issued a long, complex command via the Console controls, and wish to re-execute it without re-typing)'''
@@ -5929,7 +5822,6 @@ class WebHack:
         new_wh = return_new_wh_from_canned_initstates_chosen_randomly(gameclass,modeclass)
         self.debug(watch.stop())
         new_wh.changed_since_last_render = True
-        new_wh.set_cfg('adultmode', self.cfg('adultmode'))
         new_wh.set_cfg('devmode',   self.cfg('devmode'))
         return {'replace_wh_with' : new_wh}
 
@@ -7666,13 +7558,8 @@ class UI:
 
     def render_mode_indicators(self, s):
         wh = self.wh
-        if wh.cfg('adultmode') or wh.cfg('devmode'):
-            s.append(space(2))
-        if wh.cfg('adultmode'):
-            s.append(space(2) + fontcolorize('[adultmode]',HtmlColors.ADULT))
         if wh.cfg('devmode'):
             s.append(space(2) + fontcolorize('[devmode]',HtmlColors.DEVONLY))
-        if wh.cfg('adultmode') or wh.cfg('devmode'):
             s.append(EOL)
 
     def render_extra_status_fns(self, s):
@@ -7889,7 +7776,6 @@ class UI:
                     #wh.debug('method '+a+' has meta: ' + str(method.meta))
                     if AUTOUI_METAKEY in method.meta and method.meta[AUTOUI_METAKEY]:
                         if is_devonly(method) and not wh.cfg('devmode'): continue
-                        if is_adultonly(method) and not wh.cfg('adultmode'): continue
                         if hasattr(method,'extra_show_reqs'):
                             extra_reqs = getattr(method,'extra_show_reqs')
                             met_extra_reqs = True
@@ -7904,9 +7790,6 @@ class UI:
                         label = wh.label_for_usercmd(cmd)
                         #TODO color is NOT working!
                         color = None
-                        if is_adultonly(method):
-                            color = HtmlColors.BLUE
-                            label += ' (A)'
                         if is_devonly(method):
                             color = HtmlColors.RED
                             label += ' (D)'
@@ -8246,10 +8129,6 @@ class WebHackGeoSystem(GeoSystem):
         def buildlogmsg(reason):
             return 'put_on_map() did not because '+str(reason)+'; coords was ('+str(loc)+'); thing was "'+str(thing.describe())+'" ('+str(thing)+')'
 
-        if is_adult_only(thing) and not self.wh.cfg('adultmode') and not move:
-            s = 'its an adult mode only thing and the game is not in adult mode'
-            self.wh.log( buildlogmsg(s) )
-            return False, s
         return GeoSystem.put_on_map(self,thing,loc,move,moveonsamelevel,moveonsameregion)
 
     def remove_from_map(self, thing, move=False, moveonsamelevel=False, moveonsameregion=False):
