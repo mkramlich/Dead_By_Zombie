@@ -1,7 +1,5 @@
 TODO
 
-at game start, tock 0, you're surrounded with ?'s. fix that. you should already have seen some stuff around you
-
 elim all refs/support for Windows (reminder: web32 refs in the code; my Console wrapper/emu)
 
 elim remaining vestiges of the original web UI version (Django refs, HtmlColors, HTML snippets, web-somethings, etc.)
@@ -37,3 +35,7 @@ elim remaining refs to the Demo-vs-Full (Premium/License) system
 elim refs to Wolfenhack
 
 change all zombiehack/zh refs to DeadByZombie/dbz
+
+make this warning go away:
+/Users/groglogic/projects/mine/DeadByZombie/github/Dead_By_Zombie/src/deadbyzombie/webhack.py:8796: SyntaxWarning: name 'master_layoutmap' is assigned to before global declaration
+  global master_layoutmap #TODO line seems unneeded. why did i do this?

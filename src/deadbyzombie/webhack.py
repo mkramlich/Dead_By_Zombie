@@ -72,7 +72,7 @@ from ai_system import AiSystem
 from belief_system import BeliefSystem, HasBeliefs
 from event_system import EventSystem, Event, TickEvent
 from fact_system import FactSystem, HasFacts
-from geo_system import *
+from geo_system import * #TODO instead do explicit imports
 from goal_system import GoalSystem
 from has_mind import HasMind
 from id_system import IdSystem, HasID
@@ -105,8 +105,8 @@ def trace(msg):
     #    logger.debug(msg)
 
 def debug(msg, *args, **kwargs):
-    pass
-    #logger.debug(msg,*args,**kwargs)
+    #pass
+    logger.debug(msg,*args,**kwargs)
 
 def log(msg, *args, **kwargs):
     pass
@@ -525,6 +525,7 @@ class ZombieHackDemoGameMode(DemoGameMode):
         pm(you, youloc)
         wh.ev.add_listener((ThingEntersCellEvent,{'thing':you}),wh,'make_you_level_active_and_focus_ui')
         geo.add_to_cell_desc('This is where you started.',youloc.level,youloc.r,youloc.c)
+        geo.activelevel = youloc.level
 
         pm(Dog(wh), youloc.clone(r='-1', c='-1'))
         pm(Fruit(wh), youloc.clone(c='-1'))
@@ -593,6 +594,7 @@ class ZombieHackFullGameMode(FullGameMode, ZombieHackDemoGameMode):
         geo = wh.geo
         pm = geo.put_on_map
         start_level = you.loc.level
+        geo.activelevel = start_level
 
         self.make_Eastside()
         self.make_Library()
@@ -4391,7 +4393,7 @@ class WebHack:
         self.update_seen_cells()
 
     def update_seen_cells(self):
-
+        debug('update_seen_cells')
 
         #TODO add a new visit method to GS that visits with every cell/r,c for a level and redo below with it:
         you = self.you
@@ -4400,6 +4402,7 @@ class WebHack:
         yc = yloc.c
         level = self.you.loc.level
         see_range = self.get_see_range()
+        debug('see_range: %i' % see_range)
 
         # Reset Every Cell's Lit State to False 
         for r in xrange(len(level.grid)):
@@ -4407,8 +4410,6 @@ class WebHack:
             for c in xrange(len(row)):
                 cell = level.grid[r][c]
                 cell.lit = False
-
-
         
         # TODO commented out because was causing whole level to light up
         # should fix then decomment
@@ -4439,7 +4440,9 @@ class WebHack:
                         fr = flare.loc.r
                         fc = flare.loc.c
                         d = dist(fr,fc, r,c)
-                        if (d <= 1): cell.lit = True
+                        if (d <= 1):
+                            cell.lit = True
+                            debug('flare has lit a cell: %i,%i' % (c,r))
         
 
         for r in xrange(len(level.grid)):
@@ -4450,11 +4453,15 @@ class WebHack:
                 if level.environment == Level.OUTSIDE: # outdoors, sun/stars/moon up above, fresh air, bears
                     if cell.lit:
                         cell.seen = True
+                        debug('you see a cell because lit & outside: %i,%i' % (c,r))
                     else:
                         d = dist(r,c, yr,yc)
                         cell.seen = (d <= see_range)
+                        if cell.seen: debug('you see a cell because in range & outside: %i,%i' % (c,r))
+                        else: debug('you do NOT see an outside cell: %i,%i' % (c,r))
                 else: # else it is Level.INSIDE (meaning indoors) so not effected by the day/night light cycle
                     cell.seen = True
+                    debug('you see a cell because inside: %i,%i' % (c,r))
                     #TODO PERF bad to do this every tick if this level's environment value is always INSIDE, and never changes; I only need to set seen to True once, then never alter it again
 
 
