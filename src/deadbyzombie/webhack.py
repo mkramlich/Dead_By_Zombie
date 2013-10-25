@@ -2185,6 +2185,9 @@ class Lifeform(Thing,HasMind,HasInventory,RndTalker,Eater):
     def use(self, what):
         return what.use_by(self)
 
+    def does_digest(self):
+        return Eater.does_digest(self) and self.is_alive()
+
     def mind_content_load(self, thingclassname, subdir=''):
         cln = thingclassname
 
