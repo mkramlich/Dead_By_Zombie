@@ -4,8 +4,6 @@ topmost issues are generally highest priority and/or coming up next in my work q
 
 ------------------------------------
 
-fix 'has' to 'have' and capitalize 'you': "you lost 1 hp due to starvation and now has 0 hp"
-
 a way for player to learn about the status of the world, what's happening with the zombie apocalypse
 
 elim all refs/support for Windows (reminder: web32 refs in the code; my Console wrapper/emu)
@@ -24,8 +22,6 @@ migrate forward all ideas worth keeping & relevant from my original offline TODO
 
 migrate to using GUI lib (like Pygame/SDL) since more freedom in choosing UI appearance
 
-merge those 3 lib modules together and elim unused/redund
-
 fix any imperfections that happen after you die
 
 make the world much larger
@@ -40,10 +36,8 @@ elim refs to Wolfenhack
 
 change all zombiehack/zh refs to DeadByZombie/dbz
 
-make this warning go away:
-/Users/groglogic/projects/mine/DeadByZombie/github/Dead_By_Zombie/src/deadbyzombie/webhack.py:8796: SyntaxWarning: name 'master_layoutmap' is assigned to before global declaration
-  global master_layoutmap #TODO line seems unneeded. why did i do this?
-
 when you hit 'S' to save, the app pauses mysteriously (the save is executing) from user's POV; better to let user know we got his command and have begun executing the save, so he expects a brief pause
 
 elim all the dead code (some still leftover from the original webapp version of DBZ)
+
+fix 'has' to 'have' and capitalize 'you': "you lost 1 hp due to starvation and now has 0 hp"

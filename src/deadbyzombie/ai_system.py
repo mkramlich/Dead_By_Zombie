@@ -12,7 +12,7 @@ from belief_system import BeliefSystem
 from thought_system import ThoughtSystem
 from goal_system import GoalSystem
 
-from lib import sentence
+from misc_lib import sentence
 
 class AiSystem:
     def __init__(self, fa=None, sk=None, mem=None, be=None, go=None, th=None):

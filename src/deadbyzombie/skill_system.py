@@ -6,12 +6,8 @@ a generic skills system created for WebHack
 
 import random
 
-#import groglogic.mainapp.mind
-#from groglogic.mainapp.mind import HasMind
 from has_mind import HasMind
-
-# My Libraries
-from lib import rnd_using_rpg_die_notation
+from misc_lib import rnd_using_rpg_die_notation
 
 class SkillSystem:
     #TODO the skill value should not be a single int value, but a tuple: (level, xp); where level is how good you are at that skill, and XP is how much actual experience/exercise/practice you've had using that skill in the world. It's possible to have high level but little to no XP, which represents born talent.

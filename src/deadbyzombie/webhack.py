@@ -1,9 +1,10 @@
 '''
 webhack.py
+
+WebHack: A Python Framework for Rogue-like Games
 by Mike Kramlich
 
-WebHack:
-A Framework for Rogue-like games written in Python
+ps. the name is a play on NetHack (net -> web... get it?)
 '''
 
 import copy
@@ -17,20 +18,16 @@ import random
 import sys
 import textwrap
 
-
-from groglib import dist, chance, Groups, read_file_lines
-# lib is lib.py in same dir as webhack.py
-import lib
-from lib import StopWatch, getattr_withlazyinit, sentence,\
-    sentence_capitalize, encode_whitespace_inside_quotes, awordify,\
-    rnd_in_range, TextPools, assertNotNone, stradd, isinstance_any,\
-    randrangewith, gender2heshe, gender2himher, gender2hishers, app,\
-    assertNotDirectInstantiate, secs_float_diff_to_summary_str, table,\
-    and_many, isclass, in_range, get_object, cycle_increment,\
-    get_next_with_cycle, fontcolorize, get_doc, bare_class_name, split_width
-
+from misc_lib import dist, chance, Groups, read_file_lines, StopWatch,\
+    getattr_withlazyinit, sentence, sentence_capitalize,\
+    encode_whitespace_inside_quotes, awordify, rnd_in_range, TextPools,\
+    assertNotNone, stradd, isinstance_any, randrangewith, gender2heshe,\
+    gender2himher, gender2hishers, app, assertNotDirectInstantiate,\
+    secs_float_diff_to_summary_str, table, and_many, isclass, in_range,\
+    get_object, cycle_increment, get_next_with_cycle, fontcolorize, get_doc,\
+    bare_class_name, split_width #TODO alpha sort these
+from misc_lib import HtmlColors as LibHtmlColors
 import filecache
-
 from rectarea import RectArea
 
 
@@ -136,19 +133,19 @@ YES = True
 TICKS_PER_DAY_DEFAULT = 48
 
 
-class HtmlColors(lib.HtmlColors):
-    FG         = lib.HtmlColors.BLACK
-    BG         = lib.HtmlColors.WHITE
-    YOU        = lib.HtmlColors.BLUE
+class HtmlColors(LibHtmlColors):
+    FG         = LibHtmlColors.BLACK
+    BG         = LibHtmlColors.WHITE
+    YOU        = LibHtmlColors.BLUE
     FRIEND     = '#00BB00'
-    DEVONLY    = lib.HtmlColors.BLUE
-    USDOLLAR   = lib.HtmlColors.DARKGREEN
+    DEVONLY    = LibHtmlColors.BLUE
+    USDOLLAR   = LibHtmlColors.DARKGREEN
     MONEY      = USDOLLAR
-    GOLDCOIN   = lib.HtmlColors.DARKYELLOW
+    GOLDCOIN   = LibHtmlColors.DARKYELLOW
 
-class Colors(lib.HtmlColors):
-    BLACK = lib.HtmlColors.WHITE
-    WHITE = lib.HtmlColors.BLACK
+class Colors(LibHtmlColors):
+    BLACK = LibHtmlColors.WHITE
+    WHITE = LibHtmlColors.BLACK
     FG = WHITE
     BG = BLACK
 

@@ -7,15 +7,9 @@ created for WebHack
 import random
 import time
 
-# My Libraries
-# lib is lib.py in same dir
-from lib import HtmlColors, assertNotNone, stradd, tostr
+from misc_lib import HtmlColors, assertNotNone, stradd, tostr, Groups, dist3
 from rectarea import RectArea
-
-# that will eventually be moved to a lib directory, out of webhack/grogdjango:
 from fact_system import HasFacts
-
-from groglib import Groups, dist3
 
 '''
 TODO

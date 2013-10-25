@@ -3,7 +3,6 @@ belief_system.py
 by Mike Kramlich
 '''
 
-#from groglogic.mainapp.mind import HasMind
 from has_mind import HasMind
 
 class BeliefSystem:

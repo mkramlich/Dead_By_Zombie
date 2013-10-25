@@ -5,10 +5,7 @@ this module provides solely: class EventSystem
 '''
 
 import time
-
-# My Libraries
-from lib import StopWatch, assertNotNone, tostr, get_set_with_class_and_all_super_classes
-
+from misc_lib import StopWatch, assertNotNone, tostr, get_set_with_class_and_all_super_classes
 from pprint import pformat
 
 class EventSystem:

@@ -1,10 +1,10 @@
 from __future__ import with_statement
 
-import sys
 import linecache
 import os
 import pickle
 import random
+import sys
 import textwrap
 
 if sys.platform == 'darwin' or sys.platform.startswith('linux'):
@@ -18,14 +18,9 @@ elif sys.platform == 'win32':
 
 DBZ = '.'
 
-from lib2 import chance, rand_diff, rand_range, rand_success, read_file_lines
-from lib import rnd_in_range, split_width
-
-from deadbyzombie.lib import HtmlColors
 from deadbyzombie import webhack
 from webhack import FilePersister, deserialize
-
-from groglib import load_file_as_python_to_dict
+from misc_lib import chance, HtmlColors, load_file_as_python_to_dict, rand_diff, rand_range, rand_success, read_file_lines, rnd_in_range, split_width
 
 app_name = 'Dead By Zombie'
 

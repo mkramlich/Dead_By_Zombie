@@ -3,8 +3,7 @@ rectarea.py
 by Mike Kramlich
 '''
 
-# lib is lib.py in same dir
-from lib import in_range, rnd_in_range, rnd_bool, equals_any
+from misc_lib import in_range, rnd_in_range, rnd_bool, equals_any
 import random
 
 class RectArea:

@@ -1,4 +1,6 @@
 
+#TODO this is prob no longer used; if so, delete
+
 def extract_info_from_filename(filename):
     #filename pattern: 'gamestate-g%s-u%s-t%s-%s-%s.dat' % (gameid, userid, tock, date, time)
     pieces = filename.split('-')
