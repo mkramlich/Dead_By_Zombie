@@ -245,6 +245,29 @@ class DefaultMode(Mode):
         wh = cur_state()
         tock = wh.ev.tock
         self.addstr(2, 0, 'time: %s' % tock)
+        self.addstr(2,12, wh.get_time_of_day_desc())
+
+    def render_hp(self):
+        c = 24
+        for chunk in self.describe_hp():
+            txt, color = chunk
+            self.addstr(2,c,txt,color)
+            c += len(txt)
+
+    def render_stomach(self):
+        c = 34
+        for chunk in self.describe_stomach_for_render():
+            txt = chunk[0]
+            color = chunk[1]
+            self.addstr(2, c, txt, color)
+            c += len(txt)
+
+    def render_coords(self):
+        coords = None
+        loc = cur_state().you.loc
+        if loc is not None:
+            coords = '%s,%s' % (loc.r, loc.c)
+        self.addstr(4,0,'loc: (%s)' % coords)
         
     def render_locinfo(self):
         wh = cur_state()
@@ -257,40 +280,17 @@ class DefaultMode(Mode):
         you = wh.you
         loc = you.loc
 
-        self.addstr(2,12, wh.get_time_of_day_desc())
-        self.addstr(2,24, level.name)
-        self.addstr(2,44, region.name)
+        self.addstr(4,14, level.name)
+        self.addstr(4,34, region.name)
 
         znames = geo.report_zone_names_for(loc)
         znames_msg = znames
-        self.addstr(5,15, '%s' % znames_msg)
-
-    def render_hp(self):
-        c = 0
-        for chunk in self.describe_hp():
-            txt, color = chunk
-            self.addstr(4,c,txt,color)
-            c += len(txt)
-
-    def render_stomach(self):
-        c = 20
-        for chunk in self.describe_stomach_for_render():
-            txt = chunk[0]
-            color = chunk[1]
-            self.addstr(4, c, txt, color)
-            c += len(txt)
-
-    def render_coords(self):
-        coords = None
-        loc = cur_state().you.loc
-        if loc is not None:
-            coords = '%s,%s' % (loc.r, loc.c)
-        self.addstr(5,0,'loc: (%s)' % coords)
+        self.addstr(4,60, '%s' % znames_msg)
 
     def render_wielded(self):
         wh = cur_state()
         if wh.you.has_wielded():
-            self.addstr(4,40,'{%s}' % wh.you.describe_wielded())
+            self.addstr(5,0,'{%s}' % wh.you.describe_wielded())
             
     def row_qty_in_shown_map(self):
         shownlevel = cur_state().geo.activelevel

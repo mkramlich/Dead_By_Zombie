@@ -42,20 +42,9 @@ The Mac version gets the most testing since it is the developer's primary workst
 
 Mac Instructions:
 
-To install the game from the CD:
-
-    * insert CD into drive
-    * once it appears in Finder, copy the .tgz file to your computer somewhere
-    * unpack the .tgz file
-
-To unpack the .tgz file:
-
-    * in Finder, double-click on the .tgz file
-    * a DeadByZombie folder was created. the game is in it and ready to play
-
 To play the game:
 
-    * in the DeadByZombie folder, double-click on the file 'play-game.sh'
+    * in the Dead_By_Zombie folder, double-click on the file 'play-game.sh' (or run it in Terminal)
     * on the Intro screen you'll see a menu of choices
     * use the up/down arrow keys to move the cursor up/down
     * select the highlighted choice by pressing SPACEBAR
