@@ -32,10 +32,10 @@ The game comes in versions for different platforms: Mac and Linux. The requireme
     on Mac:
         Mac OS X 10.5 or higher
             or
-        Mac OS X 10.4 (or less might work), but with Python 2.5 installed
+        Mac OS X 10.4 (or less might work), with Python 2.7 (accessible via "/usr/bin/env python2.7")
 
     on Linux:
-        Linux 2.x (tested on 2.6), with Python 2.5 (accessible as python2.5)
+        Linux 2.x (tested on 2.6), with Python 2.7 (accessible via "/usr/bin/env python2.7")
 
 The Mac version gets the most testing since it is the developer's primary workstation. Linux is similar to Mac so will probably work second best.
 
@@ -63,7 +63,7 @@ To play the game:
 
 Linux Instructions:
 
-Similar to Mac, but since you're a Linux user you'll likely have the tech skills to figure things out. The play-game.sh script should start the game just like in the Mac version. Make sure your Python 2.5 is accessible via "python2.5". Python 2.6 or higher 2.x may also work, and in those cases you may just need to make custom aliases to work in your environment.
+Similar to Mac, but since you're a Linux user you'll likely have the tech skills to figure things out. The play-game.sh script should start the game just like in the Mac version. Python versions higher or lower than 2.7 might work fine, but you'll have to adjust paths/aliases/scripts on your own to make it work in your particular environment.
 
 
 Platform Common Instructions:

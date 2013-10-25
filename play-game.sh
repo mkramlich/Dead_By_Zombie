@@ -10,4 +10,4 @@ export PYTHONPATH=$DBZ/src:$PYTHONPATH
 # -W ignore:^raising*:DeprecationWarning:webhack:5352
 # -W ignore:^raising*:DeprecationWarning:deadbyzombie.webhack:8688
 
-/usr/bin/env python2.5 $DBZ/src/deadbyzombie/DeadByZombie.py
+/usr/bin/env python2.7 $DBZ/src/deadbyzombie/DeadByZombie.py

@@ -18,8 +18,6 @@ extract the core engine (which I've privately named 'webhack') from DBZ into sep
 
 NetHack movement dir keys; right now it's confusing if your muscle memory expects NH's movement keys
 
-upgrade/bump to Python 2.7 or higher
-
 support larger window sizes (map view subset should get bigger, dynamically/auto-detect, if not already)
 
 migrate forward all ideas worth keeping & relevant from my original offline TODO files, into this TODO
@@ -47,3 +45,7 @@ change all zombiehack/zh refs to DeadByZombie/dbz
 make this warning go away:
 /Users/groglogic/projects/mine/DeadByZombie/github/Dead_By_Zombie/src/deadbyzombie/webhack.py:8796: SyntaxWarning: name 'master_layoutmap' is assigned to before global declaration
   global master_layoutmap #TODO line seems unneeded. why did i do this?
+
+when you hit 'S' to save, the app pauses mysteriously (the save is executing) from user's POV; better to let user know we got his command and have begun executing the save, so he expects a brief pause
+
+elim all the dead code (some still leftover from the original webapp version of DBZ)
