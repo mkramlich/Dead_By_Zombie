@@ -1,9 +1,5 @@
 #!/bin/sh
 
-#. ./setenv.sh
-
-#/Users/mkramlich/projects/mine/DeadByZombie
-#export GROGDJANGO='/Users/michaelkramlich/Desktop/code/DeadByZombie'
 export SITELOGFILE="makeinitstate-site.log"
 export WHLOGFILE="makeinitstate-wh.log"
 

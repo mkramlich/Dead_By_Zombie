@@ -14,11 +14,7 @@ if sys.platform == 'darwin' or sys.platform.startswith('linux'):
     from curses.textpad import Textbox
 elif sys.platform == 'win32':
     import Console_curses_wrapper as curses
-    #from Console_curses_wrapper import Textbox
     from Console_curses_wrapper import input_field
-
-#os.putenv('GROGDJANGO','/Users/michaelkramlich/Desktop/code/dbz-mac')
-#os.putenv('PYTHONPATH','%s/src:%s' % (os.getenv('GROGDJANGO'), os.getenv('PYTHONPATH')))
 
 GROGDJANGO = '.'
 
@@ -26,9 +22,7 @@ from lib2 import chance, rand_diff, rand_range, rand_success, read_file_lines
 from lib import rnd_in_range, split_width
 
 from deadbyzombie.lib import HtmlColors
-#from deadbyzombie.viewlib import makehtmlsafe, EOL
 from deadbyzombie import webhack
-#from deadbyzombie import views
 from webhack import FilePersister, deserialize
 
 from groglib import load_file_as_python_to_dict
@@ -212,7 +206,6 @@ def render_feedback_as_lines(wrap_w):
         newlines2EOL = m[3] #TODO unused
         lines_by_newline = msg.split('\n')
         for line in lines_by_newline:
-            #lines_by_wrap = textwrap.wrap(line,wrap_w)
             lines_by_wrap = split_width(line,wrap_w)
             for line2 in lines_by_wrap:
                 lines.append(line2)
@@ -307,7 +300,6 @@ class DefaultMode(Mode):
     def row_qty_in_shown_map(self):
         shownlevel = cur_state().geo.activelevel
         val = len(shownlevel.grid) #grid is array of map rows
-        #raise '%s' % val
         return val
 
     def shownlevel(self):
@@ -912,7 +904,6 @@ class FeedbackScreen(ThingsView):
         return ''
 
 def saves_location():
-    #return '%s/%s' % (os.environ['GROGDJANGO'], 'saves')
     return '%s/%s' % (GROGDJANGO, 'saves')
 
 def quick_save_location():
@@ -988,7 +979,6 @@ class QuickLoad(Mode):
 
 def in_bounds(x, y, x0, y0, w, h):
     val = (x >= x0 and x <= x0 + w and y >= y0 and y <= y0 + h)
-    #if not val: raise '%s: %s %s %s %s %s %s' % (val, x,y,x0,y0,w,h)
     return val
 
 class SplashScreen(Mode):
@@ -1037,11 +1027,7 @@ class SplashScreen(Mode):
 
         for z in self.zombies:
             r,c = z
-            #try:
             self.addstr(r,c,'Z','red-black')
-            #except e:
-            #    print r,c
-            #    sys.exit(1)
 
         centered_box(self.box_h,self.box_w,'#')
 
@@ -1204,7 +1190,6 @@ def color_set(color_name, fg, bg):
     curses.init_pair(id,fg,bg)
     
 def color_id(color_name):
-    #raise '%s' % colormap
     return colormap[color_name]
     
 html_color_to_name_map = {}
@@ -1262,7 +1247,6 @@ def init(stdscr, *args):
     color_set('dark-yellow',       curses.COLOR_WHITE,  curses.COLOR_YELLOW)
     color_set('dark-green-black',  curses.COLOR_GREEN,  curses.COLOR_BLACK)
     color_set('dark-yellow-black', curses.COLOR_YELLOW, curses.COLOR_BLACK)
-    #color_set('brown-black',       curses.COLOR_BROWN,  curses.COLOR_BLACK)
     color_set('green-black',       curses.COLOR_GREEN,  curses.COLOR_BLACK)
     color_set('yellow-black',      curses.COLOR_YELLOW, curses.COLOR_BLACK)
     color_set('red-black',         curses.COLOR_RED,    curses.COLOR_BLACK)
@@ -1278,10 +1262,6 @@ def init(stdscr, *args):
 
     while True:
         chi = scr.getch()
-        #raise 'up arrow: %s' % chi
-        #if not in_range(0,chi,256):
-        #    continue
-        #ch = chr(chi)
         ch = chi
         if in_range(0,chi,256):
             ch = chr(chi)

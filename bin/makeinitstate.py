@@ -30,7 +30,6 @@ if __name__ == '__main__':
     mode_class = getattr(game_class,mode_class_attr)
 
     devmode_allowed = False
-    #devmode_allowed = True
 
     fpath = None
     base = 'data/webhack/initstates/'

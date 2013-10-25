@@ -38,7 +38,6 @@ def path_for_file_in_data(filename):
     return envcfg('GROGDJANGO') + '/data/' + filename
 
 def read_data_file(filename, linedelim='\n', lineprefix=None):
-    #lines = read_file_lines(path_for_file_in_data(filename))
     lines = filecache.read_file_as_lines(path_for_file_in_data(filename))
     lines2 = []
     for ln in lines:
@@ -99,7 +98,6 @@ handler.setFormatter(fmt)
 logger.addHandler(handler)
 loglevel = getattr(logging,envcfg('WHLOGLEVEL'))
 logger.setLevel(loglevel)
-#logger.debug('webhack logging init completed (in webhack.py)')
 
 def trace(msg):
     pass
@@ -118,7 +116,6 @@ def error(msg):
     pass
     #logger.error(msg)
 
-#GROGDJANGO = envcfg('GROGDJANGO')
 GROGDJANGO = '.' #TODO hack!
 DATADIR = GROGDJANGO + '/data/webhack/'
 
@@ -136,7 +133,7 @@ SUBMIT_STYLE_PARAMS_PREFIX = 'params|'
 
 YES = True
 
-TICKS_PER_DAY_DEFAULT = 48 #24 #48
+TICKS_PER_DAY_DEFAULT = 48
 
 
 class HtmlColors(lib.HtmlColors):
@@ -536,7 +533,6 @@ class ZombieHackDemoGameMode(DemoGameMode):
         flyer2 = Flyer(wh,bodytext='The League of Mad Scientists For a Better Tomorrow - next meeting to be held at the mansion of V. Venturius')
         pm(flyer2, youloc.clone(r='+1', c='-2'))
 
-        #pm(Flare(wh,lit=True), youloc.clone(r='+1', c='+1'))
         pm(Flare(wh,lit=True), youloc.clone(r=3,c=19))
 
 
@@ -1199,7 +1195,6 @@ class FilePersister(Persister):
         return size
 
     def fetch_state(self, user, game, request=None, whsesskey=None):
-        #filepath = self.get_filepathname(user,game)
         filename = self.determine_best_saved_file_to_fetch(user,game)
         savedir = self.get_savedirectory_for_game(game)
         filepath = savedir + '/' + filename
@@ -1246,8 +1241,6 @@ class FilePersister(Persister):
 
     def has_state(self, user, game, request=None, whsesskey=None):
         debug('CHECK IN FILE')
-        #fpath = self.get_filepathname(user,game)
-        #return self.does_file_exist(fpath)
 
         savedir = self.get_savedirectory_for_game(game)
         fnames = os.listdir(savedir) #TODO replace with cache-based equiv
@@ -1281,7 +1274,6 @@ class FilePersister(Persister):
         return self.get_savedirectory() + gamesubdir
 
     def get_savedirectory(self):
-        #return envcfg('GROGDJANGO') + '/saves/webhack/'
         return GROGDJANGO + '/saves/webhack/'
 
     def get_filename(self, user, game, tock, dtime):
@@ -2379,10 +2371,6 @@ class Lifeform(Thing,HasMind,HasInventory,RndTalker,Eater):
         if thing == self: return 0
         if isinstance(thing,Corpse): return 5
         if isinstance(thing,zh_Zombie): return 40
-        #if isinstance(thing,fh_Hitler): return 50
-        #if isinstance(thing,fh_Marshall): return 30
-        #if isinstance(thing,fh_GermanArmy): return 20
-        #if isinstance(thing,fh_Nazi): return 15
         if isinstance(thing,Human) and thing.is_alive(): return 10
         if isinstance(thing,Door) and not thing.opened: return 4
         if isinstance(thing,Window) and not thing.broken: return 3
@@ -2407,7 +2395,6 @@ class Lifeform(Thing,HasMind,HasInventory,RndTalker,Eater):
             c,r = loc
             cell = mylevel.grid[r][c]
             for thing in cell.things:
-                #self.wh.debug(self.wh.feedback(self.describe()+' considers: '+thing.describe()))
                 if self.would_self_attack_this_thing(thing):
                     target = thing
                     return target
@@ -2428,12 +2415,8 @@ class Lifeform(Thing,HasMind,HasInventory,RndTalker,Eater):
                     for enemyclass in self.myenemyclasses:
                         if isinstance(costume.looks_like_class, enemyclass):
                             costume_is_enemy = True
-                    #s = 'self %s\nother %s\ncostume class %s\ncostume_is_enemy %s\neffective %s' % (self, thing, costume.looks_like_class, costume_is_enemy, costume.is_effective())
                     if not costume.is_effective() or costume_is_enemy:
-                        
                         return True
-                    #else:
-                    #    s += 'costume protected!\n%s' % s
                 else:
                     return True
         for friendclass in self.myfriendclasses:
@@ -2787,7 +2770,7 @@ class Soldier(Human):
 
 class You(American):
     digests = True
-    starves = True#False
+    starves = True
     char = '@'
     charcolor = HtmlColors.YOU
     render_importance = 9999
@@ -4118,10 +4101,7 @@ class WebHack:
         cmds = sorted(cmds2,key=lambda q: q[1])
         for cmd, label in cmds:
             fnname = 'usercmd_' + cmd 
-            #label = self.label_for_usercmd(cmd)
             s += space(4) + '<b>'+label+':</b> ' + get_doc(self,fnname) + EOL
-
-        #s += read_data_file('webhack/key_misc_actions',linedelim=EOL,lineprefix=space(4)) + EOL
 
         s += read_data_file('webhack/key_end',linedelim=EOL)
 
@@ -4365,8 +4345,6 @@ class WebHack:
         for cos in you.get_worn_of_class(Costume):
             if cos.fidelity > 0:
                 cos.fidelity -= 1
-                #raise 'degraded %s' % cos
-            #else: raise 'fidelity low so wont degrade %s' % cos
 
     def lifeforms_digest_stomach_content(self, tick_event):
         def fn2visit(lifeform):
@@ -4469,7 +4447,6 @@ class WebHack:
             for c in xrange(len(row)):
                 cell = level.grid[r][c]
                 cell.seen = True
-                #continue
                 if level.environment == Level.OUTSIDE: # outdoors, sun/stars/moon up above, fresh air, bears
                     if cell.lit:
                         cell.seen = True
@@ -4485,7 +4462,7 @@ class WebHack:
         see_range = 0
         t = self.tock_into_day_cycle()
         min = 0
-        max = self.TICKS_PER_DAY / 2 #12
+        max = self.TICKS_PER_DAY / 2
         sr_diff = max - min
         self.debug('sr_diff %s' % sr_diff)
         half_day = self.TICKS_PER_DAY / 2
@@ -4538,8 +4515,6 @@ class WebHack:
         return self.ev.tock % self.TICKS_PER_DAY
 
     def handle_all_sounds(self, sound_event):
-        #assert isinstance(sound_event,SoundEvent)
-
         class Foo:
             def __init__(self, sound_event):
                 self.sound_event = sound_event
@@ -4640,7 +4615,6 @@ class WebHack:
             def fn(self, thing):
                 self.things.append(thing)
         f = Foo()
-        #f.wh = self
         self.geo.visit_with_all_things_in_world(f.fn)
         s += 'count: ' + str(len(f.things)) + '\n\n'
         for thing in f.things:
@@ -4698,7 +4672,6 @@ class WebHack:
                 traits += ' (AN)'
             if issubclass(cl,Corpse):
                 traits += ' (CO)'
-            #charchunk = '<font color="%s">%s</font>' % (color, cl.char)
             row = build_row(k,traits,cl,self)
             data.append(row)
         #TODO add row for: open door, broken window
@@ -4734,7 +4707,6 @@ class WebHack:
         keys = list(self.config.keys())
         keys.sort()
         s += '\n'.join(map(lambda k: str(k) + ': ' + str(self.config[k]), keys))
-        #s += str(self.config)
         self.feedback(s)
     devonly(autoui(usercmd_config))
 
