@@ -1001,19 +1001,17 @@ class SplashScreen(Mode):
     box_r = 3
     box_c = 7
     box_w = 65
-    box_h = 21
+    box_h = 12
 
     def __init__(self):
         scr_h = scr.getmaxyx()[0]
         scr_w = scr.getmaxyx()[1]
 
         self.zombies = []
-        qty = rnd_in_range(300,400)#90,100)#10,20)
+        qty = rnd_in_range(400,500)
         for i in range(qty):
             r = rnd_in_range(0,scr_h-2)
             c = rnd_in_range(0,scr_w-2)
-            if in_bounds(c,r,self.box_c,self.box_r,self.box_w,self.box_h):
-                continue
             z = (r,c)
             self.zombies.append(z)
         
@@ -1027,12 +1025,20 @@ class SplashScreen(Mode):
             self.addstr(r,c,txt,color_name)
 
         def box(r, c, h, w, ch):
+            for y in range(r,r+h): # fill in with blank space before drawing the outer walls
+                for x in range(c,c+w):
+                    self.addstr(y,x,' ')
             for rr in (r, r+h-1):
                 for cc in range(c, c+w):
                     self.addstr(rr,cc,ch)
             for rr in range(r, r+h):
                 for cc in (c, c+w-1):
                     self.addstr(rr,cc,ch)
+
+        def centered_box(h, w, ch):
+            c = scr_w / 2 - w / 2
+            r = scr_h / 2 - h / 2
+            box(r,c,h,w,ch)
 
         for z in self.zombies:
             r,c = z
@@ -1042,18 +1048,15 @@ class SplashScreen(Mode):
             #    print r,c
             #    sys.exit(1)
 
-        box(self.box_r,self.box_c,self.box_h,self.box_w,'#')
+        centered_box(self.box_h,self.box_w,'#')
 
-        center(self.box_r+2, app_name)
+        center(self.box_r+10, app_name.upper())
 
         # Teaser Quotes
         wrap_w = 60
-        txt = "Tonight we cross the final barrier in Man's exploration of Nature and her Laws.\nTonight the dead will rise.\n\n      Dr. Heinrich von Hexenhammer"
-        self.text(self.box_r+5,self.box_c+3,txt,wrap_w)
-        txt = "Good Heavens, Synthia! If your skirt lifts up any higher I will be quite unable to do any more Science this evening!\n\n      Victor Venturius"
-        self.text(self.box_r+13,self.box_c+3,txt,wrap_w)
+        center(self.box_r+13, "Day is for the living. Night is for the dead.")
 
-        center(self.box_r+self.box_h-3, 'Hit Any Key', 'black-white')
+        center(scr_h - 14, 'Hit Any Key', 'black-white')
 
     def handle_getch(self, ch):
         mode_push(IntroScreen())
