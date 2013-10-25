@@ -22,8 +22,6 @@ support larger window sizes (map view subset should get bigger, dynamically/auto
 
 migrate forward all ideas worth keeping & relevant from my original offline TODO files, into this TODO
 
-elim use of dateutil package?
-
 migrate to using GUI lib (like Pygame/SDL) since more freedom in choosing UI appearance
 
 merge those 3 lib modules together and elim unused/redund
