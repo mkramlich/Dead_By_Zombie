@@ -17,7 +17,7 @@ if __name__ == '__main__':
     assert len(sys.argv) >= 3, 'Usage: makeinitstate.py <gameclass> [demo|full] <fname>'
 
     game = sys.argv[1]
-    games = ('ZombieHack','WolfenHack')
+    games = ('ZombieHack','WolfenHack') # ZombieHack was my original internal name for Dead By Zombie; WH is another game I wanted to implement using the same shared core engine (webhack) used by DBZ/ZH
     assert game in games, 'game was %s but must be in %s' % (game,games)
     game_class = getattr(webhack,game)
 

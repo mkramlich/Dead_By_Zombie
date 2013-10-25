@@ -8,11 +8,9 @@ elim remaining vestiges of the original web UI version (Django refs, HtmlColors,
 
 delete all commented-out code
 
-rename core engine from webhack
+extract the core engine (which I've privately named 'webhack') from DBZ into separate public github repo?
 
-extract core engine from DBZ into separate public github repo?
-
-NetHack movement dir keys
+NetHack movement dir keys; right now it's confusing if your muscle memory expects NH's movement keys
 
 upgrade/bump to Python 2.7 or higher
 
@@ -30,12 +28,12 @@ fix any imperfections that happen after you die
 
 make the world much larger
 
-change all zombiehack/zh refs to DeadByZombie/dbz
-
-elim refs to Wolfenhack
-
 carry over some features/ideas from Apoc Dawn and TactiHack
 
 at game start, pretty soon the player should "hear" the sounds of other people in distress and crying/yelling for help, coming from elsewhere in town, from inside houses, etc. so have that immediate emotional pull and dilemma of whether to help others or ignore them and focus only on saving yourself
 
 elim remaining refs to the Demo-vs-Full (Premium/License) system
+
+elim refs to Wolfenhack
+
+change all zombiehack/zh refs to DeadByZombie/dbz
