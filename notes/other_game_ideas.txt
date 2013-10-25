@@ -1,0 +1,3 @@
+game idea: like that old Recon Vietnam RPG, but all text web game...you play one member of a recon squad, your squadmates are AI-driven, you get missions to patrol/reocn/infiltrate somewhere in Vietnam (in 60's US-Vietnam war). ambushes, boobytraps, guns, NVA, villages, communists, traps, rations, drugs, rain
+
+make Paranoia-based game using this engine

@@ -1,0 +1,11 @@
+engine_names.txt for WebHack
+----------------------------
+
+game engine names:
+    NURPS: [NetHack-like|Not-NetHack]  Univ. Role-Playing (Game) System
+    NurpsHack: NURPS + NetHack; or: NetHack + U.R.P.S.
+    NurpsWhack - Not U.R.P.S, Web(-app), (Net)Hack-like
+        which means: Not an URPS, and Not a webapp, and Not a Net-Hack-like
+        but the joke is: of course it is all of those things!
+    best name so far: NurpsWhack (abbrev: NW, or NWH)
+    TODO: google to see if either of those names taken already!!

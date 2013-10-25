@@ -1,0 +1,10 @@
+inform user somewhere that:
+    if he's wielding a bat or knife while attacking he'll do more damage
+    if he's wearing leather jacket when being attacked he'll be safer or take less dmg
+
+
+user command to toggle whether to show worn things in the Inventory display
+    also one for wielded things, and for misc things (things not worn/wielded)
+the usercmd button for these toggles should be shown *IN* the Inventory display itself, possibly to the right of "Inventory:" in the header line. Or at the very end, after the things list, on a line by themselves (line with just the toggle buttons I'm talking about here)
+
+fix this grammar flaw, seen in feedback: "You has an empty stomach (...)"

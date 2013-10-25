@@ -1,0 +1,69 @@
+ZombieHack Pitch Blurb
+----------------------
+
+fight zombies
+flee, hide, survive
+find safe shelter, esp at night
+board up windows
+barricade doors & hallways
+become a zombie
+lead zombies
+develop a cure for the zombie plague
+build a shelter
+destroy shelters
+blow holes in a wall
+knock down doors
+explore sewers
+dig pits
+set traps
+use weapons
+scavenge for food
+loot stores, homes, office buildings
+malls
+stores/shops: grocery, department, clothing, sporting goods, guns
+scientists & laboratories
+government agencies
+police stations
+military bases
+pick fruit
+eat food
+plant trees
+plant plants/trees that grow fruit, flowers, vegetables
+chop down trees for wood
+use wood to build things
+make friends, allies, enemies, employees or slaves out of NPC's
+ignore, save, help, abuse or kill NPC's
+compete or cooperate with the other NPC human survivors of the zombie invasion
+day & night cycles, with realistic effects and consequences of each
+see farther in day, less at night
+zombies more active at night
+safer to travel outside in the day, but be sure to find somewhere safe to spend the night
+gain skills
+use skills
+improve skills
+exercise
+gain followers - lead NPC's as their leader, ruler, master, employer, prophet
+try to save the human race, or betray it and try to destroy it
+try to forge an empire with you at the helm
+be a hero or a terrorist; saint or sinner; tyrant or man of the people
+shotguns
+chainsaws
+grenades
+mines
+rockets
+explosives
+pistols
+rifles
+knives
+melee or ranged attacks
+zombies crave the taste of human flesh, esp brains
+zombies are slow moving but dangerous in large numbers or close quarters, and downright deadly at point blank range
+if a zombie kills a human 99% chance they turn into a zombie too
+if a human is bitten/wounded by a zombie 1-50% chance they turn into zombie
+quests, plots, sub-plots, mini-games
+complete freedom of action for the player - (almost) no ethical restrictions on choice of action; (almost) anything you can do in the real world you can do in the game's world
+NPC's use AI programming techniques to emulate realistic human speech, personality, decision-making and behavior
+make war:
+    war: weapons, soldiers, generals, military bases, military gear/tactics
+
+

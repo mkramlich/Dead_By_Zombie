@@ -1,0 +1,58 @@
+wolfenhack.txt
+--------------
+
+overall: recreate/homage the original MUSE games from 80's Castle Wolfenstein & its sequel Beyond Castle Wolfenstein
+
+...........
+
+WH: Guard, Nazi subclass, char G
+WH: SS trooper, Nazi subclass, char S
+WH: a Marshall/General (Nazi subclass) char is M (for Marshall)
+WH: Eva Braun, char is P/V/B, NPC mistress/wife of Hitler; is Nazi subclass
+
+WH: alternate history events; weird things can happen; for example, you may come across a time traveller from the future who wants to try to alter the course of WWII; or you may meet Captain America (or some other comic book character who was alive during WWII, like Wonder Woman)
+
+WH: other famous people from WWII may exist as NPC's in the game world: Churchhill, Stalin, Roosevelt, etc. Maybe some cool surprises like you find Churchhill in a dungeon cell and you can try to free/rescue him (take him with you when you escape the castle.)
+
+Wolfen: other Allied prisoners may be found in other jail cells of the prison; US airmen, Brit airmen, etc.
+
+WolfenHack: before play starts, give user option of playing as Hitler rather than the prisoner; your victory/loss conditions are different of course; you can do everything the real Hitler could do historically in that situation; having this feature is great for public controversy, thus publicity, thus eyeballs, thus driving up potential subscribers/revenue; goal ideas: stop the prisoner from escaping him (have him be caught before he escapes the castle); etc.
+
+Hitler's girlfriend/wife: Eva von Braun
+have famous/historical NPC's that might be found near Hitler like generals, ministers of government, etc. Field Marshall's. Manstein. Rommel. 
+
+WolfHack: guns, real historical weapons from that period, German pistols, machine guns, etc. use real names of the guns.
+
+WH: one of the high-ranking German NPC's in the castle is a traitor and is willing to help you escape and/or kill Hitler, if you can find him, befriend him, etc.
+
+in WH, if you attack a guard, and other guards see/hear that it occurred, they will begin moving toward you with goal of attacking you once within attack range of you.
+
+put an alarm and tripplate in Wolfenhack
+
+wolf: you start game carrying a piece of paper, which is the orig draft notice you got from US Army in 1941
+
+change 'is hitler dead' listener from being on tick to being on a death event
+    emit a death event when a lifeform dies
+    the listener should have 'thing:wh.hitler' as an event param condition
+
+wolf: you should not have the goal 'kill hitler' UNTIL you learn that he's in the castle (or, at least have reason to strongly suspect it). Have an event listener that will check if you (should) now know if Hitler is in castle. If so, it adds that goal to your game victory goals. Could listen for thing_enters_cell, or just have a tick listener that checks every tick whether you can see Hitler currently. Once you see him for first time, the 'kill hitler' goal is created, and also that tick listener is deregistered. Because if it kept checking in subsequent ticks it would be pointless.
+
+WolfenHack (orig Cast. Wolf. redone using this engine/style)
+    daggers can be thrown
+    daggers can be wielded, and if you try to move into cell with enemy you will attack them with it instead
+    if a Nazi sees you he'll yell "Show me your pass!" in german. you must flash a valid pass within X ticks or he'll get angry at you
+    if Nazy angry at you, he'll try to kill you or capture you
+    if Nazi adjacent to you, and he'll try to capture you (succ random), if succeeds, you're thrown back in a prison cell at bottom of dungeon, losing all your items
+    item: pass (different instances are good/valid for diff parts of the prison/dungeon); there is a super-pass which is valid anywhere but it's very rare possibly a unique item, laying somewhere in the prison
+    if Nazi dies, he leaves a corpse and a Nazi uniform
+    you can pickup and put on a Nazi uniform
+    when wearing a Nazi uniform, you'll still be challenged for passes, but will be trusted more, and in some areas you won't be asked for a pass normally whereis if you didn't wear a uniform you would be
+    in most of the dungeon, if a Nazi sees you without you wearing a Nazi uniform, he gets angry at you (assuming you're an escaping prisoner or enemy spy)
+    there are many Nazi's in the facility, but only one Hitler
+    if you kill Hitler, or, if Hitler dies by some other means but you eventually see his corpse, then you win the game (you'll have the option to retire victorious or continue playing)
+    there is an Exit space; if you move into it, you exit the castle and Win, game freezes, you can't play it anymore, only issue a Reset or go on to other parts of the website
+    there are multiple levels/floors to the castle
+    there are stairways/ladders/chutes, if you move into space with one it transports you to the new level/floor it leads to
+    the Exit is never placed on the level you start on, always one of the farthest ones from your starting level
+    grenade: you can pull pin and throw it, it lands on ground a random # of spaces in the dir you threw it, or, if it runs into obstacle, perhaps earlier; it explodes a few ticks later
+    wait action: player indicates to 'do nothing' for 1 tick()

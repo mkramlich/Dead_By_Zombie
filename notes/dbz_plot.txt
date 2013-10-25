@@ -1,0 +1,73 @@
+add Cthulhu stuff
+
+a cult
+
+Prince of Darkness-like plot where some evil force is trying to breakthrough into the everyday world. The zombies may just be a small part of that, a symptom or early warning. VV and the League would fight against that happening. The player could get sucked up in that effort.
+
+the church has a preacher who is preaching "Only the the church can save you, come inside", etc. and of course any NPC's inside the church don't really have any special protection
+
+Dr. Victor Venturius is an eccentric scientific genius who can play a crucial part in the fight against the zombie menace.
+He also is caught up in several other interesting plot threads and adventures, and the player may witness them or get involved in them if they contact Venturius and work with him.
+There's a research laboratory. And his home is a multi-floor mansion on the grounds of a large estate.
+He has Ph.D's x3: physics, medicine and aerospace engineering.
+He's a member of a mysterious League whose members have all pledged to fight evil and make the world a better place.
+Each member is an extraordinary individual in some way or another, bringing unusually strong talents or resources to bear in their common quest.
+He will need you to go acquire and bring back to him several things, to aid in his research or schemes. A newt. A zombie corpse. A living zombie. A book on anatomy. A book on disection. A book on surgical instruments. Some actual surgical instruments, at least one of which is sharp and shiny. A book of medical crime fiction. An episode of Quincy. A copy of the movie Night of the Living Dead. A pack of gum. Some breath mints. The latest issue of The Economist. The latest issue of Hustler. Physics Today. Nature. Science. Jugs.
+You MUST bring him all of these items, even if you think some are silly. To advance the plot.
+[Each of those items DOES exist in the game world, and thus you can find them and bring them to him.]
+Running errands for VV is one way to help him and the League in the fight against the zombies, and their larger fight against Evil
+VV has a small private spaceship in a hangar on his estate. It's possible for the player to discover it. See it. Walk inside of it. Take off? I don't know.
+The player may see or interact with 1 or 2 other League members in person (other than VV), but that's it. It sounds like there are about a dozen or so total, due to various things the player learns.
+
+"The ladies are waiting, sir." -- V's butler to him, said in player's presence (they're in V's mansion)
+[suggested that it's romantic (orgy? gb? party? slaves? harem? paying customers for his giggolo services?), and/or he's just really popular with women]
+[Then, after V does not immediately respond to butler's comment, instead seeming to want to continue dealing with the player:]
+"I suggest no further delay, sir. You know how they get." - butler to V
+
+"The League has come to agreement on this issue," says Venturius.
+[figure out what it is he's referring to; i don't know yet, but sounded cool.]
+
+in-game text:
+[VV has been missing from the game world for some time, at least from player's POV. Player may have known or guess he was on a mission or a battle against Great Evil, along with the League. And the fate of the world was in the balance. The zombie menace was just a small drop in the water in comparison to the horrible apocalpyse that would be unleashed if V and the League failed at Kalma. The Machine is a time machine, only or or two exist, and V and the League have used it to travel back in time, to 1903 Europe (or Antarctic), to a place called Kalma, where an ancient stone artifact, The Gate, was, at the time in history, uncovered and accessible to anyone who knew of or stumbled upon it's exact location. VV used the machine to travel back in time to 1903 to Kalma. Now he returns to present day at his estate, and the player is present there when he returns:]
+Venturius emerges from the Machine. He steps out of a cloud of white smoke into the center of the room.
+"I return from 1903," he announces.
+"I bring with me news of a great victory over the forces of darkness.
+We have sealed the Gates at Kalma.
+No demon shall pass through while our guards stand watch."
+[He refers to a sort of ancient, magical portal to another dimension that is either Hell or something like it. A place where much Great Evil dwells. The Abyss? Tartarus?]
+He sat down on a nearby chair. Collapsed, really. Shoulders slumped. A servent rushed to fetch him some water.
+....?..player leaves V's estate, time passes...
+then one day either VV's servant (or a note from his estate) arrives, which says this to the player:
+	'We apologize for the delay in communicating with you as to the state of affairs here, but there has been quite a lot to do. The details of which do not need be of your concern. Nothing more you need to know than the following fact which should, if you have been paying close enough attention in recent days at the great [great, taxing and deadly dangerous] & dangerous events which have taken place around our employer [VV]. {sad news} {bad news} {following item of extremely sad news: Venturius now sleeps.}'
+	['He was gravely wounded at Kalma. The doctors have done all they can for him.']
+	'Venturius now sleeps. It has been a long time coming.'
+The note ends like that, with no further word of what it means. No subsequent messages arrive from V's estate. All attempts to contact his estate are ignored. Any physical attempt to visit his estate will be blocked, or, when gotten there, the buildings are empty. Or, the game just ends, in a "win". Game over.
+[This implies or suggests that he has died. The player does confirm as fact that VV was gravely wounded or weakened in the battle at Kalma. Player not aware of it when they witnessed him return through the Time Machine. In the game, DBZ, the player will NOT learn for sure whether he is alive or dead. It will be left as a mystery or cliffhanger. Possibly to be picked up in a later game or expansion.]
+
+Doctor Who -- VV is like The Doctor
+Call of Cthulhu - the player is caught up in a Lovecraftian/Cthulhonic adventure and story/stories, atmosphere
+The X-Files -- VV most like Mulder
+Ghostbusters -- VV is most like Akroyd
+Prince of Darkness - the evil & devil tones, the old asian professor telling his tales
+The Illuminatus! Trilogy -- VV is like Hagbard Celine
+Lord of the Rings - VV is Gandalf
+Abominable Dr. Phibes -- VV like a "good" Phibes
+Batman -- VV is like Batman & Bruce Wayne
+Austin Powers - VV is like AP and Dr. Evil
+20,000 Leagues Under The Sea -- VV is like Capt. Nemo
+H.G. Wells classics -- VV like protags of Time Machine, Invis Man, Dr. Moreau
+V for Vendetta -- VV is like V
+
+speech idea for an NPC who travels back in time to the present and encounters the player:
+"We come from the future. I mean The Future. Your future.
+Just a minute ago I travelled back in time a full month from now. Man, you woudn't believe what it was like then. I mean, it was crazy. Er, it WILL be crazy. Or it might be? Wow. Well, I gotta run. Sorry can't talk more. Good luck!"
+
+maybe the player is a cousin of VV. your name could be Richard Fenkman.
+your uncle VV sends an email or leave voicemail inviting you to his estate to discussion urgent matters of mysterious import? (zombie outbreak. war of good vs. evil. demonic invasion from another dimension.) it could be the first node in a plot thread involving VV, the League of Neomen, the war against Evil and the Demonic Invasion From Another Dimension, etc. which is separate from, though related to, the game's main plot thread which is the zombie outbreak and the effort to survive and maybe develop cure.
+
+'There is a great evil seeping into this world. It is due to an accident. And it all began long ago on an expedition to the antarctic that should never have occurred. Perhaps now is the time you learned the truth about what happened on that expedition. In telling of it may lie the key to solving the present crisis, and saving our world. It is only fair you hear everything, even if you are helpless to do anything about it.
+    The expedition was formed by a man named Alexander Grenville. It....'
+
+'There is a dead man on Mars. And he is calling out a name. Do you want to know what the name is? Do you? Trust me, you don't.'
+
+

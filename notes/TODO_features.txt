@@ -1,0 +1,161 @@
+TODO Features
+----------------
+
+on manu menu the Continue Saved Game entry should not be there IF there is no saves/quicksave file
+
+implement these user commands:
+    def usercmd_lock(self, relrow=0, relcol=0):
+    def usercmd_unlock(self, relrow=0, relcol=0):
+    def usercmd_wave_arms(self):
+    def usercmd_jump(self):
+    def usercmd_yell(self):
+    def usercmd_say_hello(self):
+
+zombies may have had professions when they were humans (pre-zombie), like lawyer, doctor, cheerleader. it effects how they look, talk, behave, and they're abilities, when in zombie form, and where they hang out. profs: cop, rock star, artist, engineer, model
+
+barricades: you can build a barricade in a spot, if you have the right raw materials (wood? logs, dead trees, chopped down tree limbs/trunks; furniture? nails? duct tape? sheet metal) and tools (hammer? saw? blowtorch?); a barricade makes a spot impassible to zombies and humans
+
+an NPC may be infected with the zombie virus but have not yet turned into one. you can see/hear symptoms of it in their description or NPC actions observed. (eg. "The woman twitches uncontrollably.". "The man's eyes are very red and his face is discolored.")
+
+....
+
+
+
+map key: add open door, broken window
+
+map key: maybe not list VV or other special NPC until you've met them already and know of their existance
+zombies weren't attacking her much - change that
+
+Help page should have actual help:
+	describe/explain the UI - what is everything on the screen mean, how does it work
+        explain the "zone desc" part of the UI (NOT done so in current Key on Help page!)
+		explain that ?'s on the map means areas you can't see currently for whatever reason (typically due to darkness caused by time of day, such as night or evening)
+        explain the teleporters! T's! or, make not exist (or invis+disabled) in non-devmode
+		the desc/help text for a command should be either the docstring or an attribute for that command's view handler function --- the Help page should merely grab the value defined there when it needs to display the help text for that command
+	how to move/attack, use dir commands
+    explain how almost every action you do causes a "tick", what happens during a tick, and that tock increments during that
+    explain relationship between tock and day/night
+	food, eating, fruit, fruit tree
+	explain the Inventory button and inventory system
+	explain the Things Here button and idea of things on the ground vs. in your inventory
+	zombies, turning into a zombie
+    attacking a thing reduces it's HP (even a wall/door, etc.), when it reaches 0 it's destroyed (ceases to exist) or dies (if lifeform); if dies, it leaves a corpse
+	hp, damage, death, you dying
+
+thing_classes command:
+    print a user-friendly description of the thing's purpose, use, meaning
+    example: knife/baseballbat desc should indicate they are weapons that if wielded when attacking will let you do more damage and/or make more likely to hit
+
+
+minefield. if mine in a cell, it's a comma ",". When lifeform moves into it's spot, it blows up, doing lots damage to it, possibly killing/destroying it, then the mine is consumed/deleted. There could be a safe path through a mineifeld which is a contiguous path of cells that do not have mines in it. the PC would move along that path, but the zombies would be too dumb to do that, just moving randomly or in straint line towards you, so, they get blown up. However, the mines run out eventually. You'd need a command taht allowed you to re-place/activate a mine in a given cell. And a supply of mines. Maybe a military base, with a room with 100's of unactivated mines in it, for you to take from? Or a Mine Dispenser. An object that has a button, you press the button, it dispenses (creates) an unactivated mine, putting it on ground in taht cell or into your inventory, whatever. Could have infinite or finite supply.
+
+game can characterize how the player is playing, and alter the world, make events happen, adjust it's reaction, etc. to better handle that particular player's style. If the player seems to be avoiding combat and wanting to explore, then the game does something to be more satisfying to that personality. Or, vice verse, if the player is going around attacking zombies, the game does something to reward that desire and style.
+
+when you attack with a wielded chainsaw, it should make a "*whrrr*!" sound, even if just for entertainment/chrome purposes (you should see text message like that "*rrrrrrrrr!* or whatever). Maybe random text like "chunks of zombie fly off!" "You divide and conquer with your chainsaw."
+
+DBZ idea: yelling attracts attention of zombies who hear it, causing them to maybe gain idea/plan to move towards you
+
+DBZ: when attacking, having approp skill should increase chance of hitting, and, dmg done, in proportion to how much skill you have. Approp skill depends on what weapon you have wielded (example: gun skill helps when wielding gun but not when wielding bat, and vice versa)
+
+DBZ: if NPC humans see you killing zombies successfully, they may decide to start following you, because they see you a strong protector, leader, source of safety, man about town, etc.
+
+DBZ: add user command that asks a NPC human to "(not) attack zombies". Maybe another to "(not) protect me", and another to "(not) guard this spot" (which is like a combination of telling that NPC to move to/near that spot, don't move away from it, then attack any zombies/enemies/threats that come close to it/them, but to not move away from that spot and to not pursue enemies if it would cause them to leave that spot, etc.)
+
+DBZ: user has button to toggle whether to show ID's for the things in his Inventory list. Default is off. Same toggle state also effects whether to show ID's in the Things Here list.
+
+somewhere on starting level should be some clue/evidence/document that informs the user that there is a scientific output in another region/level that is (probably) trying to fight the zombie plague (and therefore, the user could conclude it may be good idea to travel there, contact them, help them, etc.)
+
+allow the PC character to be female
+    how?
+        user chooses gender before game init'ed?
+        the Restart button doesn't immediately restart, instead goes to screen/mode where user can toggle/select gender (among other options) then hit a button there to actually do the Restart. (would I have to have separate pools of initstate files, some baked with male PC's, some with female PC's?)
+
+game content and exerpience could vary by PC's gender
+
+user command that eats stuff from inventory until stomach full, if can
+
+NPC's shouldn't always obey your ask requests. Rather, a chance, depending on NPC's personality, plus, your influence/charm/charisma over them, and their trust of you.
+
+boolean flag I can set in the code, if True, then I can issue a command to enable/disable devmode. When devmode enabled, all the devmode-only commands can work. Best ones to implement first: invuln, always-kill-zombie-on-first-hit, no-NPCs-move
+
+on 'Choose Thing To Eat' page, on same line as the stomach #/#, also show the total calorie count of all carried edible items (the stuff listed below)
+
+to Intro Screen add Help link
+    on Help screen, have these menu items:
+        Map Key [like: d is dog, Z is zombie, etc.]
+        Command Keys
+        Play Guide
+        Encyclopedia
+
+command to let user toggle which key set to use: default or no-num-pad
+    his choice could be persisted to a file the game writes inside the dbz directory (same level as license)
+     AND mention in the README about how to do it
+
+add a randomly chosen quote or passage to show in the splash screen. a sentence or a few lines. from the story/backstory involving Hexenhammer, Venturius, the unleashing of the zombie plague, motivations, dramatic moments, etc. It could be chosen at randomly every time that screen is entered.
+
+anything I mention in promotional material, or that Ver Comparison Chart needs to be added to the game (example: Oomoo, Venturius fembot assistants)
+
+when user chooses Restart Campaign, it should first take user to a screen that just shows scrollable/pageable text of an intro blurb. ("A zombie outbreak has happened. You are ... blah blah blah.")  Once user indicates he's done reading that, the game then (1) loads world from demo-or-full initstate, then (2) takes him into DefaultMode screen and begins play.
+
+    build out the Venturius stuff more, quests, plot progress, creative personality and events related to him
+
+in Demo scenario, on start level, the routes should exist (be visible), just disable the 'route' command key if in Demo mode; that way user is teased/reminded of the extra content he could access if he has the Full Version
+
+Dr. V is building some cool exotic prepostorus contraption. He quests the player with acquiring and delivering various pieces of it. As more stuff gets delivered to him, you can actually see visual progress on the contraption, it's a thing inside his mansion, occupies a portion of it or attached laboratory space. Use punctation characters like * or colored # to render the various parts of the contraption. Purple #, for example. ALSO the user/player should learn of this fact (his need for this stuff) fairly early in his play experience. Maybe V needs to build the contraption as part of his effort to cure/solve the zombie plague. Maybe he's come up with a chemical to cure the zombie plague, but he need the machine to mass produce it?
+    one things he needs:
+        sprockets, tubes, wires, gears, bulbs, pulleys, bands, duct tape, igniter, microchips
+
+set a boolean flag in the code, directly, which enables all devonly commands -- JUST make sure to set that flag to False before building a public dist
+
+a way to truly Win the game
+    such as: by curing the zombie plague or destroying all zombies such that they never come back
+
+once you become zombie, you shouldn't be able to move or pickup/drop, basically not do any new actions other than to look at the worl state/status
+
+starting quests:
+    1. get to your house
+    2. get the chainsaw in your house (pickup, wield)
+    3. find Dr. Venturius estate
+    4. tell Venturius about the zombie outbreak
+
+command that saves AND quits
+
+Mac app icon
+    make DBZ app icon!!!
+    integrate it into the dist
+
+help screen/mode
+
+hit ? in any mode to switch to screen listing all commands supported in orig mode, with key and description of each; then press any key to pop return to previous mode
+
+a device that if carried (and activated - because it can be on/off) will emit a "Pain-in-the-Zombie" field that makes nearby zombies experience pain, say things like "Ouch!", and try to move away from you.
+
+you chance of hitting in an attack should go up the higher skill you are with the weapon being used
+
+define and add-in new locations (premium mode only, and add to the website chart and convention pdf chart):
+    Movie Theater
+	Hotel (haunted? old? zombie-infested? crazy?)
+    Candy Factory
+    History Museum
+    Toy Super Store
+
+overheard rumor, or, NPC belief uttered:
+'The ruins of an alien civilization have been discovered on the planet Mars.'
+
+The contraption that Venturius is building requires this long list of parts and resources. One of them is "sprockets". Make some sprockets items and place them somewhere in the world. He also needs pipes, tubes, etc. In a normal world he could just go buy them himself or have them mail-ordered and delivered. But due to the zombie outbreak, normal services and economy has broken down. Things that uysed to be done automatedly now have to be done manually. The world is now in a state of semi-anarachy.
+
+evil mad scientist: Dr. Heinrich von Hexenhammer - Dark Science (or Dark Arts?)
+good mad scientist: Dr. Viktor Venturius - Weird Science
+The League of Mad Scientists for a Better Tomorrow - the group Venturius is a part of. aka "The League" for short
+
+an NPC may belong to 0+ Groups. A group can be like a club or organiziation, like in Paranoia or Illuminati, such as Cult of Cthulhu, College Republicans, etc. Belonging to a group may give them special abilities, favors, contacts, items, enemies, allies, goals, etc. The PC may join 0+ groups too, during game play.
+
+"Come out of the house. We know you're in there. It's the smell. It drives us crazy." - zombie speech
+
+"Once I was stranded in 1942. Whew. Rough year." - Venturius
+"You were stranded there for a year?!" - somebody
+"Yep. It was hard. I almost didn't survive. Tough times. A very bad year for the human race." - Venturius
+
+somewhere, house full of people. if you (only happens if you/PC) move into a certain spot with a trigger, it causes all the NPC's in the house to turn into zombies
+
+

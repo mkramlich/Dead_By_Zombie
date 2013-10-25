@@ -1,0 +1,70 @@
+game_ideas.txt for WebHack
+--------------------------
+
+The Island of Doctor MoreauHack
+    human/animal hybrids, a mad scientist, even use actual snippets from the original book (since I think it's now public domain)
+    could also do other books by H.G. Wells, like Invis Man, Time Machine, War of the Worlds, Food of the Gods, etc.
+
+TrekHack - Star Trek-like game; with elements/characters/etc as close to orig Star Trek as I can get while still being legal/safe; you're able to be a member of a crew (bridge officer? captain) of a Fed starship similar to orig Enterprise. go on missions, away teams, beam down, phasers, communicators, etc. Playing it like cross between a great STOS episode, but also have the freedom of GTA and Ultima and Sun Dog and Elite, etc. Game won't be called TrekHack literally probabably but that's the project name.
+
+HauntedHack - you enter a haunted mansion; ghost, poltergeists, apparations, scary noises and sights; monsters, evil forces/winds; death traps
+
+CollegeHack - you're a student (or visitor to campus? or professor?) in college; there are other students, professors, books, buildings, class rooms, labs, sororities/fraternities, lockerrooms (girl's showers!)
+
+WildWestHack - it's the Wild West, gunfighters, duels, saloons, banks, carriages, trains and train robberies, gangs, wanted posters, bounty hunters, sheriffs, Texas Rangers; gold miners, gold rush; buried treasure; Indians, Mexicans; settlers, pilgrims, country doctors, horses (you can buy/steal/borrow and ride a horse), cows, ranches, ranch hands, branding
+
+WasteHack - Wasteland
+
+SecretHack (spies, James Bond, old TSR Top Secret RPG)
+
+NyetHack - NetHack-like (fantasy, dungeon, etc.) but with this engine, and probably try to make it better (NPC's who have their own plots/goals/missions, etc.)
+
+PyroHack (Pyro)
+
+UltiHack (Ultima I-IV)
+
+HauntedHack - you're in a haunted house
+
+CounterHack - Counter-Strike, player is on the CT team or T team, and it's either a demolition map or hostage map, just like in CS; of course all your teammates are NPC's. you are @, teammate CT's are C, and T's are T
+
+CollegeHack - simulation of CU-Boulder or a generic college...classes, students, professors, you're a student or visitor to school; you can attend classes, interact with people, steal things, pick locks, kill people, start fires or actually be a goodie two-shoes and do normal typical legal things too
+
+MurderMysteryHack - player is PC human in mansion with other human NPC's, as guests, and one by one NPC's show up murdered by a mystery assailant. try to survive, escape, or figure out who is the murdered (one of the other NPC guests, or, some secret person you don't know about yet)
+
+AlienHack (Alien(s) movie(s), youre a colonist or marine facing Alien(s), maybe a marine investigating a spaceship youre docked with, or a space station or planetside colony town, you could also be a Ridley-like character)
+
+LifeHack - setting is like modern America...you may have a job, a house, a family, friends, you get paychecks, have a bank account, you can use ATM's, call people on cell phones, etc.; every tock is equivalent to a specific minute of a RL day, so say every X tocks is like X minutes or seconds or something...if you have a job you'll be expected to be at work office during certain hours or you will stop getting paychecks...you can do evil/illegal things and if people see or learn you did them, they get pissed, if cops see/learn they will want to kill you or arrest you, etc. you can steal, vandalize, arson, mug, do drugs, buy/sell drugs, etc.
+
+Visions of Aftermath: The Boomtown - given the WebHack treatment
+
+Seven Cities of Gold - the part when you're on the ground in the New World can use the existing WebHack map/dungeon engine, but the part when you're at sea in sship may need to use more customized code (allow ship identify and ship-based movement in seq squares), plus the mode when you're in Europe at a port, and can buy/sell cargo, outfit ships, etc.
+
+Sid Meier Pirates - similar adapation as Seven Cities gets
+
+ReconHack - you're a solo soldier (or part of a squad, the others are NPC's) on patrol/missions in Vietnam in the 60's/70's.... real weapons & equipment for that era/setting...Vietcong, NVA, AK-47's, boobytraps, spiked pits, tunnel networks, flamethrowers, napalm
+
+BeachHack - more of a demo than a full game, you're at the beach, part of the level is sea water, part is dry beach where you can walk around....over time the water boundary fluctuates as the sea comes in and goes out with the tides...parts of the water are deep enough you will drown if you don't know how to swim. no victory goal, but all the mechanics to support this are builtin to core WH engine so real games can use this type of stuff too
+
+CaveHack - you can descend into a cave, multi-levels, very random and natural, every time you play a new game of this it creates a new random cave system...like a real cave, a cave-in may occur, you'll need light source (flashlight?), may need food and water, can become trapped, may discover pools or rivers underground, etc.
+
+AlienHack - like the orig Alien movie...you're on a spaceship and an alien is loose on the ship, maybe impregs people too
+
+TheThingHack - like Carpenter's movie The Thing..you're one of the people in the arctic station, the Kurt Russell character...you're not sure whether/who/which of the other NPC people in the station is The Thing...paranoia, fear, people are killed or go missing, esp when out of your sight, etc. just like the movie
+
+MiniHack - like NetHack but entire world is just one region and one level; you win if you acquire the Quest item and take it to the Exit; both the Quest item and the Exit are on that same level (that you start on); there are monsters, rooms, traps, etc. Semi-randomly generated every time you play (well, reset anyway.) Good way to demonstrate/showoff the engine's capabilities. Also, good introductory game for new players, to see if they like it.
+
+ShoppingHack - you're a shopper; the play occurs in a store or a mall; there's stuff to buy; you have a victory goal(s) (buy certain things, buy most things, buy best value/dollar things, etc.); obviously oriented mostly to females; interesting experiment to see if they would like it; maybe you can also shoplift; there are store guards, mall security, etc.
+
+PhibesHack - game based on the Abominable Doctor Phibes horror movies, Vincent Price (don't remember exact movie titles but had Phibes in it)
+
+games based on cool movies; enough alike the movie that it's cool and fun, but different enough that I'm safe legally of course. Examples: Alien, Aliens, Carpenter's The Thing. Carpenter's Halloween (game where you are a babysitter in a town and a Mike Myers like serial killer is on the loose), Raiders of the Lost Ark, etc.
+
+Star Wars-like game using WebHack;
+    not literally SW of course, but very like it in tone, style, substance, plot, language, events, characters; You are a Luke Skywalker-like character. Names of characters, races, planets, etc. are different than SW, but the story's basically the same. Could be very exciting and inspiring.
+    And lots of opportunitis for me to write cheesy cool fun sci-fi blurbs, dialogue, text, events, character descriptions, event descriptions. Bounty hunters. Princesses.
+    Death Star-like stations. Alien races. Jedi-like characters and powers. A quest. A rebellion. Allies, friends. Robots.
+    Robots with personalities like R2-D2 and C-3PO. The main game/campaign is you as a Luke-like and the overarching plot/events are like first SW movie. But could also have one game/campaign per SW movie (so 6.) And/or could let user choose to play as different PC's (a Han Solo-like, a Leia-like, etc.)
+
+SpaceHack - allows cells which are basically open 'space' (as in sci-fi space: the void an astronaut is in when he leaves a space station and space walks, is what I mean); this lets me have things like starships and space stations, where the maps/regions are set inside/around a starship or space station.
+     It's possible to go out an airlock/hatch of a ship/station, and you're in free space: there's no air, it's cold, etc. If you don't wear a spacesuit or equiv protection you will die, etc. Must of course have super-intelligent computers (HAL).
+     Malfunctions which endanger the crew. Aliens. Sabotage by crew or passengers. A space passenger liner. A battleship. Space marines. Laser rifles. Robots.

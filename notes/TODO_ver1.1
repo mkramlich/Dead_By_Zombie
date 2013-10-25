@@ -1,0 +1,56 @@
+TODO ver 1.1: Day is for the Living, Night is for the Dead
+----------------------------------------------------------
+
+(X) increase food calorie counts
+
+(X) decrease zombie spawn frequency
+    changed from 1/3 chance per tick, if night, of 1-2 zombies spawning
+    to a 1/6 chance
+
+barricades
+    (x) can build barricade
+    (_) require wood in inventory
+    (_) consume the wood
+    (_) axe
+    (_) command to use axe to chop down tree (any Tree, even FT) (in a direction), tree deleted, puts wood on ground
+    (_) zombie may attack a barricade, and may damage it or destroy it; if zombie hits it a sound is produced;
+
+safe zones
+    (X) command to declare a spot to be a SZ
+    (X) in zombie-spawning code, do NOT spawn in any SZ cell
+            ZombieHack.make_zombies_at_night()
+    (_) when zombie spawns somewhere, any adjacent cells which had 'safecell' status lose that status
+	(_) each tick, each SZ cell, if that SZ cell is adjacent to a non-SZ cell then there is a random chance it will lose its SZ status
+	(_) command to toggle whether to show visual indicator of which cells are SZ; green 'S'? draw precedence is higher (meaning shown above/last) than everything except walls and the PC/avatar
+
+add stuff mentioned in Prem on website but not actualy was in yet:
+    (X) Dr. Hexenhammer (in castle, with laboratory)
+    (X) Zulu fetish doll (little red 'w', for warrior)
+    (X) VV's 6 fem assistants
+    (_) way for user to cure zombie plague
+
+flares
+
+candy man - NPC carrying a lot of candy -- so if dies he drops tons of candy
+
+Gygamire Caverns - many levels/regions of interconected tunels and caves carved inside the earth...some edible fungus found in various places, grows (like tree except fungus creates new fungus periodically)
+
+VV can build a contraption to help manufacture a cure to the zombie plague, but to do it he needs missing parts. PC can go on a scavenger hunt to find them all, and if you bring all and give to VV and will then begin building contrpation and it will be done in X ticks. Parts scattered aaround the world: liquid oscillator, vacuum pump, bimodal shunt, phasic fus, carbon filter, antipodal actuator, liquid crystal cornflakes, one-inch spring, tungsten strip, 
+
+shooting: attacking with gun-type items at a distance
+
+interactive dialogue mode
+
+zombies can break windows; a broken window can be moved through just like it were an open door or space-without-wall; when window gets broken, a sound is made; an unbroken window cannot be moved through; a broken window looks like an empty space
+
+when makeinitstate runs, get rid of these console msgs or make them say the region/level name:
+Region(): w,h: None,None
+Region(): w,h: 30,20
+Region(): w,h: 30,20
+(...)'
+
+zombies have memories of their past lives. like to visit/hangout at places they inhabited when they were humans/alive (their home, job, etc.). some zombies are sad and will be crying. some zombies are filled with rage and vicious.
+
+
+
+

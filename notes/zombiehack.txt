@@ -1,0 +1,1073 @@
+zombiehack.txt
+---------------
+
+a zombie type that is invisible by day, but visible (glow in the dark) at night
+    you might walk into an invisible zombie during the day, or it might attack you; you can hear them say things even when they're invisible
+
+zombie virus carrier who is himself immune to it (won't turn into a zombie); when he walked around and got close to other humans, he would infect them and they would turn into zombies, even though he himself would not
+
+rumors - define a bunch of rumors, and then have the NPC's each have knowledge of a subset of them (varies by individual), and it becomes of the the things they may reandomly speak about. Example rumors ('Old man Jackson is a crazy old coot." Or "The woman who lives in the house at 123 Elm Street is a nympho. She sleeps with any man that moves.", etc.). Some rumors may be totally false, and some may be based on fact.
+
+Venturius has a white Neoman power/combat/flight armor suit in his house, locked up somewhere. Player might be able to get it. When worn it gives awesome protection in combat. And may give extra abilities and powers. (Weapons? communcation? gadgets?)
+
+you can step on a trap/trigger in a cell and it causes several zombies to appear behind you or nearby (they wake up or disturbed from coma? they hear you) the code to declare it could be like: ZombieTrigger(x,y,zombieqty)
+inside the ctor method it can register whatever event listeners it needs
+
+user can toggle/swap position of feedback and the inventory/things-here blurbs
+
+player ability to make a wall 
+player ability to make a door
+
+Prosinec - the zombie virus, or the cure for it; Czech for December
+
+show total food calorie count carried (# of ticks of nutrition) in status area
+
+some book types/instances impart skill experience when read; the skill(s) and experience award varies by book instance/type
+	a book of this kind has a finite max xp it may impart to a particular reader (like You, the player), and it keeps track
+	once that hits 0, you may still read it, but you won't learn anything more (gain more xp in that skill)
+	almost every skill can be learned (gain xp) via reading a book
+
+put bunch of mines randomly around the outside of MilBase
+
+give Scientist the science skill
+
+Hospital
+	needs patient rooms, operating rooms and storage closets
+	needs people in rooms (patients) and they think "I should not move", so they dont' move (like they're in bed)
+	Doctor class should have medical skills, serious healing ability, can do minor heals for free/easy, can do major heals with right equipment/materials/facilities
+
+Cemetary - has graves, has lots of zombies
+
+Library
+	you can 'read' a book: in feedback you see it's body text
+	librarian, patrons
+
+Bank
+	locked vault room with tons of money & bars of gold
+	guards; staff; alarms may trigger; cops respond to alarm
+
+University
+	dorms, classrooms, labs, frat, sorority, computer rooms (CU-Boulder/WillVill-based?)
+
+Police Station - Police class, 'C' (cop), has gun, tries to enforce law
+
+Prison
+	needs prisoners, prison guards, prison cells, walls
+
+Zoo
+	needs lots of animals, diff kinds
+
+Venturius Estate
+	VV: needs unique thoughts, beliefs, speech, VVMind class (subclass ScientistMind, subclass HumanMind)
+	needs a servant/butler NPC human (Fred, Albert or Alfreda)
+	impl some of the cool speech/scenes I made in my physical notes as either random text or random events that occur when Player in the mansion (The 'return from 1903', the "ladies are waiting, sir", etc.)
+	mansion has hanger with ship in it
+	mansion has Time Machine in it
+
+add: Park; Golf Course; Lake Dayton (region with big lake in middle, and a litle land around edges with some fisherman, campers, trees)
+
+SuperStore
+	super grocery store
+
+Wendigo Forest, add to it:
+	river running through a corner of it
+
+military base
+	put soldiers in the guard alcoves at the main entrance
+	if a human moves past the guards at the main entrance, moving further into the base, AND they don't have a valid 'pass' item; the guards will get angry at them: sound base alarm, attack them, try to kill or immobilize/arrest
+	on it's level, the route 'back' should be located on the edge closest to the main entrance to the base (south-side)
+	base should have lots of guns, ammo, explosives, grenades, mines, military items inside of it, not civilian stuff
+	most soldiers should have gun and military gear on them (gun, nade, uniform, etc.)
+	gun & grenade are new weapon types; gun is melee weapon (like knife) for now, but higher dmg/to-hit; soldier is an 'A' on map (for army man); soldiers have generic human mind initially, but eventually create a SoldierMind; later add a General class, with diff skills, mind, equipment, and a command relationship over soldiers; soldier has a rnd speech set ("Yo!", "Let's rock.","God bless the USA!","Remember 9/11!","Remember Iwo Jima.","Sarge is gonna kill me.")
+	attacking a soldier should anger other soldiers, sound alarm, cause them to swarm towards you
+
+church
+	cross-shaped; inside is a Preacher ('P' purple) who speaks part of a sermon text each tick, like a script, and he restarts from the beginning after reaches the end of it; use the opening lines of Prince's Let's Go Crazy ('Dearly beloved, we are gathered here today...'); several civilian churchgoers there, not moving, listening to sermon (implied), all are women looking/wearing 80's Prince female protege/girlfriend clothing (big hair, fishnet stockings, lingerie, etc.); his sermon is normal speech (sound), so you can hear it if you're close enough, like any sound
+
+Scientist, additional functionality:
+	each tick possible to perform Research action on a particular Topic/Goal
+one topic/goal is 'develope zombie cure'
+each scientist has a diff research skill level, which effects how much research progress they can make per tick
+amount of research progress/points (RP) made by a scientist each tick is semi-random, partly influenced by their skill
+every time a scientist researches on the dev-zombie-cure topic, there is a very small chance he may immediately stumble upon the cure, though base chance is microscopic (like: if rand(10000000) == 0: cure!), but chance is higher the more accumulated RP points exist, and his skill level; there are two types of RP accumulations: a single global RP total (that anyone acn contribute to and benefit from) and there are also scientist-specific (and private) RP totals; a scientist reaches the cure breakthrough when the total of (the global RP + his personal RP + his skill level) >= the min RP needed to cause the cure breakthrough; when he does perform research the new RP he generates will be added both to his own personal/private running RP total AND to the global/shared/community RP running total; scientist is 'S' on map; scientist has a rnd speech set ("By jove I think I've got it!", "Aha! That's it!", "What an elegant solution!","Are you mad?","Sounds nice but I need to see some evidence.")
+
+add to my vi notes on mac:
+	when in vi with file loaded, to add 2nd file in 2nd pane above current file/pane:
+		:sp <filename>
+	now do this to switch between panes:
+		CTRL-w
+	to edit file:
+		:e <filename>
+
+add to my shell notes:
+	to cd to prev pwd:
+		cd -
+
+OOBMSDP: The Offical Office of the Bureaucratic Mental State Department Place, Inc.
+	office building, corporate, bureaucratic, mazelike, cubicles, paperwork, rules, propganda, fluff speak, makework, highly overpaid CEO and top people; hierarchy of ranks; comedic, oppresive, communist, rules, processes, managers, micro-management, time tracking, political correctness
+
+tourist guide - like a book or document; when you 'read' it, the body text gives a summary of what's in Dayton that are tourist attractions like Zion Research, Fort Myers, the Hospital, etc. Give a little desc of each, and describe or hint where they're located.
+
+add more promo text to site and game page, like:
+	protect then lead your fellow citizens to safety and victory over the zombie menace!
+	charm, propagandize and exploit your fellow citizens for personal gain or cruel amusement!
+	get into trouble at the military base!
+	pursue secrets man was not meant to know at the research facility
+	engage in law and order at the police station
+	study at the library
+	search for a lost dog, find him, then return it to his little boy owner, unless he's now a little zombie boy, in which case you should now run away quickly
+	get a checkup at the hospital
+	explore the forest!
+	discover the caves of infinite deepness!
+	but whatever you do, do NOT step foot into the cemetary. especially at night. especially alone. without weapons. okay, here take mine. have fun! don't stay out too late! *waves*
+
+Engineer class, 'E', can build/repair things, similar mindset to a scientist but different
+
+if NPC is wielding something you should be able to see that fact.
+	When look at their cell? When look focused at them specifically?
+
+you can knock on a closed door (directional action)
+
+you can start a fire. the fire can spread (consuming buildings, stuff, lifeforms, etc.), potentially engulfing and destroying the whole town and killing everybody. fire can be put out with water, extinguishers, etc.
+
+octopamine - brain neurotransmitter in cockroach related to voluntary control of movement....use as part of name for the zombie pathogen?
+
+impl each of below, which then allows you to effectively build a house:
+	you can build a wall in an adj cell, if you have right skill and have raw materials needed
+	you can build a door in adj cell, if you have right skill and have raw materials needed
+
+Dr. Ozitov - major/fg NPC..scientist..eccentric genius...in a research facility...you learn of him...you can travel to visit him....he has his own Mind and rnd speech set....well mind could be like: HumanMind -> ScientistMind -> OzitovMind
+
+keep count of how many zombies you kill
+	show this count somewhere to the player --- maybe in the 'story' command's output
+
+at tock T (say 10, 50, 100, something) you hear a one-time sound broadcast (radio? or loud public audio speaker broadcast?) of a voice, speaking as a government authority, telling citizens to remain indoors and remain calm due to the danger outside, etc. and say "Help is on the way" (implying rescue, or military arriving in force to fight the zombies, the cavalry arriving soon, etc.)
+
+there should be a small convenience store on the level, with a lot of food in it, and a few persons; the building/region name should be "convenience store" or equiv; also, you could have a memory of it's existance and location (like "there is a little convenience store on the south side")
+
+have a memory (or plant a sign) informing player that there is a large gun store "across town", full of cool weapons and ammo, but that "it's too far to walk, have to take train/bus/cab to get there"; there could then be a cell with a sign saying "Subway Entrance" but the cell/sign should indicate that the entrance is closed or blocked or destroyed.
+
+cur you can close a door when a zombie is in the same cell with that open door; change that; you should not be able to close an open door if a zombie is there
+
+submitting "wait <N>" via console input should be like hitting the 'wait' button, except N times in a row...except that the code should abort out of the loop if something significant happens. What constitutes significant can vary and is up to the player to specify. By default, significant conditions/events/states include: if you die; if you turn into a zombie; if you're attacked; if you lose HP; if you starve and lose HP; if you're stomach becomes empty; if you reach 1 HP; (etc.) There should be a way for the player to specify whether he wants more, less, or a different set of significant conditions, than the default ones. All the feedback() generated during the waits will accumulate and all of it will be displayed to the player once the wait loop finishes, as you might expect to happen, since that's more like the normal 'wait 1' behavior.
+
+my combat skill should increase chance of hitting and doing dmg -- doesn't seem to (noticeably) right now
+	whatever skill is being exercised when I attack, and therefore, is gainging xp and levels, should be the same skill which effects my chances of hitting and doing damage
+
+for first X tocks of the game (in trial and in full game), you can hear a civil defense/emergency siren wailing. Eventually it stops, mysteriously. The purpose is to instill a sense of realism, atmosphere and danger into the player's mind.
+
+item types: note/document/book/sign
+	so i can have a TODO list scrap of paper in my inventory at start
+	so I can find a book somewhere, with a title and content text
+	so I can put a sign in a cell. You see the sign's text when in same cell. (A text description of the sign. Which may be literal text, or, a textual description of the sign's visual appearance or graphical logo or insignia. Examples: "Mook Park", "Jefferson City - 2 Miles East", "A sign with a red-and-white cross symbol." or "Curfew - Dawn to Dusk - Violators Shot Without Warning - Effective From 11/14/2007 - US Gov"
+
+starting level has 1 pistol, with a few bullets loaded, and no extra ammo anywhere on the level. There is a sign or document or TV/radio ad (overheard when within range) that informs player that there is a gun store "nearby" (in a nearby level, that only exists and is reachable in the FullMode scenario). Either the pistol can be fired (but only has a few bullets) or, it cannnot because it is jammed. If jammed, there is no way to unjam it in the Demo/Trial scenario/mode.
+
+axe - both axe and chainsaw do more max dmg than a bat...chainsaw burns fuel each tick that it is activated, and may be turned on/off by a user command (button in Inventory next to the chainsaw to turn it on/off.) Chainsaw more dmg than axe.
+	should be a way that player learns (in-game) about existance of both these weapons, and possibly also where they might be found
+
+NPC human likely to yell or scream when they are attacked by a zombie (you would hear it as a man yelling or a woman screaming, depending on gender) It could be a non-verbal sound, like (*eeeeeragh!*) or verbal ("Help!!!!")
+
+if you're inside a house, zombies may yell things like "Come out!" or "We know you're in there." and "If you come out now we'll only eat your brain."...and....they may bang on the door or walls (only if they're adjacent to the house walls, on the outside). It would produce a sound, and you may hear the sound, following normal sound laws.
+
+mine
+
+time bomb
+
+remote-fired bomb (like radio control, via a little control device with a "detonate" button on it)
+
+you can ask an NPC to move out of their current spot; is is useful in a situation where an NPC is standing in a spot that blocks a path between you and some goal destination; if NPC decides to honor you request, he will move, only once, to an adj cell (if he can). your only alternative would be to wait forever for them to decide to move randomly, or wait until somebody killed them, or they starved to death, etc., or you yourself attacked and killed them. so nice to just ask them to move pretty please
+
+you can ask an NPC (like a doctor) to try to always keep you in good health; you may also want to combine this with asking him to follow you or stay near you, for example; if doctor honors this request, he will try to perform healing actions on you whenver you are hurt (your cur hp < max hp)
+
+when zombie in same cell with a corpse, he may eat (some of) it [it becomes an additional action choice]
+
+when you add money to inventory, the code should automatically merge it with any existing money in your inventory that matches it enough (same currency, no special qualities (or, if has spec qual they're identical or compatable)
+
+grenade: item that you pull its pin, throw it (or drop it), and after X ticks it explodes; like all thrown items, it generally tries to "land" in the spot where the thrower intended, but there's a random chance it may drift or land off-target, depending on how good/bad his skills are, wind, weather, etc.
+
+contact grenade; like regular grenade, except that after you pull it's pin it only blows up when it hits something hard (enough), like if it were to be thrown against a wall, an enemy NPC, or a door. When it hits that thing, it blows up, and damages or destroys the thing it hits.
+
+remote activated bomb: you or an NPC can use a remote control item to remotely trigger this kind of bomb "at will"; may require line of sight, or not; may have a max distance to bomb (otherwise the signal can't reach it), etc.
+
+mine: when on ground and activated, when anyone/thing moves into it's spot it blows up, causing damage to it, everything else in the same cell, and things in adj cells too; dmg amount and blast range depend on strength of the mine; a variation on a mine is a sensor-triggered bomb; when the sensor detects the triggering condtiion, it sets off the blomb; the sensor condition could be anything from a certain amount or wavelength of light, heat, sound, humidity, etc.
+
+time bomb: when a time bomb is activated, it will blow up in either X time units (ticks) or at precisely a certain time (tick); when it blows up, it damages everything in same cell and probably adj cells too; amount and range of dmg depends on strength of bomb; bomb itself is destroyed
+
+enforce hard limit on zombie count created, per wh instance
+have all corpses "rot away" eventually (delete after X ticks passed)
+    except: You's corpse; human (non-zombie) corpses
+
+BUG (still exist?)
+    could not order NPC to follow me when NPC was in same cell with a corpse - the command just ignored me, no response, no feedback
+
+confirm that this is a good thing:
+:1 - - [07/Sep/2007:12:49:25 -0500] "POST /zh_usercmd/ HTTP/1.1" 500 71225
+
+if mall layout placed on a level, it should create a zone, with a name/desc indicating it's a mall
+
+elevator: it's basically a one-celled room surrounded by walls except one cell which is a door. you walk into the empty cell, you will learn there are buttons on the wall with numbers for each floor it can go to. there's a usercmd action to press each of the buttons, the "door" to the elevator automaticaly opens & closes as you'd expect. when you press a button it essentially teleports you to that level/floor you indicated, into a space that looks identical to where you started, except it's on that dest level/floor. the elevators doors then open, so you can walk out of it. When you're outside the elvator, the door is normally closed, but you can press a button on the wall adj to the door, and the elevator doors open automatically when you do that. They will close automatically again in 1-2 ticks if they have not been closed before then, otherwise.
+
+create a skyscraper region (many levels, each level has the floor of a skyscraper-like buildilng, wait stairs/elevators between each level)
+
+create a shopping mall region, multiple levels, lots of stores inside of it, food court, admin offices, mall security, bathrooms, parking garage, roof, vents, fountains, dressing rooms, lots of items/goods/gadgets/clothing...have little to no zombies outside of it when  you arrive in the region, but after you go inside the mall a scheduled/triggered event happens that places a ton of zombies around the outside of the mall, trying to get in. It is up to you to decide to stay inside the mall (barricade? defend yourself? hide) or try to run out and escape, etc.
+
+must build a Resource-management system in order to reduce memory use
+    what is it? a per-wh-instance cache/registry singleton -- you can access a particular object by key/id, and the RS knows when an object was last accessed, and can passively/actively drop things out of the cache, but if that thing is requested later it knows how to retrieve it (from disk/database) or recreate it (if applicable) I would use this to keep memory use smaller by removing non-active region content to disk/database, and then pulling them back later only when needed.
+    must eliminuate/reduce the object graph coupling problem the code currently has, in order to implement a Resource-management system
+    all object member fields that point at other objects (like how Cell points at level, Level points at region, etc.) should be converted to use string ID values, instead of direct object references. Then make helper methods somewhere that can take a string ID and return a reference to the actual object intended. Ideally make that function name be as small and simple and un-boilerplate-y as possible. Consider using Python's dynamic attribute/property accessor defintion stuff. So any app code that looks like this "cell.level" gets interpreted/treated as call to something like this: "class Cell: def level(self.levelid): return self.app.id_sys.id2level(self.levelid)
+
+IdSystem, ResourceSystem, Groups, the relationship between these subsystems needs to be explored and architecturally defined/understood
+
+still about 100 calls to print need conversion to log() calls
+
+some classes have their methods calling the global log() function instead of the wh instance log() method, which is wrong and will lead to problems in prod, so fix that eventually
+
+in webhack.py, the LOGDIR value should come from config
+and the specific log filename (currently 'wh.log') should at least come from config, and probably also be per-wh-instance (or per-loaded-webhack-module-instance), so that if there are multiple distinct webhack processes (apache+mod_python+django+webhack) running, each handling a user(s), that they have physically distinct log files. Actually it can't just be 1 logfile per loaded module instance, it has to also be 1 logfile per wh instance. Well, per ssion. Not sure.
+
+all direct prints and print-based logging needs to be replaced with REAL logging calls - use python's logging API (unless django says i should use something else/better), and configure it to go to a REAL logging file/location, whose name/path is defined in a config file
+
+you can ask/order an NPC to:
+    gather food
+        he'll gain the thought 'I should gather food' and will try to acquire food and bring it back to a certain spot and drop it on ground there and/or bring it to you (move adj to you, then 'give' it to you)
+    guard a spot (or a thing (like a door/stairway), protect a lifeform -- following it as needed)
+        this lets you order NPC's to guard a location, a door, a house, etc.
+        and lets you order an NPC to be your bodyguard or another lifeform's bodyguard
+
+a tree seed is created when a fruit rots away
+a tree seed can only grow in soil (a cell bottom 'terrain' type), if a tree seed grows it turns into a tree of same species
+
+1st level, replace TP spots to the RndRegions with a special 'stairway down to subway leading to location X" thing class - like a TP and stairway, but, different from each of those things. And place each in diff spots throughout that first level, not all together like that.
+
+usercmd/inventory-button to drop multiple things selected/identified by the user (not "drop all" but "drop several specific things")
+
+usercmd (rel dir) to ask an NPC to not leave the building he's currently inside of
+
+NPC may randomly decide to pickup a thing on ground in same cell
+
+write a guide blurb for people writing layout definitions for me. the guide can be emailed to people and also shown in/under the webhack Help doc tree in the game/site itself. It should describe the requirements for a layout, show some examples, list all the legal characters supported, and describe the format and which elements are required and which are optional
+
+the Help page (and/or some usercmd button in the main game UI) should show the game's manual/help/readme/tutorial/guide/encyclopedia documentation. Initially, just have a big chunk of text. Then, break it up into several disctinct chunks, each living in it's own file on disk. Generate a table of contents (a href links to anchor points further down in same html document), with one entry for each section chunk. the Help content is in two categories: that which is common to all WebHack-based games, and that which is unique to a particular WH game, like ZombieHack or WolfenHack, eg. The generic parts talk about things like movement, eating, etc. Whereas the game-specific section for ZH would talk about zombies, zombie infection, about the particular world you're in (what country, year, culture, your background, etc.), your goals, any game-specific rules you must/should know about, etc.
+
+in the Inventory and Things Here lists (in the UI, that user has buttons for each item): the thing's render char (in render color) should be shown too, on that item's line
+
+lamp/lightpost thing type: it's a light source (causes all cells within range R of it to be seeable)
+
+the layout files should allow 1+ layouts in a single file, they are demarcated by a "------" line, or something like that. When the code reads in the layout from the file
+
+layout file format should allow specifying of the name & desc of the building/zone
+
+the layout file should allow (as option to layout creator) ability to specify/place text descs for cells inside that layout. Example: you could specify that at cell 2,3 it has the cell.desc text "There are scratches on the wall here."
+
+the layout file should allow the specification/placement of specific, specifically-populated Thing instances (humans, furniture, etc.) (by populated I mean that the thing's traits (like name, race, their thoughts, goals, etc.) are specified in the file too
+
+the code that rnd places trees on a level should NOT put them inside buildings
+
+BUG VULN: the make tp code i wrote to that makes a tp pair between the starting level and the first level of every other rnd region, has bug vuln that it always puts the farside coord in 0,0 and 1,0: either/both may be inside wall/door/etc
+
+eval Thing, Lifeform, Human, American, Zombie, Food, Cell and all mixin classes & baseclasses used by them (and component objets like list fields, etc.) to look for ways to reduce memory footprint (push instance fields up into class fields; do lazy init of instance fields which are container types like lists/sets/dicts)
+
+make random whether/how-many levels a rnd region has
+    2nd+ levels should "make sense" for being upper floors/levels of the level below: buildings have to *align* their wall boundaries with buildings on level below, for example; you can only have a buildilng somewhere IF there is a building in same location/boundaries on level below (althrough the reverse is not necessarily true: a building does NOT have to have upper floors to it, only lower floors, and that is only if the current floor in question is not the street level)
+
+clothing instance's UI-rendered 'charcolor' should be same or close as possible to it's 'HasColor' color
+
+zombie might attack a closed door
+    if succeeds, he damages it a little (1 hp?)
+    possible for him to destroy a door in this manner
+
+zombie HP should vary by indiv zombie
+
+baseballbat may break when used in an attack
+    can happen with almost any weapon
+    the chance depends on the weapon instance's "strength" rating
+
+chainsaw - like bat but does lots more damage, also, creates a "*rrrr*" sound every tick while it's "on". the motor can be on/off, and you can turn it on/off. Does only 1 max damage if off, does much much more when on.
+
+bug: saw this in feedback: You see nearby: a door, a zombie and The zombie of an American (..blahblah..)
+    wrong: The "The" should be "the"
+
+zombies can and must eat food too, just like normal humans
+
+If you eat a zombie corpse, you will die. Or get sick, causing lose HP every turn afterwards, until you die from it.
+
+
+dogs should bark/growl sometimes - make that in their random speech set
+
+bandages, etc. items that if you 'use' them will heal your HP
+
+If a lifeform has edible things in it's inventory, the game will make him EAT those edible things, automatically, before inflicting the last (killing) point of HP loss due to starvation. The code will let him starve all the way down to 1 HP, however, if necessary, without this rule kicking in, however. This rule applies to all lifeforms, including You (the player) and NPC's.
+
+devcmd that prints report of thing counts by thingclass, that exist in the world (directly on the map somewhere, or, in inventory; all regions and levels); another version prints a csv list of thing.describes(), and/or thing ID's & locations
+
+devonly reldir usecmd to make thing (in that dir) be invuln (or not)
+    also usercmds for: starves, digests, always_does_kill_dmg, etc.
+
+devonly reldir usercmd to delete thing (doesn't kill/destroy it, per se, just deletes it from world) - no sound, no corpse, all carried things are deleted too (doesn't drop-all like when dies)
+
+animals may pickup/eat food in same cells - or move towards nearest food it sees nearby
+
+a growing tree should NOT grow new thing IF there is already more than X of that growtype already in it's cell
+
+tree seed exists; if a tree seed is left in a cell (with soil floor/terrain, NOT building floor/deck/concrete/sidewalk) then it may eventually turn into a tree (of the same species of tree that produced this seed); tree seed can be picked up and dropped; tree seeds do NOT grow stuff (ie., not like a growing-tree type), though may be of a tree species that does; if tree seed in inventory (not on ground) it will NOT become a tree -- it must be on ground/soil to do that.
+    fruit eventually decays (transforms) into a tree seed (for a fruit tree) - the fruit ceases to exist, and a tree seed is created in it's place (whether in your inventory, or, on the ground)
+    each tick, there is a small chance of wind happening
+        when wind blows, it may move a tree seed or fruit that is lying on the ground into an adj cell
+
+fire; a thing may be on fire; each tick, if a thing is on fire it loses HP; the fire also may spread to other things in same cell (or, if inventory, things in same inventory); if thing on fire in someone's inventory, it will cause that carrier to lose HP and/or become on fire itself! fire may spread to things in adj cells; fire will not spread into cell with water terrain; stone walls are immune to fire; wood walls are not immune to fire; 
+
+other growable food types: vegetables
+
+Flower's, grow/spread on ground (not grown by a tree), can be plucked out of the ground (pickup command with do it), though if later dropped they will not grow/spread anymore, and will eventually rot away and die
+
+you can get 'meat' (food type) from an animal corpse; meat will spoil quickly if not refrigereated; meat has lots of calories in it
+
+marijuana grows/spreads on ground (like a weed/flower)
+
+Food:
+    some food can be gotten from grocery stores or vending machines, or looted from buildings/houses/NPC-inventory, etc. (there is roughly only a finite supply of these kinds of food (meaning, they do not "grow on trees"), though technically new instances of this kind may be created randomly, especially when exploring a new area/level/region/building that You have never visited before. (This gives incentive for You to go exploring, roaming, hunting for more good and supplies, even if it's dangerous to outside and risk zombie attack.)
+
+NEVERMIND I DONT THINK THIS IS CORRECT: bug vuln: IdSystem CANNOT use id(obj) for new ID's; if does, will cause bugs later; must instead keep track of an incremental ID value, and keep incrementing it when generating new ID's. The last/next ID value should be stored inside IdSystem instance, and thus would be persisted along with wh into the database.
+
+semi-bug: usercmd_console() method has unreachable code! fix this by either removing the unreachable, or, restoring it to exercisability, either way is better than current situation
+
+user can toggle flag that indicates whether to render lifeforms or not
+    (render logic still honors what you're allowed to see or not)
+
+user can toggle flag that indicates whether to render non-structure things or not
+    structure thing: wall, door, window, stairs, etc.
+    non-structure: lifeforms, items/weapons, etc.
+
+when explosion occurs, it puts "smoke/flames" into a circular area of cells around the explosiion origin point; you can see it in the UI, becauase they are Things (not pickup, not wear, etc., but does not block movement into), the render importannce is HIGH so it will be shown in UI even in cells where other things (like npc's or walls) are (except You, You always on top). Each piece of smoke/fire will decay away (delete) after X ticks. Semi-random when/how they decay, maybe, but all will go away in 1-3 ticks from creation time. They render as a red/orange "@" or "*" symbol. Example:
+    .....
+    ..*..
+    .***.
+    ..*..
+    .....
+
+add morning, evening, mid-day, midnight to blurb at top of UI
+
+there are dogs (Dog instances, a lifeform)
+    dogs cant talk
+    they can turn into zombie dogs (red 'd' or red little 'z')
+
+add to GameState:
+    boolean flag indicating whether state changed since last render by UI
+        currently: wh.changed_since_last_render
+        in new world, that value MUST NEVER be a field of wh instance!
+    TextField containing the last rendered string made by UI
+        currently: ui.last_rendered_page
+        in new world, that value MUST NEVER be a field of ui instance!
+    update webhack.py to use this new persist mechanism (for writes/reads)
+
+bug/anti-perf/anti-scaling: resolve the problem where if I use TextField for GameState.data field, and, pickle using protocol 2, that Django raises ex when trying to save a GameState instance to the db, complaining about the data field and text format or something. Workaround was to change to protocol 0, and the error went away. However, protocol 0 produces about 50% larger data gobs than protocol 2 does. Like 300k pickled wh instances isntead of only 200k. Ideas: see if another django model field type I can use other than TextField. Or, is some field option or django config which will make it not puke when a model instance field's value is binary rather than text.
+
+    future perf/scaling optimization: adjust code such that when a request comes in to playwebgame (ie, a view request, NOT a submitted usercmd), that it DOES NOT have to pull out the entire webhack game instance/session from the db into memory. Since it's going to render a cached string anyway (that hangs off of the UI instance, which itself hangs off the WebHack instance, which itself lives in the session whcich came from the db), all I need to do is move the home of that cache render string either OUT of the WebHack object graph, and/or into a separate, dedicated, specific django model table/class. If the code decides it DOES need to re-render the screen, or, if a submitted usercmd was received, then it can still fetch the full enchilda. We might have to move the home of the WebHack instance state object OUT of 'session' object, and into it's own dedicated Django model class table. And alter the request handling code so that it ONLY fetches the WebHack model instance out of the Django db table when it needs to re-render the page OR process a submitted usercmd. Otherwise, it only fetches the current cached page render string, which lives in it's own, separate, dedicated django table. Anything that moves it's runtime home OUT of the session will LOSE the free "persist at end of every request, on outbound trip" feature that session gives, so will need to add code to emulate that manually.
+
+Light:
+    every tick, the engine iterates through all light sources on active level, and for each, determines which cells receive light from that source (have an amount of illumination quanta added to the cell in question)
+    in order for a thing to be visible in the UI map view, it must be in a cell with a minimum amount of light in it. The min amount needed depends on: the thing itself (how big or small it is effects it), and, how far away the cell is from the viewer (the player, You). Smaller things need more light. Farther away things need more light.
+    every X ticks the world changes from day to night, or back again
+    in day, there is a Sun light source which gives alot of light to every cell
+        that is "outside" (not inside buildings)
+    at night, there is no Sun, but there is a little bit of starlight & moonlight
+    at night, every X ticks, there is a small chance that a new Zombie is created somewhere, though more likely in graveyards, morgues, etc. Plus a human corpse may spontaenously 'convert' into a zombie
+    at night, NPC humans prefer to move/stay inside buildings
+    zombies prefer to move out of the light, and stay in the dark
+    zombies prefer to sleep and/or not move during the day, unlike the night
+
+when new night zombie created, they should NOT be created INSIDE houses
+    create a 'house'-type zone encompassing that 1st building in zombiehack
+    make the code use this notion of 'house' zones
+
+show the in-world time hour in the UI, like "1pm" or "5am"
+    each tock is 1 hour of in-world time (currently)
+    every 24 tocks is equiv to 24 hours (currently)
+
+each tick, there is a chance that any human in same cell with a corpse may:
+    get "sick", whatever that means
+    turn into a zombie (because he got the zombie virus)
+
+each tick, there is a chance that any corpse may spontaneously turn into a new zombie
+    impl: the corpse is deleted; a new zombie is created where it was
+
+NPC's dont follow well when not close too me already (dist >= 2-3 seems often they get lost and stop following)
+
+when you kill a zombie, it should drop everything
+    when a zombie is created from an orighuman:
+        the orighuman's inventory/worn/wielded should transfer directly to the zombie itself
+
+you can 'loot' corpse in same cell (is usercmd button next to it in the Things Here list in UI); it causes all the corpse's inventory to "drop" to the ground in the cell
+
+attack chance to hit should depend on weapon used
+attack dmg to apply should depend on weapon used
+
+move all ZH code to zombiehack.py
+    MUST solve the class_prep function issue - how will that work?
+    and wolf to wolfenhack.py
+
+every worn or wielded item is associated with a body part
+    impl both worn and wielded like this:
+        self.worn = {} # keys are worn item obj refs
+        # so the list of all worn items is the keys list
+        self.worn[helmet] = {} # metadata for this worn helmet
+        self.worn[helmet]['bodypart'] = 'head' # means worn on head
+        self.wielded[sword]['bodypart'] = 'left hand'
+        # two-handed wield:
+        self.wielded[sword]['bodypart'] = ('left hand','right hand')
+
+Inventory UI list: for worn items, sort from top of body down to bottom: head stuff first, then torso, then legs, then feet
+
+it should take a tick to wield/unwield/wear/unwear an item
+    consider changing all/most activities that currently happen every tick, to instead happen every N ticks (say 2 or 4 or 8), that way, I can have a timet cost implemented for activities like wielding that is "small", and have it be smaller/faster than bigger/slower/more-cpi-intensive activities like doing a full world  update (moving all NPC's, doing AI for all NPC's, etc.)
+    once I go to that system, it is then easy to implement a "thing's speed" system, where some NPC's are fast, some are slow, etc. Where a fast NPC takes less ticks to do most activities than a slow NPC takes. Example, costs an average speed lifeform say 4 ticks to move to one adj cell. A fast lifeform can do it in 2 ticks. A very fast lifeform can do it in 1 tick. There will be activities that are always faster or slower than other activities, given the same speed of creature doing it, so we even want to have a range of default tick costs (the tick cost when done by an average speed creature). So it costs an average speed creature say 4 ticks to move to one adj cell, but only 2 ticks to wield an item, and 1 tick to "look here" or "inspect <thingid>". The default tick cost of an action could be declared by hanging an attribute on the primary function which executes that action.
+
+usercmd to merge all (or any two specific) inventory items together (for qty-based things like money)
+
+for things in inventory:
+    button+field to give a thing a name/alias/nickname (example: you name a sword)
+    for qty-based things in your inventory:
+        usercmd to drop a certain qty of a qty-based thing, in your inventory
+            i see this as a button+input-field, user enters a qty number in the field, and hits the 'drop qty' button next to it
+        also a button+qty-field to split off a new thing with that qty - so splits into two things, the new one having the given qty, subtracted from the parent thing, all still in inventory
+
+usercmd to toggle UI showing of worn items or not
+    and one for wielded
+    both kinds still only shown if show_inventory is True
+
+you cannot wear or wield an infinite number of things
+    you can wield up to 2 things
+    you can wear up to 8 things
+
+wielding Baseball bat should give better chance to hit, and higher damage
+
+have a UI toggle command that will list all things in your cell, with buttons for each, done just like the inventory list; button ideas: pickup, inspect/study/look, arm/activate (for a bomb, mine or trap)
+
+drugs: alcohol, cigarettes & cigars, marijuana, heroin, cocaine, lsd/acid
+
+container-type things (like a bag or backpack): it can contain things (HasInventory?)
+
+lifeforms usercmd report should be a Table rather than list of lines, so I can align common data into columns, like, inventory, worn, wielded, hp, etc.
+
+consider moving the thing.pickup(what) code out of Lifeform/Thing into HasInventory, at least a base impl of it (then can provide subclass impl that calls it and does whatever needs to)
+
+by default, all Humans created with random clothing in inventory and worn, automatiicaly, unless a 'naked=True' flag is passed to the ctor
+    defined several generic clothing classes, then in the Human ctor, make it wear some of this clothing (random clothing colors/sizes/types)
+
+create exception classes for failed attempt to: wield, unwield, wear, unwear; and raise each where makse sense
+
+
+in the render_inventory list, there are buttons to move an item up/down one slot in the list - it literaly changes that thing's position within the inventory list
+
+all things have weight
+    if thing on ground, it can only be picked up IF you are strong enough -- the more weight the thing is, the higher strength you need
+
+raise a DropAllFail exception inside lifeform.dropall() if it itself catches any DropFail's from calls to lifeform.drop(thing)
+    inside dropall, if any DropFail caught, add it to a list, then continue iterating
+    after iterating is done, then if are any in that list, build a DropAllFail, populate it with that list, and raise the DropAllFail instance
+    inside code that calls dropall, have it handle it right & inform user
+
+a lifeform (including you) may be unable to move (out of his current loc) if:
+    it is tied up (regardless of whehter "tied down" to floor/etc.)
+    it is tied down (to floor/furniture/wall/etc.)
+
+a lifeform may have a 'brand' (if owned like slave by an evil NPC)
+
+command to list all things in your cell, one thing per line, each thing desc has zero or more buttons next to it which are the actions you can do with/on/for it, like "pickup", "inspect", 'activate' (if bomb), etc.; implement like how I did UI.render_inventory()
+
+when thing worn, it is on/with/associate-with/inside-of a certain body part
+    a thing might only be allowed to be worn on a certain body part(s)
+
+a worn thing may not be unwearable at any given moment (maybe it's attached to you physically, with glue, or with chains/locks)
+
+when a thing is dropped, it is automatiicaly unworn/unwielded
+    except if that thing CANNOT be unworn/unwielded, then, it CANNOT drop
+
+a wieldable thing requires a min of X hands to wield it, either 1 or 2 typically
+    a knife requires 1 hand
+    a chainsaw requires 2 hands
+    a baseball bat requires 1 hand min, but can take advantage of 2
+        if the baseball bat is the only thing wielded, it assumes you use 2 hands
+        if you're wielding a bat with 2 hands rather than 1, it does more damage when hits
+        generally any melee weapon will do more damage when wielded with 2 hands than 1
+    some weapons yield no advantage when wielded with 2 hands (a knife) whereas some do (a baseball bat)
+
+new items: chainsaw, knife, sword
+    sword like knife except does more min/max dmg; also, it's only slightly better than knife when wielded 1-handed, and does it's best dmg when 2-handed
+    chainsaw does lots of damamge, but must be turned on, and it's loud when on (produces loud sound that can be heard far away, and so it may attract notice of zombies)
+
+a thing cannot be worn and wielded, at same time
+
+Thing method: is_wearable() True/False; you can only wear something with is_wearable() True; armor/clothing is yes, Wall is no
+
+when a thing drops something, it should be removed from the worn/wielded sets, if in them
+
+    there is a button that when you press it, it will add to feedback a list of buttons for each of your last 10 submitted usercommands (pressing a button will submit that exact usercmd again, complete with all params), regardless of whether they were originally submnitted via console, or, via button press. It is smart enough to not render buttons that already exist on the UI anyway (like a 'wait' button, for example)
+    the UI can have an option to automatiicaly render a list of buttons, each of which will fire a usercmd, and each one is one of the most popular commands you've entered (it records history of every usercmd submitted, including counts of each), so I can auto show buttons for your top 10 most submitted usercmds! (whether they came from console submmit or from button press). This feature can be toggled on/off by user, and the number N can be changed by him too. The UI is smart enough to not render redundant buttons (for usercmds there are already buttons for normally, like, 'wait' or 'reset')
+    w/respect to both of above ideas, do both; have one section of UI be for the "most recent usercmds" and another section adjacent to it for the "most submitted usercmds". EAch can be toggled on/off by user, and the number N can be modified by him too.
+
+when you 'lookhere' it should print thing ID's for each thing
+
+get manual usercmd 'pickup <thingid>' working
+
+IdSystem:
+    in order to implement 'drop <thing-id>' (and other commands) need IdSystem
+    need an IdSystem global singleton hanging off of WebHack instance
+    manages ID strings
+    manages one or more separate registeries of ID's, and an ID is only unique within it's registry
+    each registery can track ID's for a particular category or type of objects
+    only one registry/category needed initially: 'things'
+    each registery also has a dict of app-defined aliases, that map to ID's. The aliases are user-friendly or developer-friendly string values (like 'hitler' or 'my-sword')
+    an alias can point at either a fixed ID, or, can map to a function to call that will return the ID or object to point to. The latter is useful for "relative" aliases, like "my-sword" or "my-wielded-thing', so you can issue a command to 'drop my-wieldedt-things', and under-the-hood a function dynamically figures out the list of all your wielded things, and returns a list of those things
+    any method in API that maps from an alias to an object should be able to return a list of object references (to support aliases like 'wielded' or 'worn')
+    an Alias can map to a single ID, or, a set of ID's, or, to a function that can be called that will return a list of object references, when needed by API
+    there are usercmd's to let the user define an alias (pointing to single ID, or, to a csv list of ID's, or other aliases!)
+    an Alias can map to another Alias, or to a list of other aliases
+        example: alias 'wife' can map to 'Susan', which maps to thing ID XYZ
+        or, alias 'wives' to map to ('Susan', 'Mary'), each of which are aliases that map to thing ID's, etc.
+        when a thing is destroyed/deleted from world, it's ID mapping is removed from this system's registry
+    some/most API methods that take ID string can also take an Alias string, and regardless they will both return the target object(s) that is referred to
+    WebHack will pre-define lots of convenient alias mapping functions, like 'most-recent-picked-up', 'most-recent-dropped', 'spouse', etc. In devtesting as I find myself often needing to act on a particular thing, decide if it would benefit from having a pre-defined alias function for that.
+    you can request it give you a new unused ID, and assign it to a target object
+    you can ask it for a list of all assigned ID's
+    it has convienince methods to go from ID to object, object to ID, any to ID, and any to Object
+    has a method to deregister/unassign an ID
+    the ID created/assigned by this system should be stuffed in Thing instance's HasID's instance field 'id', so each thing knows it's own ID
+
+if i give usercmd "drop corpse", and I have exactly 1 corpse in inventory, it should be smart enough to drop that. Use the IdSys Alias dynamic function feature. where the id alias "corpse" could cause a function to be called that decides if there's anything in your inventory that would logically be called a corpse.
+
+HasID needs to generate ID strings as needed, register them in a globa
+
+rename all zh_Foo thing class to Foo
+    and for fh_Foo thing classes
+    need to rename textpool data files too
+
+HP related methods of thing/lifeform should move to a HasHP mixin class
+
+consider/try renaming id_thing() to id(), if legal Python
+
+once can be wielding an item, add a usercmd button to throw the currently wielded item(s) in a rel dir
+
+have a usercmd which prints to feedback a list of all things in your cell, one thing per line, and next to each is a button to pickup that specific item
+
+consider making an ActionAttempt class, which subclasses Event, but also acts as a baseclass for all more specific FooAttempt classes, like MoveAttempt, AttackAttempt, DropAttempt, PickUpAttempt, etc. The core webhack engine would then have one listener for the ActionAttempt event class, and it acts as the sole handler & executor of all of them. When that listener fired, all it does is called attempt.do() (on the ActionAttempt instance named 'attempt', in this example). There would then be an AttackAttempt subclass of ActionAttempt. AttackAttempt would have two subclasses (initially): NormalAttackAttempt and ZombieAttackAttempt.
+
+make allowed to attack doors and windows
+
+features to add next which give most bang for buck:
+    each inventory item can be in worn/unworn state, and wielded/unwielded
+    list inventory one per line, with action buttons next to each (wear,wield,drop)
+    LOS
+    light
+
+brain transplant: possible for the brains/minds of two lifeforms to be switched (via surgery? via a machine? via effects of a chemical?); the impl literally swaps the two mind instances between the two bodies. A zombie's mind instance could be swapped with a non-zombie human. So you'd see a "normal" human acting like a zombie and saying zombie things ('Brains!') even though was not zombie (could not infect others with zombie because he himself is not really a zombie.)
+
+mini-goals
+    somewhere on 1st level, you may acquire a mini-goal of getting a certain NPC to a place of safety (doesn't matter, the goal is satisfied once that NPC reaches location X, say inside a certain house, with all doors closed)
+
+for NPC, having "should not move" thought should beat "should follow you" - this logic is more convenient for player who is leading NPC's somewhere, but periodically needs them to stand still for a little bit in order for him to scout, for example, or elim enemy
+
+bug: i could not tell an NPC to "not move" when she was in cell with corpse, but could do so when there was no other thing in cell with her
+
+you cannot "kill" a corpse; when corpse hp reaches 0, it's deleted it; no new corpse is made
+
+there is a house that has a 'zulu fetish doll' in it somewhere. intitially, it's just an intert object, literally, like a small tourist trinket. (This will be like the Trilogy of Terror movie). After you're in the house for a while, it comes alive, chases you and tries to kill you!
+
+if I give request/order to NPC (to follow, to move, etc.), they should neither comply or verbally respond if they are dead
+
+bug: human i was attacking ended up with 0 hp but was not killed (no corpse)
+    since "not alive" though, the AI did not operate on her afterward, so she
+        was in stasis (though she spoke response to my orders to follow/move/etc)
+
+inside the house is a one-cell room (closet, jail cell?) with a door (door inside house, separating that little room from the main interior of the house)
+
+when you look at a door/window, it describes it's type and condition (a wooden dor, closed locked; an iron gate; a clear glass window, a broken glass window, a vault door, a hatch)
+
+when wall/door/window destroyed: no corpse is created
+when wall destroyed: create 0+ pieces of rubble
+when door destroyed: create 0+ pieces of wood
+when window broken/destroyed: create 0+ pieces of broken glass
+when corpse destroyed, it's deleted; no new corpse is created
+
+a lifeform has zero or more body parts (like head); each body part may have a distinct description and/or have distinct state/conditions. Example, nipples may be engorged/swollen, or not. Body parts may be modified from their default/normal/typical/natural state. The default set of body parts a lifeform has depends on species. So every Human will have a certain common set of body parts. A cow would have a different set, though there would be some similarties, like a cow has a head (as human does) but also a tail (which a human does not (normally!)) There is a method which returns description of all the body parts a thing has ('She has a head, a mouth, two breasts.')
+
+mine, a thing; can be planted/buried/activated in a certain location
+    when thing moves into it's location, if mine enabled it will probably explode
+    the explosion applies an explosion-type attack to the victim, which will likely damage/hurt and possibly kill/destroy the victim
+    the explosion effects other things in same cell, not just the entity which triggered it
+    if explosion powerful enough (depends on mine type, plus some randommness), it may also damage things in adj cells too
+    it produces a loud noise too
+
+NPC's can pickup things; it's one of their ActoinChoices if in cell with things on the ground; also, can drop (if have inventory)
+
+flashbang, an item thing; when a flashbang "goes off" it emits a blinding light and deafening sound momentarily; all lifeforms in range of it (with no blocking LOS between the flashbang and their position) will be temporarily blinded and deafened and possibly stunned. The conditions last for N ticks, then go away. A flashbang may be thrown. A flashbang must be 'enabled' (like pulling pin) before throwing in order for it to work as desired. There is a single user command that user can issue that will both (a) enable the flashbang and (b) throw it (at a target location/thing or in a rel dir), in the same command, for convenience purposes. The chance it successfuly reaches intended target, and goes off, are both influences by your skills in the appripriate areas ('throwing' and 'flashbangs').
+
+Soldier, human subclass NPC
+    more likely to attack, less likely to flee, than civilian type
+    more likely to seek out (hunt down, patrol for) zombies than civilian
+    char is dark green letter 'S'
+    greater chance of hitting than normal human, greater dmg potential
+    has more/higher skills, esp combat-related like 'hand-to-hand'
+    normally created with a gun in inventory (wielded), and armor (worn)
+    has has some skill in area named after his gun (or gun type), example "rifle 5" or "guns 3" or "M16 4"
+    other items may have: grenade(s), explosives, nightvision goggles, radio, mortar, rocket launcher, knife, boots, helmet, water bottle, food rations.
+    a soldier will fight/perform/behave better if led by nearby General or similar military leader/officer/sergeant type of NPC
+    a soldier gains battle experience (a skill) for every attack he's part of. This skill represents general combat experience and not any one particular attack type, weapon or tactic.
+
+you can ask/order a soldier to do stuff like "attack zombies" or "guard this spot" or "protect <person-thing-ID>", and he may do exactly that. Chance of obeying higher if you (a) are in military too, and (b) have higher rank, (c) have high charisma/leadership/oration and/or battle experience. 
+
+attacks that don't involve You should NOT be in feedback UNLESS:
+    config "you_know_all" is True
+    or
+    config "you_see_all" is True
+    or
+    you can see the loc where attack occured, meaning:
+        distance not too far
+        LOS is not blocked
+        sufficient light in/on that location
+
+NPC should remember/record who he attacked (last, recently, historically)
+when NPC considering whether to attack or not, he should be much more likely to if he had in the past and has reason to believe that that past victim may still be alive
+if NPC has choice between multiple attack targets, he should give preference to one he has attacked already in the past, and most recently.
+
+human/lifeform can be "in a pose", like "spreadeagle", "laying down", "on tiptoes", "on all fours", etc. The default pose is "standing" for humans, and possibly "on all fours" for some animals, etc. An NPC may choose to change their pose, or may do so at the request/order of You or another NPC. The current pose will be mentioned in any full description of that lifeform. The current pose effects what types of actions are possible by that lifeform, on/with that lifeform, and how those actions happen. 
+
+user cmd to list your inventory, one thing per line, next to each thing's description there are zero or more usercmd buttons, each some action you can do with/to/on that item (wear/unwear (if wearable), wield/unwield (if wieldable), drop, look-at, eat (if edible)); when the usercmd button is submitted, it must have a hidden param with the item's thing ID in it, and it gets passed to the usercmd so it knows what thing instance to deal with; other usercmd ideas: use, activate/deactivate, enable/disable, open/close (like a box); the thing itself can tell the UI the list of usercmd's it supports in this situation (the UI doesn't ask the thing if it's "open"-enable, in other words, instead it asks the thing "give me list of usercmd's you support", and one of objects/strings in the list returned by the thing would be something indicating the 'open' command)
+
+can attack walls (non-lifeforms) and dmg them (they have HP) and they will be destroyed when HP reaches 0
+
+add asserts inside all Thing subcalss ctors
+
+now that ES supports listening for baseclasses and suclasses:
+    also MoveEvent should get 2 subclasses at least, 1 for abs move and 1 for rel move; and renmaed to like MoveRequest (and all other "non-event" event classes shouldbe renamed to FooRequest or whatever) (Attack, Drop, Pickup...)
+
+consider adding notion of handler to ES; you can add a handler for an eventclass; there can be only one handler (unlike with listeners where there can be multiple listeners);
+    if the handler successfully handles an event (indicated by it not throwing exception out of itself and/or returning True) then the ES can be configured to automatically either:
+        post a meta-event to its queue that indicates that that particular event was handled successfully (the posted event has a ref to the event that was handled successfully)
+        call listeners in a list of listeners registered to learn that 
+    the same logic could be done for failed handling (the handler threw an exception or returned False, etc.)
+
+eval refactoring my Groups class to use a set for each group's container structure; will give perf boost on membership tests; I *think* it be seamless w/respect to current dep app assumptions, but not 100% sure. If an app assumes it's getting a list as the container impl it will break. If it assumes it's a sequence/iterable, then it will be fine. Also, I don't believe any apps are using Groups to have an obj ref appear multiple times in a single group, instead, it will appear no more than once in that group. If that's true, I can change to set without problems. Consider making a fork of Groups or adding an optional ctor param to it which signals Groups to use set instead of list. And have WebHack exercise that new ctor param so it gets sets.
+
+wolf:
+    if hitler dies, all the germans/nazis/generals/guards should react
+        anger to you, hate to you, celebration, whatever
+    impl: they gain the belief that "Hitler is dead."
+        that belief should effect their actions/behavior when have it
+
+mind_content_load(): add <thingclass>_memories.txt files
+
+the myenemies/myenemyclasses stuff should be replaced by usage of either:
+    fears ('fears bears', therefore he will flee from bears)
+    and/or
+    beliefs/thoughts/facts
+        like 'I belief Nazis are evil and should be killed on sight.'
+
+create:
+    FearSystem, HasFears
+    NeedSystem, HasNeeds
+    PlanSystem, HasPlans
+    maybe also: GoalSystem, HasGoals (though may be too similar to Plans)
+
+create memory pool files for each NPC class too (like German_memories.txt, Hitler_memories.txt), and load those just like i'm doing with thoughts, speech,  etc.
+
+merge speech/RndTalker into AI systems!
+    the speechset/RndTalker system should become part of the AI system, and be it's own subsystem within that, with similar API's
+    then, when I issue the "all minds" dev cmd, it should print that thing's current default random speech set, in addition to thoughts/memories, etc.
+
+gender should effect an NPC's default set of beliefs, thoughts, needs, fears, speech
+
+an NPC may be a murderer/serialkiller; he will sometimes attack people randomly
+
+an NPC may litter; it adds to cell desc like" there is some trash on the ground here"
+
+The look-reldir description should:
+    TODO: move HP from lifeform up into Thing
+    TODO: add notion of max HP to thing/lifeform
+    use max hp compared to hp to determine how healthy/hurt to say in describe_damageness
+    describe what you see in that adj cell, in more detail than you get normally with other commands
+
+something that has 'wet' fact should eventually dry out
+    the wet fact should record when it was last applied/added to it's owner
+    when a thing receives a tick event, check for wet facts and delete them if it's been >= X ticks since they were last applied/added
+
+
+a cell may have dust on the ground
+    if does, then:
+        walking out of that cell may/will leave footsteps marks in the dust, leading in that direction
+            is implemented by adding to the cell.desc
+        there is a usercmd to write a text msg into the dust (using your finger)
+            it is appended to the cell.desc, like "The words <msg> are traced in the dust here."
+
+when you ask npc to do something (follow, not, not move, not not move) it exercise a social/persuasion skill a little
+    if you succeed (they obey/agree to you), you get a little more exercise of it (as a reward)
+
+in ActionChoice class, add a __call__ instance method which calls self.do()
+    then in the AI that makes the chosen action execute, replace "chosenaction.do()" with just "chosenaction()" - that way, I can use EITHER plain old functions as actionchoice targets, or, ActionChoice subclass instances.
+
+after ES upgrade to Event classes:
+    ensure that when a listener registered for SomeEvent, that it not only is called for instances of SomeEvent, but also for any subclass (isinstance-compatible) event (SomeEventSub1, SomeEventSub2, etc.) event
+
+AI: needs - each lifeform/mind/body has zero or more needs; each need type/kind has a rating which is how much it needs to be satisifed normmaly; also, there isa  value which is how much it's satisifed currently (which might be > or < or = to the minimum level needed); also, if a need ISN'T satisfied (doesn't >= the level needed) then some action/effect happens, like, they die, they yell, they gain a bad mood, they fall asleep, etc.); examples of needs: eat/hunger, love (to love another, and/or to be loved by another), social, sleep, rest, exercise, clothing (to prevent freezing and/or social humiliation), shelter (from weather, to prevent freezing or other bad 'exposure to nature' effects), friendship, touch, be touched, be not too arm, be not too cold, have air, have oxygen, have water, a particular drug (an alcoholic NEEDS alcohol or bad effects happen; a herion addict NEEDS heroin)
+
+AI: fears - the lifeform will generlaly avoid or flee or fail to choose courses of action that involve something they fear
+    diff kind of fear, each modeled as a Fear subclass
+    examples: FearOfThing(thing), FearOfThingClass(thingclass), FearOfLocation(location), FearOfLevel, FearOfRegion, FearOfNeed, FearOfLanguage, FearOfBeingHurt, FearOfBeingAttacked, FearOfDying, etc. Each Fear subclass instance will be populated with any per-instance parameters needed to make that fear unique. For example, FearOfThing will be ctor'ed with a 'thing' instance field which is the thing instance which he fears. Others: FearOfStrangers, FearOfMales, FearOfMovement, FearOfChange (hates/fears when ANYTHING changes in their life/environment! pretty debilitating), FearOfWater, FearOfHeights, FearOfTalking, FearOfSound(specific-sound/soundtype/sounds-in-general), FearOfLight, FearOfDarkness
+
+when you ask/order an NPC to do/think something, they should NOT automatically do/accept it
+    instead:
+        there may be some hard min requirement(s) taht must be satisified, depending on what it is you/re asking and what circumstances are
+        the chance may be higher the higher/more you have a certain skill or quality (the more money you have, the more money you've given them, the higher your charm/speaking/attractivenss)
+        despite or in addition to above, there may be some randomness still
+        ALSO, if that NPC declines to do/accept your question/thought/order, then they MIGHT tell you why (what their reason for declining was, like "I don't find you attractive enough." or "I would only do that for the bearer of the Chalice of Yenzog.", etc.)
+
+ES: change all direct references inside ES to self.tock instead to call self.now(); then have a WebHack subclass of ES that WebHack uses, and it overrides now() to return a self.tock
+
+EventSystem new feature:
+    add method to ES that lets caller schedule an event to be automatically posted to the event queue whenever now() becomes a certain 'when' (there are several ways of doing this). Best idea, to be specific: a scheduled event is posted only when a Tick event is handled whose 'tock' value matches the when when the scheduled event is supposed to fire/post. (Ie, register a listener for the Tick event which when it executes will post the desired scheduled event to the queue)
+    ALSO add method to let caller schedule a callback target to be called when now() becomes a certain value. This is also a useful ability to have.
+
+change the tick listeners that check for stuff like:
+    whether you alive
+    whether any humans alive (& non-zombie)
+    whether at least one living breeding human pair alive & non-zombie
+    whether hitler alive
+    (etc.)
+    to instead listen only for DEATH and BECAME_ZOMBIE
+        should give perf improvement
+
+refactor emit_event() to have 2 args, the first is event name value, so I can:
+    emit_event(SOME_EVENT, params_dict)
+
+produce sound when thing dropped (listen for DROPPED, emit a SOUND event)
+
+there is a Cop; he carries a Gun when created
+    if he dies, he drops the gun
+
+there is a Gun
+if someone is carrying a gun when they attack, they do much higher damage than if bare-handed
+if baseball bat carried, more dmg than bare handed, but not as much as gun
+
+when lifeform dies or turned into zombie, they drop all inventory
+
+make the website header be at BOTTOM of page instead of top
+
+experiment: put the world/game status info and console input stuff to:
+    the BOTTOM of the map, but above the move/action buttons
+    and, also try:
+    to the RIGHT SIDE of the map
+
+you can ask an NPC to "I should not move"
+    and the reverse
+    just like asking to (not) follow you
+
+when zombies are moving to get closer to human, they CAN:
+    go up/down stairs in same cell -- works for them just like for You
+    zombies cant see you if you're on another level, but they will 'remember' seeing a human go up/down the stairs (if that human was visible to them when he did it), and will use that memory when deciding who/where is closest human (mathwise, they treat a separate of one level above/below like being one cell away on the same level (a z diff of 1 compared to an x or y diff of 1)
+
+when NPC's are moving to follow somebody (due to the I-should-follow thought), they WILL consider level loc differences, and are willing/able to go up/down stairs to get closer to their target
+
+a thing has a history
+    it's a list or dict that records what interesting actions/events happened with/to/by it in the past
+    be careful what I add to it because it can get too big and be bad for perf
+    also, mostly/only lifeforms, particularly NPC's (anything using AI/mind to think)
+    facts are current state/facts; history is past/historical facts/stuff that are no longer necessarily true/facts
+
+zombies should not say things like "I am skilled in <skill>."
+    (or thoughts, beliefs, etc.)
+    ONLY say the silly/mindless things like "Glermz!" and brains!
+
+the two directional action select boxes should persist there choice state across subsequent rendering of the UI - whatever user last chose should still be selected
+
+the "I should follow You." thought string should be replaced with instance of an ShouldFollowSomebody subclass of Thought; it should have a field for who to follow; the __str__ method renders it as a pretty string like "I should follow <thing-name-or-ID>."
+
+when money is picked up, it should merge with any similar money already in your inventory
+    impl by emitting a 'picked up' event (params: who, what)
+        emit one event for each item picked up, individually
+    have a listener for that, the listener does the merge if needed
+
+add 2nd floor to that house, with stairway to it from 1st
+add basement floor to that house (it's on the Sewer level, totally surrounded by walls, and no zombies inside of it), with stairway to it from 1st floor
+    put a closed door in wall of the basement level of house
+
+you can attack a wall and damage it (has hp)
+    when a wall's hp reaches 0 it is destroyed (deleted)
+    a destroyed wall leaves some rocks behind (things)
+
+when lifeform dies, it drops all inventory 
+
+normal zombies do NOT know how to open closed doors
+    a smart zombie may exist
+    a smart zombie knows how to open doors
+    a smart zombie is created when a smart human turns into a zombie
+    most NPC humans are not smart
+    some NPC humans are smart
+    the You human is always smart with respect to the smart zombie creation rule
+
+movement is blocked into an otherwise unblocked cell IF both of the 'corner' cells (the 2 cells that are adj to both the mover's starting location, and, the destinion cell in question) contain move blocking things (typically, walls)
+
+a door has an 'inside' side and an 'outside' side
+    it has 2 'doorframe' adj cells, one to either side of the door
+        the doorframe cells are neither inside or outside of the door
+    all other adj cells (that is, other than the doorframe cells) are either inside or outside of the door
+    both doorframe cells must have walls or windows in them
+
+food: yellow %
+
+fungus: orange %
+    each tick, each fungus may spawn a new fungus in an adj cell
+    but only if no fungus is already there
+    the cell must not contain something that would prevent it from going there:
+        fungus already there
+        wall
+        un-broken window
+        NOTE: normal doors DO NOT block it, regardless of whether open or closed
+        a special kind of door (sealed, vault-like, waterproof, hatch, airlock)
+
+flowers: red %
+
+when thing moves out of cell (via walking, running, etc. but not teleport or act-of-god), it may leave footprints on the ground in the cell it just left; when you look at that cell's description, it will mention that footprints and what direction they are heading in; requires some min perception skill level to see it, though some randomness involved too; the ground must also be such that leaving footprints is possible (terrain is dirt, or the floor has dust on it, or blood, etc.)
+
+when thing attacked or killed in a cell, by violent means, it creates some bloody markings on the ground in that cell (and on adj walls, doors, etc.), and if enough blood may also spatter blood onto other things in same cell or in adj cells (including items on ground, or lifeforms). If blood exists in/on something like this, it will be seen in the description of it. There is an action/command to clean blood up/off.
+
+elevators; comprised of a zone of one or more cells (if >1 they are in a rect shape) that is the elevator car/shaft; there is typically also an ElevatorDoor(Door) instance (that can be in open or closed state, though a person doesn't manually directly open/close them like a normal door; instead an electronic signal is sent to the elevator door telling it to open or close, typically sent by a button pushed by a user or by the elevator's electronic systems)
+
+a door may be locked
+    the player may lock/unlock a door in adj cell (like how he opens doors)
+    a locked closed door cannot be opened
+    a locked open door can be closed
+
+a closed door may be jammed
+    a jammed closed door cannot be opened, regardless of locked state
+    it is possible for a closed door to be jammed and locked
+
+a closed door should block movement into it's cell
+
+diff kinds of locked doors:
+    a door is either lockable or not; it depends on whether it has a Lock
+    there are several Lock types (classes)
+    SimpleInsideLock:
+        it can only be locked or unlocked by a lifeform standing in an "inside" adj cell, not from an "outside" cell
+        it is up to the door to specify which rel adj cell(s) are inside and which are outside; there are typically 3 outside adj cells, and 3 inside adj cells, and 2 "on side of door's frame" cells
+    KeyLock:
+        it can only be locked or unlocked by a key that "fits" this particular lock; there may be 0+ keys in existance which fit it; a Key is a normal item class (can be carried, dropped, destroyed, etc.)
+
+a VaultDoor is like Door but stronger, and requires giving the correct combination (for that particular vault door) to unlock-and-open it (a closed vault door is always also locked)
+
+a non-broken window should block movement into it's cell
+
+a boarded-up window will blocks LOS through it's cell; a non-boarded-up window will not; a board-ed window renders like a wall (#) but is Brown color; you can board-up a window in adj cell, if you have in your inventory: wood, nails and a hammer (some/all of the wood and nails are consumed/deleted; the hammer is not)
+
+a zombie's corpse looks like 'a corpse' when described, and is mostly like a normal corpse, except it has the zombie virus
+
+button to indicate you wish to pickup specific thing(s) from ground, not nec. all
+    the game should switch your UI to a state where it lists all things eligible for picking up; next to each is a checkbox; there is one submit button, and all those things/checkboxes are inside a single form that that submit button submits; when submitted, the things selected with checkboxes checked will be picked up
+    DO the same also for dropping things
+    THEN do the same to give user to wear/unwear things in his inventory
+    THEN do same for wield/unwield things in his inventory
+
+consider: button to see inventory; UI switches to mode where it lists all things in your inventory, one per line; next to each thing's desc are a row of buttons to perform actions related to that thing; example: (un)wield, (un)wear, use, inspect, name, drop; whether wield or unwield button shown depends on whether it's currently wielded or not; same logic for wear/unwear; if a thing cant be used, there is no Use button; if a thing cant be dropped there is no Drop button; normally each thing line just has short desc of it; but there's a single button on the page when UI in this mode that is named "show ID's", which when pressed issues a usercmd that tells the UI to toggle the display on/off of thing ID's in this list.
+
+the dir-type buttons should remember the last used state of their respective select fields (if walk issued last with those buttons, then next UI render will have walk selected; if run, then run)
+
+for every usercmd that allows you to cite a particular thing instance, you can always give any of the following in order to cite it:
+    * it's thing ID (a unique decimal or hex number)
+    * your alias/nickname for it
+    * that thing's own natural name (Joe Smith, for some NPC, for example)
+    * your description of it (to whatever degree of detail is needed to uniquely identify it from the other possible things in the set of candidate things considered as possible targets of that command). for example "pickup sword" will work for a sword, if there is only one sword in that cell (or at least, only one thing that (a) you know about it), and (b) you would call 'a sword' or recognize as a sword, in any thing description of it in the feedback portion of the UI.
+    The most foolproof way is citing the unique thing ID, but also most awkward
+    For any usercmd that allows multiple things to be specified, you can specify a list of things by separating their identifiers (using one of the methods above) with commas, like "pickup sword, apple, bag". The comma is not required if every thing identifier has no space/whitespace in it (like example in prev sentence). Embedded quotes may be used to compensate for that too, like "pickup sword, Bag of Holding, 'The Book of the Dead'" -- notice how that shows how commas AND quotes are used in the thing identifier list.
+for some/many/most/all usercmds that allow/require you to specify thing(s), it's also possible for the UI to switch to screen/mode where it lists all your possible choices, and puts a checkbox or whatever next to each, letting you (de)select each individually, then hit a Submit button perform the action with the choices you selected. (Probably "(de)select all" buttons too for convenience.). For each thing, it will display: short desc of it, it's name (if any), your nickname/alias for it (if any), and possibly also it's thing ID. And possibly also it's wielded/worn state (if any).
+
+you can give alias/nickname to any thing in your inventory, or, you 'encounter' (this means in this case that the thing is in same or adj cell), this works for lifeforms and non-lifeforms equally well. You can give a nickname to some NPC. You can name a sword. You can name a wall or door. Etc. The name is only known to you by default -- UNLESS somehow somebody else learns of it or you tell them about it, etc. For example, if you engrave the name 'Bob' into a sword's metal blade, then anyone who sees that blade will see that name 'Bob'. But if you have a private in-your-mind-only nickname for some NPC as "turdmaggot", then it is your own personal secret. Any command that takes a thing "id" will work equally well with a nickname/alias. So instead of "wield sword" or "wield 1247235" you could do "wield Excalibur".
+
+you can tell an NPC to "follow me", and they may or may not obey that. if they (choose to) do so, they gain the thought/goal "I should follow <your-thing-ID>.". This will effect their choice of actions in the future while they have this thought. If they have it, they will (normally) follow you (that is, move closer to you, ideally getting into adj cell.)
+
+you can tell an NPC to "protect me", and they may or may not obey that. If so, it becomes a thought of theirs. When it will mean is that (a) they will attack lifeforms that they know are attacking you (the thing they're sworn to protect)
+nd (b) they may also attack things that although they're not attacking you (now/yet) they have reason to believe are a threat to you, and so they will pre-emptively attack that lifeform. They will continue attacking that thing until it is dead, incapacitated or otherwise no longer a threat to who/what they are protecting.
+
+usercmd: wear <thing-ID>
+    if you do "wear" it's like a "wear all", and the code will make you wear everything in your inventory it thinks is best for you (it can make the choice based on its memory of what you've preferred to wear in the past, for example)
+    'strip' command makes you take off all your clothes, you will be naked afterward, though you may or may not be carring items (a bag, gun, etc., may still be carried and wielded, for example); it only takes off worning clothing-like things. will not remove rings, amulets. Will not un-wield weapons or tools a 'de-strip' command will do the reverse.
+    you can also tell/order an NPC to 'you strip', and they may or may not obey you -- if they do, they immediately (or, slowly, over a period of several ticks/turns, incrementally, a little bit each time) take off all their clothes.
+    you can slap or spank an NPC
+    if you have appropriate item wielded, you can whip/hit NPC with that item (a whip, paddle, cane, flogger, etc.)
+    you can order/ask/force an NPC into various body poses & predicaments (face down, spread eagle, bentover, doggie style, on knees, on tiptoes, etc.)
+    must be thing in your inventory, and be wearable
+    if a thing can only be worn on one part of body, that is what is assumed
+    if a thing can be worn on different parts, you can also specify which part (if you care), or if you don't care the code will pick one for you (You can change where/how it's worn later by simply issuing a new wear command that does specify where/how to wear it)
+    a thing may be associated with a body part/region, and thus only wearable in that "slot", for example, a hat is headgear, gloves are for hands, etc.
+    You can generally wear no more than one thing per body part/slot. Exceptions include: rings, necklaces, shirts, etc. You can have socks and boots. Or just boots, or just socks, but you can't have 2 pairs of boots on at once. You could have two pairs of socks, but there's a limit (say 4 pairs of socks -- the limit would vary by the body part/slot and the specific wearable items involved)
+    if you're wearing anything, when you list your inventory, the worn items will be indicated like the following example:
+        Your inventory:
+            a bag
+            a stick
+            a hat (worn)
+    there's a usercmd to un-wear (remove, take off) something too
+    there's a usercmd to un-wear everyhing (take everything off) -- you WILL be naked with this command, afterward
+    there's a usercmd that will un-wear everything but your basic minimal clothing items that you would reasonablly keep on (like, underwear, pants, shirt, socks, shoes, etc.)
+    panties and bras and pantyhose and lingerie DO exist, as clothing thing types
+    it's possible to 'brand' an NPC on some body part; and possible to put tatto on them. the brand or tatto is basically just a text description of what it looks like. You can see it (learn of it's existence) if you are looking at them under circumstances when you would reasonable expect to see it or learn of it's existance. Example, 
+
+create a set of paths & path nodes for each level; they're like mental highways that NPC's can move along to get from point X to point Y, when an algorithm following the 'flight of bird' path wouldn't be able to get them there, or, not efficiently (for example, if there are obstacles along that flight-of-bird path). Ideally, all convenience functions I have that buildings (or walls) or any other type of thing that can block movement and is perm part of level SHOULD also update the path/node data structures for that level, automatically, under the hood. Each node in the path knows what other nodes it's connected to. A node is located at a certain r,c. To walk a path using this sytem, the thing determines which Node is closest to his desired destination, and which Node is closest to his current position, then he walks towards that closest Node, and then towards each subsequent Node choice that are each, in turn, the closest to the goal Node, while still 'leading to it' pathwise.
+
+you can tell/ask an NPC human to 'follow me'
+    rnd chance he'll accept/honor that request/order
+        chance higher if you have charisma skill, in proportion
+        chance higher if you threaten to harm him if he doesn't do it
+if NPC lifeform has thought "I should follow <lifeform-ID>." then the mind code will consider that as one of action choices, and a strong choice (though not 100% guaranteed to do it) - doing it means he will try to move closer to you, to adj spot, if not already, or as close as he can get
+
+a close door cell cannot be moved into (blocks movement)
+an open door cell CAN be moved into (not block movement)
+you can open a closed door, or close an open door
+NPC humans can too, as one of action choices, including as part of fleeing meta-choice
+zombies cannot open/doors
+zombies can attack closed doors, trying to damage them, when door HP reaches zero it's destroyed/deleted
+you can repair (increase HP) damaged door, but only if you have Wood item and Nails, and the door is only lightly damaged (if heavily is impossible to damage)
+
+NPC humans should prefer to move AWAY from any zombies they see/hear
+
+lifeforms can move up/down stairs as one of their movement choices, in addition to moving into a particular adj cell
+
+zombie made from an orighuman inherits some of the mental traits/state of the orighuman and orighuman's class
+
+item: leather jacket; if in inventory then when attacked you are less likely to be hit or damaged (dmg reduced by X amount)
+    once this is working then:
+    add other types of armor/protection items that have similar effect
+    each should give a different amount of protection (per class/instance)
+    each has a bodypart/area it protects: head, feet, hands, torso, legs
+    you can have no more than 1 of a type give you bonus; up to 1 headpiece (helmet), torso piece, foot piece (boots?), leg piece, hands piece (gloves?)
+    each has HP, can be damaged, and if HP reaches 0 it's destroyed/deleted
+        if damaged (hp < max) it gives reduced protection than normal
+
+elim notion of a thing's enemyclasses; replace with mypredators and myprey listsof classes; Human mypredator is Zombie; Zombie myprey is Human; Nazi/Guard myprey is You/Non-German/Non-Nazi/American/AlliedForces
+
+soldier (US army, etc.); green S or A; a green G would be a General;
+    put 1+ soldiers on street level to dev experiment, though even you won't encounter them for 1st time until you each a farther level/region
+
+even when you dead and/or gameover, all the devonly autoui buttons should be shwon, just like timepass is
+
+NPC may pick up thing on ground in their cell, as one of rnd action choices
+NPC may drop something in their inventory, ""
+when a lifeform dies (or becomes zombie), they should drop all their inventory onto ground in the cell where they are/were
+
+bank - has vault with lots of dollars in it; and guards
+
+ATM - connected to a bank (or list of banks that it supports); if you have an account in that bank, you can use ATM to find out balance, and to withdraw cash from it (will decremkent your account balance and create USDOLLAR instance (in amount you withdrew) and add it to your inventory; you must have an ATM card to use the ATM
+
+refactor gamewin/gameloss fields to become entries in a wh member dict called 'game state attributes' or something; then have a dev command to list the current values of all of them
+
+devonly ability to make the UI show any level I want (in any region), regardless of whether it's activeregion/activelevel, and regardless of where You are
+
+even after gamewin/gameloss: if devmode on, in addition to the timepass button ALSO show ALL the devonly (autoui) buttons
+
+add 2nd region; much bigger or smaller w/h than 1st region, and diff level count
+    add way in 1st region/level to get to that 2nd region -- a teleporter in a cell surrounded by walls (except one adj cell which is open), and in the cell in front of the tp (adj to it) have a sign that says "Subway to <placename>". When the code writes description of your cell to feedback (every tick?), have it display that sign text also.
+
+every house should have a zone encompassing it's area with name/desc "a house". You should see the zone desc as part of the code that describes your surroundings.
+
+you no longer have unlimited perfect sign and knowledge of things everywhere:
+    (normally,) you must have LOS to a thing in order to see it in the UI map
+    "", it must have light hitting it (from a light source, either the Sun or some artificial light like a Lamp or LightPost thing instance)
+    normally, there is always at least one light source avail: the Sun
+        at night, the Sun gives no light; only during the day
+            implement it as on/off initially, but later revise the light code
+                so that there are different degrees of light-ness, and
+                have the Sun give max light during day, then slowly descrease
+                it's light amount incrementally over time until it reaches 0
+                at night, then do the reverse progression in the morning
+    there is a config toggle that lets me turn on/off perfect sight/knowledge of everything (eq. to having perf. light and LOS to all things on your level)
+    since it would then be possible for a zombie to be in your vicinity without
+        you able to see it (due to intervening walls or being night, eg) then make sure that when zombies move they sometimes emit a sound ('You hear a shambling sound', 'You hear feet shuffling nearby.') and zombies emit sounds (whether moving or not) like moaning, grunting, slobbering, babbling.
+
+cash, item, green $ - have a little on ground somewhere in zombiehack
+    it's a class; it has a 'qty' field, so that if you have 5 dollars in your inventory, you don't need to have 5 instances of that class, just a single instance with a qty field value of 5
+
+have a bank (a building and a zone), it has a room full of money in it
+
+zh: create a level above and below the cur level - a basement/sewer level, and a building 2nd story/floor level. have 1 stairs to each. the sewer level should be level 0 (first in geo's levels list)
+
+once a zombie has attacked somebody for the first time, he prefers to keep attacking them until they're dead/zombiefied -- he wont make attacks against others if he can still attack (or pursue) the orig target of his affections. If he has a target like this, and he is no longer adjacent to him, he will try to move closer to him, if he can see him. Zombies not very smart though. So if you run around corner, and he cant see you anymore, he will not be able to guess where you are.
+
+ZH: vision for game play: you start in a region, there are 1+ zombies and 1+ humans; you encounter/see a zombie and/or when you do so you see it turn a human into a zombie, so you learn about that fact; there are other regions in the world, you can travel from region to region and in each there's a different situation but there's often 1+ zombies and 1+ humans (may be 0 of either or both in some cases, randomly); you generally want to destroy all zombies (or trap them, or avoid them), not become zombie yourself and save as many other human lives as you can (prevent them from being killed or zombified); you might be able to 'recruit' an NPC human into joining your 'gang', they will then follow you around and generally be your friend/ally and follow your orders (you can give a usercmd (esp via Console) to order a member of your gang to do a certain action; example, say you have a gangmembmer named Bob, you can issue usercmd "order Bob attack zombie" or "order Bob shoot himself")
+    ZH: continuing above vision: there are many plots, quests, mini-quests, adventures, mini-missions, mini-adventures that you can experience and learn about and make progress towards, some help toward the larger goal of game (survive, destroy all zombies, save the human race, cure the zombie plague) and some don't but are fun or provide tangential or indirect rewards (makes you stronger, acquire a super weapon, gain an ally, gain a base, learn a new skill, learn location of some useful artifact or 'expert' (like doctor) or VIP (like The US President) NPC)
+    ZH: you can have a variety of relationship types with other NPC's, from enemy, friend, ally, lover, spouse, master/slave, parent, child, sibling, employer, employee, etc.
+
+ZH: zombies should randomly sometimes say things, and if you're close enough, you hear it; there's a set of phrases they draw from, including, for example: "Brains!"... and "Uhhhhhh...." and "I want yer brainz.", etc.
+
+zombiehack: random NPC's: the avatar's family may show up as NPC's, like your father, mother, wife/husband, sister/brother, children, etc. rare but possible. the description will be like "Your zombie mother." or "Your mother in zombie form." or some such so it's clear who it is. The zombie relative should say things aloud to you that would make sense, like endearments, indications of recognition, pleading, begging, acting or pretending to be upset, etc. Trying to trick you into getting closer so they can eat your brain, of course.
+
+zombies of famous people, politicians, celebrities, actors.. zombie Arnold Sczwhneggar. zombie Bill Clinton. etc.
+
+nice zombie desc to use: "a disgusting evil zombie that wants to kill you and eat your brain", and "This zombie is missing an arm. The reduced weight lets him run faster though!"
+
+a smart zombie, rare  (Zombie subclass)
+a fast zombie, rare (Zombie sublass)
+
+graveyard: a named area (1+ rect zones); rnd chance each tick that a new zombie created somewhere in a graveyard
+
+tick: zombie turns 1 human max in same or any adj cell into zombie (You human)
+when zombie attacks a human, that human screams, you will hear it (see msg in the feedback) if you're within hearing range of it
+
+Graveyard: when construcuted, you give it a W and H. it then crates a named zone/area, and registers a per-tick callback (so it can randomly create new zombies every tick); it will also create 0+ tombstones, and will have 1+ graves underground, each of which has 1 zombie 'seed' inside of it, and a finite supply of those graves/seed; when graveyard creates new zombie it uses a zombie seed from a grave to do so; all tombstones have graves but not necessarily the reverse; tombstones look ike '^' and scattered throughout that area...auto build any Tombstones s things on the map directly; graves are not Things, instead internal objects to the graveyard instance I think; a graveyard has a finite pool of zombies it can give birth to, once that's exhausted it can no more create new zombies...also, a graveyard can be destroyed (destroys the zombie 'seeds' underground anyway) by a bomb blast or large fire)
+
+if you taste the blood on ground in a cell that was produced by a zombie attack or zombie death, then:
+    if you taste that blood, X% chance you gain the zombie infection (which would mean there will become a rnd chance you'll turn into zombie every subsequent tick)
+
+when randomly moving during the tick, zombies prefer to move toward nearest human if they see one and it's close enough (they're not omniscient about location of every human on map)
+
+zombies turn victim humans into zombies by:
+    when they kill a human, the corpse has an attribute attached indicating it has the zombie virus
+    there's a tick listener which evals all corpses to see if they have the zombie virus, and if so, and enough time has passed (rando period of 1 or more ticks since the corpse was created) it creates a new zombie there, replacing the corpse, though the zombie object has a ref to the orig corpse object
+    the way the zombie-ification-of-corpse timing works is like this:
+        early on, for the first 0-3 ticks, the chance of turning into a zombie is low to zero; then the chance rises to say 50% chance per tick; then after that, if the corpse is still a corpse, for all subsequent checks the chance will get lower and lower until it approaches (but never quite reaches) 0% chance; even a corpse that has stayed a corpse for a very very long time still has a > 0% chance of suddenly turning into a zombie!!!! as long as it has the zombie virus, it might happen
+
+zombiehack: dogs? zombie virus might be curable....you might catch the virus from an infected corpse (that has not (yet) turned into a zombie itself)
+
+zombies move slower than humans
+    takes them 2 ticks to move one space; once they begin moving to adj cell they are "busy moving" during that period and unable to initiate new actions or change course
+    the speed (tickcost to move?) should be an instance variable; can vary by thing class and by thing instance)
+
+zombies sometimes randomly make zombie sounds (moaning, groaning, snarls); same rules as for NPC random chatter
+
+zombies should prefer moving toward nearest visible human (if not too far away)
+
+if you/NPC see a zombie turn a human into a zombie, they gain 'zombie' knowledge skill XP for having seen that happen
+
+having 'zombie' knowledge skill should help you/NPC thing when it's fighting one
+
+zombies may rnd take a bite from a nearby corpse (you just see/hear it, not substantive action), make description disgusting and random (describe the kinds of things you see in classic zombie movies)
+
+zh: you can build/prepare/setup a barricade or obstacle in a cell, in order to impede movement of zombies, prevent them from getting to you, going through door/window, down hallway, etc. You can also start a fire in a space. zombies don't llike fire.
+
+zombie can turn a human corpse into a zombie if in same cell with it (during tick, an action it may choose to do)
+
+item: a tee-shirt. has a color and size. may have a logo or text. When you look at a tee-shirt the description tells you it's color, size and whether/what logo or text it has. There are tee-shirts in the game with cool quotes and logos (logos are of course just text descriptions of what the logo looks like), like "I break for zombies', or 'Zombies do it in the dark', or "Zombies love brainy people", or "I'm with the zombies", "Have you hugged your zombie lately?". It is also possible (via some device, gadget, building, machine, etc.) in the game world for the player to create new tee-shirts, with possibly whatever color, size, logo and text he wants. A tee-shirt can be worn.
+
+zh: possible for You to acquire the ability/role/power of a "zombie master" (through science? through magic?), which means that zombies won't attack you (99% chance, but still very very small chance they might, due to randomness like occurs in the real world, where nothing is 100%; so for example even if you're a zombie master there may be a particular zombie who didn't get the memo: he's defective or a mutant or whatever and thus immune to your charms.). A zombie master can order zombies near him (not anywhere in world, just near him?) to do a certain action (or not do a certain action, as the case may be, up to choice of the zombie master.). For example, he can order them to attack a certain human or zombie, or building. Or to get out of his way, clear a path, maybe even carry him on their shoulders. Even though the official goal of the game is to save the human race from zombies, destroy zombies, develop a cure, etc. it is possible for you to ignore all that shit and follow philosophy of "if you can't beat em, join em" and try to become a zombie master and then lead your army of zombies to destroy all the other humans or enslave them, or destroy the scientists, etc. Or you can order the zombies to build you a fortress or palace.
+
+zh: somewhere there exists a facility with scientists (govt? underground? university? bunker?) who are trying to develop a cure for the zombie plague;
+    you can help them by bring them some thing X (a live zombie you've capture? a zombie brain removed from a zombie corpse);
+    if you do this it causes them to make progress toward creating a cure; you can help them in a variety of ways.
+    you can bring them many diff things/items (body parts, samples, whole live zombies, photos or videotape of zombie behavior etc.), in what visit to them, or over course of many visits during play.
+    You literally have to travel to their location (it's on some level in some region, not sure exactly where yet, but not near You's start -- and you should have to learn existance of the operation/facility, hear rumor of where it is, then explore the world and gather info trying to find it, then get inside and gain their trust.)
+    Their facility is a building (has walls, doors, etc.) with 'real' NPC's inside of it.
+    So its effected and effects the game world like anything else: it can be destroyed, people in it can be attacked, and zombies can even get inside of it (somebody leaves door open? hole in wall? come in through a secret entrance in hole of floor in closet of basement level to the facility?).
+    The facility has a reasonable minimum set of defenses against zombies (walls, guards, etc.) but is not impregnable or without weaknesses that can be exploited (by intent or by accident) by others, or by Mother Nature (weather or natural disaster can disrupt/damage the facility so that zombies can get inside?)
+    Helping these scientists is the most likely way you can achieve the goal of having a cure for the zombie plague created. Because they have the most resources, skills, facilities, knowledge, time & energy, etc., to do it. But not only way. It is possible for you (the player) or some other person/agency to also do it. But you will probably require alot of scientific skills, tools, resources, etc. But it is physically possible in the game to do that! So, worst case, if the facility gets wiped out, it is possible for You to carry on the work for a cure.
+
+BUG: i can wear shoes and boots at same time
+ISSUE: i can wield gun and chainsaw at same time
+
+BUG: I should have done 4 or 6, it's crazyy i only did 1 or 0 like that! ( i had cheathit and cheatdmg on)
+	NOTE: when i turned off cheatdmg, I started doing real dmg again each blow, like 4hp, and then killed the target quicly afterward
+You attack a soldier named Becky!
+You gained 1 xp for hand-to-hand skill due to successful hit.
+weapon attack: <groglogic.mainapp.webhack.Chainsaw instance at 0xb68671ec>
+weapon does 4 dmg (out of max possible 6)
+You gained 1 xp for hand-to-hand skill due to did dmg.
+Attack damage 1 reduced by 1 due to wearing a white coat (-1).
+Your attack caused no damage to a soldier named Becky.
+
+if corpse in refrigerated area it will not decay or decay slower, meaning it won't disintegrate as quickly like it does after X ticks...this is useful for scientists to study zombie corpses for example, keeping more of them around and longer to study

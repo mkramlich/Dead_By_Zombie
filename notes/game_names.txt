@@ -1,0 +1,18 @@
+game_names.txt for WebHack
+--------------------------
+
+(any of the names for games could be cool enough they could become tee-shirt text in the game world)
+
+The Day the Earth Stood Zombie [prob best cool name so far]
+The Day the Earth Ran Screaming from Zombies (Trying to Eat their Brains)
+Z-Z-Z-Z-Zombies!!!
+My Parents Became Zombies And All I Got Was This Lousy Brain
+
+ZH: alt names: Zombieopolis; Night of the Living Hack; Hack of the Living Dead; Rogue-like of the Living Dead; YARBLOZ: Yet Another Rogue-like But with Lots of Zombies
+
+zh:
+Dead by Zombie (good name, orig, short but sweet, accurate, evocative, playful ref to phrase "Dead by dawn!" in Evil Dead movies)
+Night of the Living Hack
+Night of the Living Rogue-like
+The Rise of Zombie Civilization
+Zombie Apocalypse

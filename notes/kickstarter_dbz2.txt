@@ -1,0 +1,120 @@
+DBZ 2 Pitch on Kickstarter
+--------------------------
+
+		
+Marquee Features (pitched in the KS because exciting, popular, emo)
+	traps
+	bandit NPC's (will attack other humans, steal, destroy)
+	specialist NPC types: doctor, mechanic, engineer, scientist, mercenary, farmer
+	entire United States mainland is represented in the game's world
+		all major named US cities and regions, and landmarks
+	dozens of tools with realistic in-game users (hammer, saw, etc.)
+	can start a fire, fire will spread
+	can take an NPC prisoner (handcuff/bind them, order around, abuse)
+	you can bury a dead body (or unconscious but living human NPC; or bound/immobilized NPC or zombie)
+	caves & caverns system
+	a building or region can be "owned"/claimed by player or an NPC/group
+	minefield.minefield. if mine in a cell, it's a comma ",". When lifeform moves into it's spot, it blows up, doing lots damage to it, possibly killing/destroying it, then the mine is consumed/deleted. There could be a safe path through a mineifeld which is a contiguous path of cells that do not have mines in it. the PC would move along that path, but the zombies would be too dumb to do that, just moving randomly or in straint line towards you, so, they get blown up. However, the mines run out eventually. You'd need a command taht allowed you to re-place/activate a mine in a given cell. And a supply of mines. Maybe a military base, with a room with 100's of unactivated mines in it, for you to take from? Or a Mine Dispenser. An object that has a button, you press the button, it dispenses (creates) an unactivated mine, putting it on ground in taht cell or into your inventory, whatever. Could have infinite or finite supply.
+	an NPC may be infected with the zombie virus but have not yet turned into one. you can see/hear symptoms of it in their description or NPC actions observed. (eg. "The woman twitches uncontrollably.". "The man's eyes are very red and his face is discolored.")
+	DBZ idea: yelling attracts attention of zombies who hear it, causing them to maybe gain idea/plan to move towards you
+	zombies may have had professions when they were humans (pre-zombie), like lawyer, doctor, cheerleader. it effects how they look, talk, behave, and they're abilities, when in zombie form, and where they hang out. profs: cop, rock star, artist, engineer, model
+	can mix/concoct an aribtary chemical/bio substance, then inject into
+		a zombie, then wait to see if it cures/de-zombies them
+		and inject substance into healthy human/NPC, and see if it makes
+		them immune from zombie virus
+	when zombie attack 'hits' human, it might be a bite or scratch; if human NPC/player is bitten/scratched is  chance to turn into a zombie
+	guard dogs -- will bark if they hear/smell/sense zombies nearby
+	the CDC: big underground/aboveground complex with lots of labs and scientists and gadgets and supplies for trying to fight viruses/bacteria/plague/disease
+	bio-decontanimation showers and sealed multi-hatch/throughways
+	can find/setup an auto-firing gun turret to shoot all zombies it sees
+		and within range; his finite ammo, you must resupply it periodically
+	the CDC/Zion will send you on missions to acquire bio samples, chemicals, tools, equip they need
+	can "hire" an NPC; if hired will obey you, protect you, etc.
+		must give them money or some other items they agree to
+	interactive dialogue with NPC's is possible
+	if NPC doctor is allied/friendly to you, he can heal you
+	pistols, rifles, shotguns
+	allied/hired NPC's can have orders to go find loot/supplies, pickup, and bring back to your base, and drop it there
+	zombies can break windows; a broken window can be moved through just like it were an open door or space-without-wall; when window gets broken, a sound is made; an unbroken window cannot be moved through; a broken window looks like an empty space
+	zombies have memories of their past lives. like to visit/hangout at places they inhabited when they were humans/alive (their home, job, etc.). some zombies are sad and will be crying. some zombies are filled with rage and vicious.
+	flares
+	player can create/name a group/gang that he leads
+	player can create/place a written sign, and choose the text
+		he can see/read it, and so can NPC's; if NPC reads it, effects them
+	NPC's can form and belong to gangs/groups
+	an NPC may belong to 0+ Groups. A group can be like a club or organiziation, like in Paranoia or Illuminati, such as Cult of Cthulhu, College Republicans, etc. Belonging to a group may give them special abilities, favors, contacts, items, enemies, allies, goals, etc. The PC may join 0+ groups too, during game play.
+	define and add-in new locations (premium mode only, and add to the website chart and convention pdf chart):
+	    Movie Theater
+		Hotel (haunted? old? zombie-infested? crazy?)
+	    Candy Factory
+	    History Museum
+	    Toy Super Store	
+	
+
+		
+Below-Fold Features (changes included but not advertised)
+
+	(_) way for user to cure zombie plague
+	flesh out all the "theme" regions in orig DBZ (mil base, VV estate...)
+	MAYBE conversion to PyGame so bitmap retro cell sprites & more colors
+	fix all bugs in dbz/notes/TODO_bugs.txt
+	on manu menu the Continue Saved Game entry should not be there IF there is no saves/quicksave file
+	"Come out of the house. We know you're in there. It's the smell. It drives us crazy." - zombie speech
+	starting quests:
+	    1. get to your house
+	    2. get the chainsaw in your house (pickup, wield)
+	    3. find Dr. Venturius estate
+	    4. tell Venturius about the zombie outbreak
+	command that saves AND quits
+	Mac app icon
+	    make DBZ app icon!!!
+	    integrate it into the dist
+	once you become zombie, you shouldn't be able to move or pickup/drop, basically not do any new actions other than to look at the worl state/status
+	way to actually win such as: by curing the zombie plague or destroying all zombies such that they never come back
+	overheard rumor, or, NPC belief uttered:
+	'The ruins of an alien civilization have been discovered on the planet Mars.'
+	when user chooses Restart Campaign, it should first take user to a screen that just shows scrollable/pageable text of an intro blurb. ("A zombie outbreak has happened. You are ... blah blah blah.")  Once user indicates he's done reading that, the game then (1) loads world from demo-or-full initstate, then (2) takes him into DefaultMode screen and begins play.
+	    build out the Venturius stuff more, quests, plot progress, creative personality and events related to him
+	add a randomly chosen quote or passage to show in the splash screen. a sentence or a few lines. from the story/backstory involving Hexenhammer, Venturius, the unleashing of the zombie plague, motivations, dramatic moments, etc. It could be chosen at randomly every time that screen is entered.
+	to Intro Screen add Help link
+	    on Help screen, have these menu items:
+	        Map Key [like: d is dog, Z is zombie, etc.]
+	        Command Keys
+	        Play Guide
+	        Encyclopedia
+	command to let user toggle which key set to use: default or no-num-pad
+	    his choice could be persisted to a file the game writes inside the dbz directory (same level as license)
+	     AND mention in the README about how to do it
+	on 'Choose Thing To Eat' page, on same line as the stomach #/#, also show the total calorie count of all carried edible items (the stuff listed below)	
+	a device that if carried (and activated - because it can be on/off) will emit a "Pain-in-the-Zombie" field that makes nearby zombies experience pain, say things like "Ouch!", and try to move away from you.
+		Dr. V is building some cool exotic prepostorus contraption. He quests the player with acquiring and delivering various pieces of it. As more stuff gets delivered to him, you can actually see visual progress on the contraption, it's a thing inside his mansion, occupies a portion of it or attached laboratory space. Use punctation characters like * or colored # to render the various parts of the contraption. Purple #, for example. ALSO the user/player should learn of this fact (his need for this stuff) fairly early in his play experience. Maybe V needs to build the contraption as part of his effort to cure/solve the zombie plague. Maybe he's come up with a chemical to cure the zombie plague, but he need the machine to mass produce it?
+		    one things he needs:
+		        sprockets, tubes, wires, gears, bulbs, pulleys, bands, duct tape, igniter, microchips
+				(_) when zombie spawns somewhere, any adjacent cells which had 'safecell' status lose that status
+				(_) each tick, each SZ cell, if that SZ cell is adjacent to a non-SZ cell then there is a random chance it will lose its SZ status
+				(_) command to toggle whether to show visual indicator of which cells are SZ; green 'S'? draw precedence is higher (meaning shown above/last) than everything except walls and the PC/avatar
+		VV can build a contraption to help manufacture a cure to the zombie plague, but to do it he needs missing parts. PC can go on a scavenger hunt to find them all, and if you bring all and give to VV and will then begin building contrpation and it will be done in X ticks. Parts scattered aaround the world: liquid oscillator, vacuum pump, bimodal shunt, phasic fus, carbon filter, antipodal actuator, liquid crystal cornflakes, one-inch spring, tungsten strip,
+		implement these user commands:
+		    def usercmd_lock(self, relrow=0, relcol=0):
+		    def usercmd_unlock(self, relrow=0, relcol=0):
+		    def usercmd_wave_arms(self):
+		    def usercmd_jump(self):
+		    def usercmd_yell(self):
+		    def usercmd_say_hello(self):
+
+Misc Scraps	
+		
+forts
+
+		previously friendly/allied NPC's may betray you (let in zombies, steal)
+		you can plant a garden (series of cells that grows fruit)
+		Gygamire Caverns - many levels/regions of interconected tunels and caves carved inside the earth...some edible fungus found in various places, grows (like tree except fungus creates new fungus periodically)
+
+			barricades
+			    (x) can build barricade
+			    (_) require wood in inventory
+			    (_) consume the wood
+			    (_) axe
+			    (_) command to use axe to chop down tree (any Tree, even FT) (in a direction), tree deleted, puts wood on ground
+			    (_) zombie may attack a barricade, and may damage it or destroy it; if zombie hits it a sound is produced;
+

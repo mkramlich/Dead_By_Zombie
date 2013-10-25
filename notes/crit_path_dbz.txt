@@ -1,0 +1,81 @@
+crit_path_dbz.txt
+-----------------
+
+player MUST have way to learn on start level of existance of Jameson refugee house that's in Eastside
+
+fix route_pair() fn:
+	route/path CANNOT be placed in cell with pre-existing route or stairs
+
+fruit decays/transforms/replaced-by into fruit seed, after X tocks since the fruit was created
+	fruit seed can either be planted in ground (explicitly), or, if laying on ground may/will eventually turn into a new fruit tree
+
+my attacks miss too often with the chainsaw
+	finding: right now, the attack's chance to hit depends only on the attacker's atkchancehit NOT on the weapon and NOT on his skill
+		change both those facts!
+		any/every weapon (item that can be attacked with) should have a default or explicit (per-type/isntance) atkhitchance or modifier
+		make some weapons have a higher inherent chance to hit, than other types (bat > knife; chainsaw > knife)
+
+BUG: after i starved to death, and was dead (I could see my corpse on the map), and i was hitting 'timepass', my corpse was digesting food! (stomach cont decreasing each 'timepass'!)
+	make sure that corpses do not digest or starve
+
+MINOR BUG: i starved to death, causing game-over condition (only had timepass and reset-game button afterward) but in my devmode statusfn area it said "gameloss: False" -- then I hit timepass, THEN i saw a feedback message saying basically that I was dead and game over, and that point gameloss did change to True....maybe change code so that when I died gameloss becomes True immediaetlly, without having to press 'timepass' afterward before that occurs
+
+MINOR BUG: in the 'all minds' report, i list a wielded item in the wielded section AND in the carried section - should just be in the wielded; wearing/worn is done correctly (shown in wearing but not in carried)
+
+MINOR BUG: "You lost x hp due to starvation and now *HAS* x hp." --- fix that grammar, has should be have
+
+ensure that dogs bark randomly sometimes; the bark should be a sound emitted, therefore, you might hear it as with any sound
+
+food too scarce, you will always eventually starve to death
+
+too easy to die, due to not enough healing items, too many zombies, and autoheal doesn't work if cur HP < half max....one or more of those factors needs to become friendlier
+
+doctor NPC, has heal skill, and ability to 'heal' a seriously wounded human (NPC or you); you (the player) can ask a doctor to heal yourself, or to heal another NPC; doctors often found in hospitals; if someone is seriously hurt (hp <= max/2) then they won't naturally auto-heal over time; instead, only a doctor or serious/major medicine/healing items can help them
+
+hospital: one exists in full game's scenario, always, in pre-defined location/level; hospital contains doctor(s) and healing items (medicine, bandages, first aid kit, splints, surgical tools, etc.)
+
+gun item; you can wield it and 'shoot' it; shooting it fires a bullet(s) in a direction (one of 8 cmopass diractions, only); chance to hit (and dmg) depends on gun type, gun instance, shooter's skill, range to target, env conditions (day or night), etc.; gun has finite ammo loaded in it and expends bullet(s) per shot, and cannot fire once empty, but may be (re)loaded from 'loose'/unloaded ammo in your inventory; unlike bats/knives, a gun can hit/attack an enemy/target at a distance (whereas bats/knives limited to only adj cells)
+
+soldier NPC; almost always has gun(s) and ammo; lots of soldiers found at a military base; soldiers tend to shoot zombies on sight
+
+military base, a special location/level/place; there's one in the full game's scenario world, pre-defined
+
+fire; a fire may exist in a cell (an empty cell, or a cell with a wall (in that case the wall is on fire); each tick, each fire cell may cause a new fire to be created in an adj cell to it; each tick, an existing fire may go out (most likely if no adj fires, or, if all adj cells have fire); fire maybe look like red '^' or '*' or '&' or '~' on map; fire cannot be created in cells with water floors; a fire extinguisher item exists which can be wielded and 'spray'-ed on adj fire cell to extinguish that fire; fire extinguisher items often found in fire station buildings; fire will cause X HP of dmg to all thinfs (lifeforms, items, whatever) in same cell or adj cell to it (more max dmg in same cell, less in adj cell; in same cell 100% of damaging it, but in adj cell chance is <=50% per tick of causing dmg to any given thing); wearing certain things (types of clothing/equipment) may give increased protection or immunity to fire; a fire may be created by using a certain item, like a lighter or match or if an explosion occurs
+
+the "You see nearby: ...." feedback should have a relative direction indicator for each thing listed, like:
+	You see nearby: a zombie (to the west), a dog (to the south-east)
+
+the skill i'm increasing during attacks with my bat should be improving my subsequent attacks (chance to hit, max dmg, etc.)
+
+way to heal if heavily wounded (hp <= max/2), possibly by using a firstaid kit or being healed by a doctor NPC (NPC with doctor skills who performs a 'doctor' action on you)
+
+firstaidkit, medicine or bandages item could be green '%' character
+	you can 'use' them (like 'eat'-ing a food item), it heals you up to X HP (varies by item/type), and item is consumed
+
+doing "lock" on a door gave no feedback, so:
+	make it give feedback, if it did something
+	if did nothing, remove it from list of possible command choices
+
+enforce hard limit on zombie count created, per wh instance
+
+all corpses (of any kind, except a YouCorpse) need to rot away (delete) eventually (X tocks after corpse created) else it will cause memory leak
+
+implement the "develop zombie cure to win" stuff, or, remove all mention of it from DBZ game and the site (sub benefits, etc.)
+
+turn on digests and starves, by default (and in the initstate files)
+    tune the numbers/behaviors for digesting and starving such that it's not TOO hard to survive, it merely requires some thought and planning, and pretty much only a bad player will starve to death
+    tune the init level content and the code so that it's not too hard to keep enough food and not starve to death
+
+impl the "pick lock" command, or, remove it from the Directed Actions action type select box; if latter, also remove mention of it from Help page 
+
+Help page:
+    stairs
+    what ? means on the map
+    expain that doors/windows look different whether open or closed, and what the symbols used are for each
+    food, edible, eating, stomach, digestion, starvation
+    doors: opening, closing, locking, unlocking, picking lock, attacking/destroying
+    windows: opening, closing, attacking/destroying
+    walls: they block movement, they have lots of HP, can be attacked/destroyed
+    explain the "ask (not) follow", and "ask (not) not move" commands
+    explain how zombies work, and zombi-fication
+

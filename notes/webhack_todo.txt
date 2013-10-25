@@ -1,0 +1,547 @@
+WebHack TODO
+------------
+
+    add more user cmds: punch <relrow,relcol>; kick <relrow,relcol>; shoot <relrow,relcol>
+    each of those attack cmds also support a param that specifies a target thing (by id or maybe by obj ref)
+    each of those attack cmds can assume that if you give no params at all, that you want to do it with the same params you did last time (thus, the code should persist record of what/who/where you attacked last time
+    all usercmd_ functions should also be available for calling in the Console UI widget, once that exists (they are automatically avail in Console regardless of whether they have the autoui meta tag - autoui meta tag is only used for auto-generating buttons)
+
+execute_attack:
+    support attacks where no victim param, just relrow/relcol
+    support shooting-style attacks (guns), and those also support giving a target coordinate (which hits whatever victim is there if one is, else, if empty, it hits the space/area/cell itself, which might be useful, for example to shoot a smoke grenade into a spot); maybe impl shooting-style attacks as a separate event type, and merely share some of the same helper code
+    chance of hitting or not should be dyn calc and semi-random
+    chance of hitting depends on attack type and weapon type (if any)
+    dmg should be dyn calculated and semi-random
+    dmg potential depends on attack type and weapon type (if any)
+    dmg can be reduced by victim's armor or defenses
+    emit event to cause dmg to be applied by an execute listener
+    call a fn to execute the kill task
+    instead of killing/deleting him here instantly, consider emitting an event which requests the kill to occur; then have a listener handler which performs the kill operation
+    remove from all groups he's in
+    make him drop items he was carrying
+
+usercmd: toggle <configkey>
+usercmd: set <configkey> <newvalue>
+usercmd: <configkey>   [it will print the current value in feedback]
+    technically this last one may not be impl as a usercmd_<foo> method, but instead be a feature supported inside the cmd dispatch/handling code -- the code's logic could be that if it can't find a usercmd_<foo> method that matches the given input, it then looks in the wh.config dict to see if the input's 0th token is a config key, and if so, assumes user wants to see the current value, etc.
+
+consider moving the Console input field/form & submit button down to just above or below the move/attack buttons
+
+if sound is too loud (when impacts a particular lifeform), it can make that lifeform deaf, permanently or temporarily (for some dur of ticks)
+
+figure out how to make bgcolor black for the map render in UI, so I can make it look more like NetHack (primarigly white/bright fg text over black bg fill)
+
+when you pick up Money instance, instead of simply appending to inventory:
+    see if already have any Money instances of same type
+    if so, then simply increment an existine one by the amount of the one you wish to pickup; then, delete the one you wanted to pick up (removed from map, but not added to your inventory or anywhere else -- it's gone from universe)
+    this merge effect should ONLY happen for two Money instances that are exactly identical in all the ways that metter (same type, currency, country, etc. as well as same condition, same special traits, etc.)
+
+earthquake - when it happens, most things get moved around a little (to adj cells), randomly; add a dev cmd to make it happen; but normally there is a small chance every tick it can happen (in some games, or on some levels)
+
+some walls can be pushed into adj cells if you/npc 'pushes' them in that direction; normal walls cannot, but some can with certain reqs met (slidability, empty cell where you want to push it to, etc.)
+
+cmd that gives thing instance counts for each Thing subclass, like:
+    human 35
+    zombie 4
+    wall 10
+        NOTE: this is counts by 'isinstance' sense of class membership: being a direct member of class or being a subclass both will count (an American is +1 to American count and to Human count)
+
+human has gender
+    when add, make sure the name assigned is correct for that gender
+
+a human/lifeform/mind may have the trait "religous" and/or a particular region, like "christinaity" or "islam", etc. An NPC may gain or lose religion(s) through the course of play. For example, if an NPC who is prone to religion, but not currently relegious, encouters a preacher type of NPC (spouting crap according to a particular religion), then that NPC exposed to that may (rndly) gain that relion. The religion trait may also have a number indicating how strong that person belives in (or is involved with, indoctrinated with, etc.) that region. Example: "christianity 5" An NPC with say "judaism 0" will say/think/tell-others that they're Jewish, but in relaity, they're not. (Joke, but I'm serious about rules.)
+
+an NPC may have 0+ needs, like "love", "friendship", etc. And a number which indicates how much they (normally) need of that quality/thing/experience/item in order to be satisfied. For each need, there's also a number which measures how much that need is currently fulfilled. An NPC where all his need fulfillment values are >= the minimum required to be satisifed, is considered a "satisfied" person. A person who has an excess in many or all of those areas might be considered "happy" or "ecstatic" or "spoiled". An NPC with one or more needs below min required fulfillment levels will be unhappy or otherwise experience negative effects or penalites (like in The Sims.) Typically, a need's satisfaction value will automatically decay over time, periodically (or, in response to certain specific events that directly and specifically lower/hurt/worsen/shatter/destroy/reduce/eliminate/ruin that area of life -- for example, the need to be "dry" will be dramatically hurt if that NPC gets splashed with water. Eating is a need (well, sustenance for body -- this need can be met via non-eating, like, example, intrevenous drug injection.). A lifeform (even You) will eventually starve to death if go too long without eating. What a person needs (the mix of them), and, how much they need of each, can vary from individual to individual, and vary by mind (mind type) and personality. A drug addict 'needs' a particular drug (they need "alcohol") else they experience bad effects. The effects of not having a particular need met can vary by the need type (food different than love, etc.). Usually, the effects are bad. But the effects can also be good, or, just different/weird/tangential. Examples: a vampire needs blood; if he goes too long without drinking blood he will die. A Doctor Jekyl type of NPC may need a particular chemical concoction periodically, else he turns into an evil Mr. Hyde.
+
+create an Invisible Man class. rather, create a feature of game that lets a person (lifeform, thing) be invisible. (Whether due to magic, science, being located inside a zone of invisibility, wearing an invis cloak, innate super power, a potion, etc.). Such a thing is not (normally) visible on the map in the UI. (Certain devices/gadgets/conditions may allow You or an NPC to "see" that invisible thing, however. Goggles of Seeing Invisible Stuff. A machine which generates a quantum flux field, which renders all invislbe things inside the zone of effect to be effectively visible while inside the zone. Etc.
+
+the customer/site-visitor-facing name of the games using this engine should NOT contain 'hack' in their names; instead have a cool clever unique name; also, dont reveal/flaunt/advertise existance of a generic engine under the hood.
+
+usercmd: flirt; you can flirt or 'come on' to an NPC. the game will descrbie what you say (chosen randomly from list of canned speech) or do (with gestures, etc.); the NPC will get the event and react as they choose to. A female NPC may react by saying or doing something "positive" or negative back. Like saying "hey big boy" or whatever (stupid example, but you get idea). Or become interested with you, etc.
+
+inventory: every thing in an inventory can have a dictionary of metadata attached to it. The metadata contains information like: whether wielded, whether worn, what your name for it is (like how in NetHack you can name a sword George), etc.
+
+Human and Zombie class should have a method like 'can_be_pc
+
+lifeforms should try to move away from somebody attacking it IF it thinks he himself will die or will get beaten (is weaker) than that other guy
+
+attacks should produce sound events
+    gunfire attacks make louder sounds than melee attacks
+
+attacks should result in visual events produced
+    the core engine should have a listener for all attacks
+    that listener should produce a visual event corresponding to that attack
+        (where, what looks like (looks like an 'attack'), who is involved in it (atk and victim))
+    the core engine should have a listener for all visual events
+    that listener should decide who could possibly see that event, and to those it should pass the event to them
+        inside that thing, the Lifeform could will decide it won't really see it if it's dead, blind, etc.
+        if the thing is You, his overriden method will cause a feedback to be printed describing the attack (just like how sound events are handled), etc.
+        have a "you_see_all" config 
+
+humans and zombies have a native language; it must be one of the language skills they have; when one speaks, that will be the language by default for the speech sound event
+
+if You hear speech-type sound, it will appear as garbled in feedback if you dont know the language (have that lang skill)
+
+make execute_attack not done by event posting/listenting. instead just a plain old method call. whoever wants to attack just calls a method to make it happen. The method call/chain can involve methods of the Thing (subclass) in question, etc. The attack type, the weapon type, etc. Maybe have different attack methods/classes depending on type of attack (melee, shooting gun, etc.). If something/somebody needs to KNOW that that attack occurred then simply have the attack code post an event with the information needed by that interested party. For example, other lifeforms will need to be able to see and hear that it occurred, therefore, they need to be passed an event about it. (Probably WH would have a default listener on taht event, and he would be responsible for passing that event to all Thing's in the world that the engine thinks could possibly be interested in it (because they're withing sight/hearing range, etc.)
+
+When you hear a sound, the feedback tells you what direciton it came from. (So the sound event has it's origin location, and the code can do the math between that location and your location to calculate relative direction to it.)
+
+if you are inside a zone, and the zone has a name, and a field indicates you are allowed to see that name in the UI, then show that name near the exiting location status line (level, region, etc.). example of zone: 'a house'. '123 Apple Street'. or 'a QuickMart', 'a bank', etc.
+
+multiple zones can overlap, or be supersets or subsets of another. examples: city Foo, inside of county Blah, inside of state Moo, inside of country Goo. A zone may consist of one or more areas on the same or different levels. For example, a country zone may include all the area inside 5 regions. A state or city may only be 1 region or 1-2 levels, etc. World effects/behavior/rules/physics can vary from zone to zone. Laws, rules, mix of local inhabitants, flore and fauna, weather, etc. The same is true of regions and levels of course, but I could still just make that a property of a zone, and I'm allowed to have each region have a region zone that encompasses exactly and only that region. And a level can have a level zone that encompasses exactly and only that level. Etc. A zone may contain a vertical stack/subset of multiple levels. Like a square area from 0,0 to 5,5 on each of 3 levels, for example. Useful for implementing effects having to do with some sort of vertical space or shaft, for example.
+
+a lifeform can be asleep. he won't move or do any actions while asleep. He will awaken after a certain amount of ticks have passed (equiv to 8 hours, whatever that means), or, if he hears a sound that's loud enough to wake him. Or if something moves into his same cell.
+
+an NPC yells if attacked. you will hear it if within hearing range.
+
+the game keeps track of what levels/regions You have visited/seen. Also, what cells of it (and what you saw there) too. In it's memory of a level it only remembers major/structural things like walls, doors, stairs -- NOT creatures, items. No, I take that back, maybe it also remembers the last known positions/identies of those things too. The record may or may not use actual instances of those thing classes -- but if it does, they are not "real" instances meaning they are not in the GeoSystem's lists of "real" things, or on the "real" maps. There is a usercmd/button for user to see a "map" of any of the levels recorded by this feature. It can use the same basic map rendering logic, but the UI should not look like he's in the real gameplay UI (it lacks the normal set of buttons and fields and status data that exist on the normal gameplay screen.) It does have a button/usercmd to go back to the main UI however.
+
+have a dev-only UI subclass. have a devonly usercmd/button that lets me switch from the main UI to the dev UI. In the dev UI have a usercmd/button that lets me switch back to the main UI. The dev UI is like the main UI except it shows a ton of data about the game state that is of interest to dev (me). Example: thing counts, goals met/unmet, unusual states. How many events processed by the engine the last time it processed stuff (and teh time before that, and before that, etc.). Have show graphs to (plots of some count/measurement over time/tick, etc.). Use PIL to dyn generate graph images.
+
+the UI can have 0+ "watches" that it will render. A watch is basically a function/method that calculates something and returns a value. Both the name of the watch (the fn/method name) and the value it returns should be shown in the UI. Watches are for dev/me. Not shown to normal users, only in devmode are allowed. There's a usercmd to add/remove/toggle-display-of any particular watch. The command would be like "watch <watchname> [arg1, arg2, ...]". The watchname is assumed to be a method of the wh instance. If any args given they will be passed to the target method. You can create several separate instances of the same watch function, each with possibly different parameters. For example "watch show_thing_hp <thingid>" could be done several times with different thing id's. A watch can return a string, number or anything that has a __str__, even a class instance.
+
+if an NPC (zombie,guard, etc.) is attacking something (has oustanding target/victim across ticks) then he might say something aloud about that, like "You'll die!" or "Prepare to meet your maker!" or "Is that the best you can do?"
+
+UI: devonly buttons should be together, separate from non-devonly buttons
+
+dev cmd:
+    instance counts exist, for each thingclass
+    instance counts exist per thingclass, per level
+
+dev cmd to put a specified thought into a particular lifeform's thoughts
+
+you cannot pickup an alive human - you can pick up a human corpse though
+
+usercmd to wait/timepass 5/10/20/50/100 ticks (or X specifable by user)
+
+storylog: it's a list of log lines which document key events in the story and game (and when they happened). "Zombie outbreak in Dayton, Ohio.", then "You come out of your house one evening and discover this fact.", followed by key events that happened, like, if/when you died, if/when the human race went extinct, if/when you turned into a zombie, if/when a cure was found. Any major plot points. Goals achieved. there's a user command to see it's contents. call it story history?
+
+a stasis zone: any thing whose location is inside a stasis zone will not receive ticks or otherwise be able to perform actions or state changes -- it's as if it's frozen time. Other actors (like other lifeforms, humans, etc.) can act on a thing in stasis, however. For example, something could push the frozen thing OUT of the stasis zone. In that case, it would cease being frozen. Only the thing itself is in stasis, not, say, the floor of the cell. So for example something could cause a trapdoor to open beneath the feet of someone in that stasis field cell, and that frozen person WILL fall down through the trapdoor hole to the level below (and, if no stasis zone there, find themselves out of stasis.)
+
+the Console code should be modified so that if it doesn't recognize the input as a usercmd function, it then looks in wh.config dict; if the 1st piece (splitwise) of the input is a key in that dict, assume it's a config. If the input has no remaining pieces after splitting, then assume he wanted to know that config's value, so return that. If there was more pieces, assume that is the new value he wants to assign, and put that new value in the dict. 't'/'f' treated as True/False. Int-looking input as int's. Otherwise, a string.
+
+a mind may have 0+ conditions/states, like 'angry', confused, afraid, horny, lonely, alert, etc. These conditions/states influence how that thing behaves, chooses and talks. A condition/state may be a simple string (like 'angry') or an instance of a class, where the class has some fields for recording structured aditional data/metadata about that condition (like, how angry, or, angry at whom, or angry since when, etc.), but still have a __str__ method that returns a pretty string rendering of it (like 'very angry at Joe since yesterday'). Others: love, hate, craving, attracted-to, etc. Maybe these should just be facts about that mind. If need to model 'angry' as a class, then make an Angry subclass of Fact.
+
+The FactSystem could keep its own private list of all facts that exist. This would help it do stuff.
+
+when a thing with an AI 'goal' satisfies that goal, an event should be emitted (do it in WebHackAiSystem subclass, since the AiSystem should probably not know about event systems. Maybe have AiSystem call a no-op method in itself. Then in WebHackAiSystem I override that no-op method with osmething that posts the event. Then, register an event listener for that event. For every WH-style goal (game win, game loss, etc.) the 'you' thing should have a corresponding goal in the AI system.
+
+a thought can have a strength associated with it. (by default, a thought has no strength, or, some default value)
+    this is used when AI code is deciding what to do and has to choose between conflicting choices. It needs to weigh which is more important. For example, say that a person has agreed to wait in a particular cell until a friend shows up. So that person will stand there and not leave that cell until that happens. However, a zombie has gotten close by. Should he move, even though it would violate his original promise? The AI to decide which choice is less bad and/or more good. Normally, the AI would (for a default mind) decide that it is better to move (and reduce risk of being killed by zombie) than to not move (and continue honoring his original plan/promise to stay there.)
+
+AI: add a method to TS that the app can call to make a thing try to derive new thoughts from their existing thoughts. For example, say a person has the thought "My master is Joe." and the thought "Joe ordered me to not move." and "I should do what my master tells me.", the code should conclude (add a new thought) the thought "I should not move." It will actually add that concluded thought to that person's set of thoughts. The exact syntax of thoughts is not important, as long as it's both clear, lets me do what I need to do, and easy to parse.
+
+rewrite all functions like:
+    visit_with_<groupdesc>(fn2visit,...)
+to be like:
+    visit_with(groupname, fn2visit, *args, **kwargs)
+        [NOTE: one change is that you can pass seq args and kw args to the visit_with() function, and it will in turn be sure to pass those to the target visited function as well]
+the code for new fn would look like:
+    def visit_with(groupname, fn2visit, *args, **kwargs):
+        group = groups[groupname]
+        for visitor in group:
+            fn2visit(visitor,*args,**kwargs)
+where groupname is a string
+the visit_with fn then checks in a special dict which holds the mappings from groupnames to the set/list of entities in that group
+the entities in a group can be: things, cells, strings, objects, etc.
+example groups:
+    'all things in world', 'all cells/locations', 'all lifeforms', 'all walls', 'all lifeforms on activelevel', 'all cells on activelevel', etc.
+possibly use the groglib.Groups code to do this, since seems to fit
+for best perf, every one of those groups should have their membership updated whenever something happens that can change it; for example, when the activelevel value changes to something different, then a group like "all things on activelevel" should immediately be updated with the correct new members for that level; probably use an event listener to know when to perform a group membership update
+    TO BE more orthogonal, make a group named 'you' that contains only the You
+    ALSO: add feature to event ngine that lets me specify a groupname to visit that listener with when the listener is called -- so he doesn't hvae to do it inside hmself! PLUS then make the event engine coalescade the handling of all listeners that have the same visit group requirement
+
+perf: when reg listener with event engine, may specify what is the set of entities that the listener should be visited with (for example, all things in world; all lifeforms in world; all lifeforms in activelevel, etc.); this lets me improve perf by letting the event engine be able to coalesce the handling of listeners with identical visitation needs into a single operation; So I don't have to iterate through all things in worlds multiple times each tick -- only once!
+
+food, diff types of it; lifeforms must eat food or they even starve to death;
+you can eat food items (an action)
+
+AI: NeedSystem, HasNeeds? need for love, stimulation, adventure, excitement, food, etc. a need can have some bad effect/action that happens if it isn't met (ever, or for a while, and also depends on how badly it isn't met, etc.). Unfulfilled needs may cause new thoughts to happen. (Thoughts can then become speech.) Needs + thoughts can become goals. Goals can cause Plan's to be created to achieve those goals. Outstanding plans will effect what a lifeform chooses to do during it's tick.
+
+all/some thoughts (per thought?) eventually have memories created which correspond to them; not all thoughts do; depends on how well that thing remembers, and how strong the thought was
+
+trap; some cells may have traps in them; when a thing enters that cell they get hurt (lose hp, become poisoned, infected, irradiated, etc.)
+
+it is possible that some walls may move (slide to adj cell) during the tick update; it would happen as part of some cool dungeon effect, ilke secret walls, secret passages to be revealed when a butotn is pressed, etc. Or as part of a trap. You step into a cell, it sets off a trap. The trap then causes walls near you to start moving every tick, either to seal your exit path or to crush you, etc. Good for Aztec-like games.
+
+item: note (piece of paper, whatever); it has text; you have usercmd to "read" it; if the text is short enough then when you look at the cell containing the note the note text body is included in the description of it (for example, if body is literally "buy milk", but not if size is like a novel). If body too long maybe just show the first X characters with ellipsis, like this "The cow jumped (...)"
+
+item: book; like note except: has an author and title; if it's fiction then when you read it all that happens is that you see it's body text (in feedback); but if it's non-fiction then you may learn/increase skills (it exercises 1+ diff skills, depending on the book). A book instance may have one or more pieces of fact knowledge it imparts to the reader when he reads  it. What will happen is that the reader will gain a memory for each fact/idea imparted by that book (may be 0+). The memory body will be like "You once read in book B that T", where B is book's title, and T is the idea/fact imparted by reading it. This automates the process of you taking notes on shit you read in the game, a convenience for user. The memory may need to be a class instance rather than string, so it can have explicit structure. (title, author, 0+ ideas impartable, etc.) But even if it's a class, the class has a __str__() which renders a string line that looks like a tradition string-type memory.
+
+
+fire; a cell may have a fire in it; each tick, fire may spread into adj cells; chance it happens depends on heat of fire, fuel sources in each cell, etc. Fire won't spread into a water cell. (Very high temperature fires are so hot they make water in adj cells evaporate!). Fire won't exist (or will die out) if cell is in a vacuum (no oxygen). It's possible for a cell to be vacuum (no oxygen), useful for space/sci-fi environment. If cell has no oxygen then most lifeforms will die -- unless they are wearing a spacesuit which provides them with oxygen. Fire is red '^' or red '!'.
+
+open door is capital letter O
+window is number zero 0
+
+cell terrain can be "open air/space" -- used for cells on levels containing the upper floors of multi-story buildings, where there is no building/floor in that cell, just open air/space, therefore, nobody can stand there; if a person were put into that cell, they would fall down to the level below on subsequent ticks (fall one level per tick, until they hit solid ground/floor). This terrain should render different than normal cell that's empty (of things) but has a floor/ground/deck. Maybe " " (the space character)
+    how to implement falling descrbied above: each tick, every thing that is in a cell with no floor/ground (open space/air), will be moved down to the level below (but in same relative r,c); Unless they are levitating, etc. Unless there's a Wall in the cell below or their movement into that cell would otherwise be prevented for some reason.
+
+jet pack; if you're wearing it and it's turned on, allows you to "fly", which means up a level (cell in level above must be open space/air); or fly sideways to adj cell that is open space/air.
+
+make a convenience fn that creates a multi-story building:
+    caller specifies the base r,c,level,region, and how many levels of height
+    the code will find that level in the World, and determine it's levelkey
+    the levelkey it determines should be an integer
+    it will then assume that each upper floor should be at levels with that same levelkey but +1, +2, +3, etc.
+
+create several melee weapon classes: bat, sword, stick, chainsaw, golfclub
+    you can pickup all items in area
+    you can drop all items carried
+    you can wield a carried item (chosen randomly)
+    if melee weapon wielded during attack, you chance to hit and do dmg is higher, by amount defined by that weapon instance
+
+button to see the background/intro story to the game. (usercmd, prints txt to feedback, no tick)
+
+NPC's may decide to use the stairs, they will move using it just like You do when using it
+
+elevator: like stairs, except it connects to either one or two dest locs; if two, you can specify whether to take it up or down; if only dest loc, you can only go in that direction (up or down only); if an elevator is in a cell on one floor/level, it makes sense that there is another elevator in the same row,col cell on the floor above and/or below it (same relative r,c coords within the level); if a series of two or more elevators exist in a vertical stack across multiple floors/levels, you may of course go up and down the full length of it, but only one floor at a time, normally; if an elevator has "stops" on 2+ other floors possible, then the rider/user can specify which floor/level to go to, and it will take you there directly, in one move, without passing through intervening floors. If you 'look' at an elevator in same cell, the desc report you see in feedback will tell you what other floors it connects with.
+
+when someone says something:
+    make thing.say(what,language=None) it
+        internally, they will say it in language given (if they know it) else their native language
+        a sound event is emitted (of subtype speech), it has 2 traits: what is said, and the language spoken in
+        a lifeform may know 0+ languages, but usually at least one if human
+        you can only speak or understand speech in language you know
+        language knowledge is a skill; so there's an English skill, German, etc.
+        since language is skill, you may exercise it (when speaking it, or, through intentional study)
+        speech may also have a difficulty level (of the language used), which equates also to the min lang skill needed to understand it. A default of 1 is assumed if none specified when speech emitted. If you have German 1 but someone says something to you at German 5, you will not understand what he said, just hear gobbledygook. You'll see the text, but it will be encrypted/obfuscated so it's just like "Aasfdj kjwerwerj nlnf!" if you didn't meet the min lang skill required to understand it.
+
+default-tick-tasks: instead of performing the rnd move logic directly inside that function, instead, just pass the tick event down to every thing in the world (ok, maybe limit it to only the things in the activeregion.) Pass it to a generic 'handle_event(event)' method of Thing. In the default implementation of that method inside Thing, the method will pass the event on to any of that Thing's listeners registered for that event. (Like a mini EventSystem, at least the listener registry portion anyway.) There is a default tick listener for every Thing instance, which is a Thing method. All of these methods can be overriden in subclasses to change the behavior as needed by that subclass. But the default/superclass behavior gives you lots of smart common behavior for free. Like the rnd movement. (Well, put that in Lifeform.) Also put the code that decides whether to attack or flee or perform actions (pickup stuff, open doors, etc.) in one of those methods too (of a shared base class like Lifeform or Human). The same idea applies for how Thing handles any sound/speech events it receives. The default-tick-tasks function should pass all sound events to all things in world (that could possibly hear that sound; also, only to those on activelevel/region.) In the case where a thing is deaf, the decision to "not hear" the sound is made inside of the Thing code, NOT up in the default-tick-tasks code.
+
+add terrain attrib to Cell
+    make a few cells on starting level have water terrain
+    render water terrain cells as blue '~' instead of black '.'
+
+gold, item, yellow $ - have a room full of it in wolfie
+
+Cell has a terrain field; it's instance of Terrain. There are different Terrain subclasses, for like Ground, Floor, Water, etc. The UI uses a cell's terrain to decide how to render it. The core game engine may also take terrain into account for various rules.
+
+tick() should not incr tock immediately. instead post tick event, and then a execute_tick (the only listener ever for tick) should do that. inside execute_tick, it chooses whether or not to incr world.tock; If it choose to, it does, then posts another event called 'tock' indicating that the tock advanced and to what new value. It's this last event that stuff can listen to to be notified that time advanced.
+
+eventsystem: when adding listener, you can specify if there's a requirement for activeregion and/or activelevel; if you indicate neither, it means the listener will be called regardless of what the activeregion or activelevel is; if you specify an '_activeregion:region' match param, then the listener won't match UNLESS the current activregion is the region specified; If it is, and no activelevel specified, then it doesn't matter what activelevel is currently as long as its within activeregion; if you specify activelevel (regardless of whether you also spec activeregion) then that level must be activelevel for listener to be called.
+
+inside the move fn, should use region and level name in log msg, not obj garbage
+
+attacking a lifeform generally makes it want to either:
+    attack you back
+    run away from you
+    ask you to stop doing that
+    yell like "Help I'm being attacked!"
+
+send Helena screenshot of Wolfenhack, and/or ZombieHack, and/or the main page of the grogdjango site, and/or Ganymede
+
+wh: create another level and/or region that is "outside the castle" that the Exit transports you to when you step into it's cell (like a TP pad does); so it puts you there, and also immediately should have been listening for move events (and/or entry into that particular "outside the castle" region/level, and that listener should have logic that is if 'you' entered that place, then declare victory, game over, etc.
+
+man-sized lifeforms (human, zombie) can't be in or move into cell with other man-sized -- fix that...currently it's allowed
+
+fix thing where it logs me out if an exception rips out of my view fn into django (is it one of the middleware's that's doing it?)
+
+if NPC hears somebody say something they don't  like it may piss them off. example: if the Czech prisoner says "I hate Nazis" when a Nazi guard can hear it, it will piss them off and they will maybe come beat him up or something.
+
+create something that adjusts it's difficulty/challenge based on how strong/weak you appear to be; example, a mutator entity that say will spawn new monsters on your level if you appear strong; but if you appear weak, it won't spawn new ones, and instead will "cheat" in your favor by lowering the HP of existing monsters at that level or making them quietly cease to exist, fall asleep, die, be stupid, be blind, wander away from you, take stairs to diff level, etc.
+
+ATM item; it's connected to a bank; in the bank you have an account; player can use(rcmd) an ATM to: see his bank balance; withdraw money from it, etc.; the ATM is physically full of cash, so it's possible to steal it (it's a fixture in the cell, but can be de-mounted with sufficient tools or force) and/or break it open and acquire the money cash inside
+
+gun; item; you can pick it up, drop it; if you're carrying it you can also wield it; if you're wielding it, you have a "shoot" usercmd; you can shoot in a direction (the "attack <relrow,relcol>" usercmd will do that, will shoot your gun, if you're wielding a gun, it assumes that automatically); if you are not wielding anything, the game assumes you are bare handed, so when you 'attack' it treats it as a bare-handed attack (punch, etc.)
+
+remember idea of able to register event interceptors I had at Rush Hour 3 movie yesterday; they're called before listeners; they have ability to modify an event, or, to make it so that that event is not handed further down the chain (to any other interceptors or listeners); actually, it can deny the event in a way that the other interceptors will still get to process it, but that listeners won't; or, it an deny it in a way that not even other interceptors will get it
+
+idea: when a projectile is fired, an animation of it's flight path could be performed by writing back some javascript in the page response (and putting the UI in a certain mode), and that javascript alters the display of the map to look like a projectile is in flight, ideally by having a for loop that pauses each iteration, and each iteration "moves" the projectile a little farther along the Bresenham's path it's following. Or could do with a timertask/thread-like ability, if Javascript has that. Whatever technique is used for this could also be used to animate other things, like explosions. Projectile animation would be used for: bullets, arrows, thrown items (grenades, daggers, darts), missiles, rockets, mortars, catapulted rocks, etc.
+
+PersonalitySystem
+
+cell has (or may have) a temperature and air pressure/density, and air mixture/composition, and wind
+
+create a system for unique string ID's. then hook it up so every Thing subclass instance gets a unique string ID in a global registry of some kind.
+    allow 0+ "ID alias" to exist. The app can register them, they are optional.
+        an ID alias is a dev-meaningful word/phrase, and it maps to the real ID used under the hood. For example, when defining a scenario, it's more convenient to define an ID alias of "Hitler" for Hitler, rather than have to paste around a variable containing his actual raw string ID. Also, more importantly, allows me to use meaningful ID aliases in user input, so a user can submit command "attack Hitler" rather than "attack ID#57364"
+
+a person may have a condition, like "loves <some-person>". If they have that condition (using this example), it effects their rnd speech and thoughts and choices of action. for example, if they have the example condition above, their effective rnd speech set will include "I love <some-person's-name>." and their effective thoughts will include "I love <some-person>". I need a unique string ID system for things in order to implement this example.
+
+in rnd chatter code, make them sometimes say a thought (one of their thoughts), rather than an item from their rnd speech set
+
+a person may have 0+ personalities; they effect what types of thoughts it has, and what types of rnd speech it may make; A personality is to thoughts and rnd speech, like a skillbundle is to a person's skills. It strongly determines the latter, but not exactly, and individuals may always vary. There's a master dict of every personality type. WebHack has a dict. Each subclass game can add to (or replace) this dict. The dict key is the personality type name. The dict value is a list of items. Each item is a tuple/dict describing that personality's effects. So it may contain the list of thoughts, the list of rnd speech phrases, etc.
+
+rnd speech phrases can be templatized so parts can be interpolated dynamically when need, based on that thing's personal state and world state at the moment it renders speech. For example, "My name is $name." or "I am a $my-thing-type." or "I feel $how-feels-fn" (where how-feels-fn is a method name of the instance that returns a string describing how he feels like "sick" or "perfect"
+
+a thing has a 'memory' skill. The level indicates how well he remembers things (adds a +X bonus to the strength of each memory formed), and, how likely (or not) he forgets existing memories (how rapidly or likely a particular memory will be forgotten when the code tells the TS to make him forget stuff.)
+
+a personality type definition may optionally specify a set of skills/levels/xp (including natural talent level at a skill), much like a skillbundle does. Actually, probably expand the skillbundle notion into a full-blown 'character template' system. A template instance can specify: skills, thoughts, memories, rnd speech, personality quirks, preferences, goals, fears, desires, loves, friends, enemies, kinks/fetishes, etc.
+
+a memory or a thought can optionally be flagged as 'private' or 'secret', meaning they would not normally reveal it to other people in the world. Unless they trust that person to some degree (several levels of trust possible). Or, they are drunk or under influence of drugs which lowers their inhibition, etc. Truth serum would allow/make them to reveal information normally considered private/secret. Must be a truth serum item. And must be possible to hypnotize a person. And also to get a person/lifeform drunk. (Alcohol item. That can be drunk.)
+
+a thing can have 0+ facts attached to it. A fact is not necessarily a memory or thought, but, sometimes there is also a corresponding memory or thought. Example of fact: "killed bug this morning" is a fact. But there's no memory of it, or thoughts about it. Whereas the fact "born in Germany" will often (but not always) mean there will also be a memory of "I was born in Germany" and a thought of "I love Germany."
+
+NPC may flirt with you (you'll see a feedback msg indicating it happened); if female, depends on personality (if she has thought like "I attracted <id-of-You>")
+
+fix phenom where when some stack traces occur, the site de-auths me: I become a non-auth (not logged in) user, for some strange reason. I'm guessing it's happening because of one of the django middlewares I have installed, that's catching an exception that ripped out of my view fn, and it's coded to de-auth the user. either remove that middleware or change it's config to not do it. At least when I'm doing dev work like this (in prod, I could let it still behave like that.)
+
+experiment: gen the map rendering with PIL as a png; then have some javascript that detects mousemove or mouseover events, it should use the mouse coord to figure out what map cell coord (r,c) it is over; with that, it can index into a javascript data structure (that I've written into the page response too) that contains data about all the cells shown on that map, like, what things are in each cell. The data only has information (a) used to render the map, and (b) the user/player would have the right/ability to know normally (ie. he wouldn't be gaining cheat knowledge by looking at the raw HTML source of that page, for example); the javascript should display info about the 'mouseover' map cell somewhere on the page; what to display: name/type of thing shown (on top) in that cell; what's there (a wall, a person, a zombie, etc.); what zone that cell is inside of (if any)
+    also: once I'm generating the map as a PIL image:
+        colors! draw stuff in different colors depending on it's type and status
+    the decision to return the text map or the graphic map should be based on a config toggle flag, and/or should be delegated to a method which is overriden by a subclass of UI. One subclass renders the map as text, another subclass renders it as the PIL image, etc.
+
+item: a paper map; it's really just a blank piece of paper which you the user have performed an action of "creating a map" on that piece of paper; when you do it, you draw a pencil depiction of a particular map (you specify the region/level, etc. though by default it assumes current reg and level); it takes time to perform this action; when you create a map, you only record onto that map things you know about that map (the walls you know about, the doors, etc.), it's not an omniscient rendering. (There could also be an electronic map or MapQuest-like device or service you can access which DOES show you an omniscient rendering of a region/level). there's a usercmd to "look at a map" (you specify the paritcular map item), and the UI will show you a rendering of that map (with no UI controls or normal content/status, other than a button or link to "stop looking at the map" and return back to normal game play mode/UI). Generally, the only way to "see" a map of a region/level you're not on/in, is to "look" at a paper map created in this manner. Or, look at the viewscreen of a device which provides an electronic map service. Or, to look at the screen of a remote camera, where the camera is located on the reg/level on question. There are surveillance camera fixtures. (A fixture is like an item except that it's "mounted" in a cell. While mounted, it cannot be picked up, normally. Though some fixtures can be un-mounted by a person, or by an accident, etc. Furniture is also a fixture. A small piece of furniture, which is not permanently mounted to the cell, can be de-mounted and picked up and carried. Some fixtures, furniture and items are too heavey to carry (depends on your strength and existing encumbrance level.) Another fixture is a monitor screen. You can issue a usercmd to "look at monitor", and the UI will switch to a mode where you see a rendering of the level that some surveillance camera is looking at. The camera may be on the same level/region or a different one. A monitor may be connnected to 1+ cameras. If connected to multiple, the view may rotate randomly or round-robin (out of user's control), or, the user can choose what camera to use for viewing.
+
+experiments:
+    make the bg color of the map black?
+
+wh: during play you may acquire an extra goal; if you hear the Czech prisoner rnd say something about "...the secret plans hidden in this castle to Hitler's ultimate weapon..." blah blah blah, then you gain a goal to "find secret plans" or whatever; and a per-tick listener is registered to check for satisfaction of that goal; ideally, also register a listener to check if you pickup the "secret plans" item (will need to create a new thing subclass for that), and give ability to pickup items, etc.
+
+the help page should have a list of links to major help sections or documents;
+    each is a file on disk in a certain subdir (like ./games/webhack/help/geography.txt)
+    the view fn simply detects all the files in that dir, reads them in, display the links and/or (on the page that shows the contents of a particualr file) displays the text content of that file
+    as a first step, get the contents of the geography.txt file into the help page or on link from it
+
+each level (of a region; where a level is analogous to what I currently call a map) may have 0+ rectangular "zones"; a zone has a name, and it has coords definining it's (r,c,w,h), and possibly a description; a zone may also have one or more functions or other data assocatied with it; when something moves into a zone, a function on that zone object may be called notifying it of this fact (do this through the event/listener system); not all zones register listeners for this event, but some do; zone should probably be a class so I can have common methods, and able to subclass it; example of a zone would be "the kitchen"; a zone may overlap with other zones; a zone may include (partially or wholly) another zone(s); for example, a "ship interior" zone may include several sub-zones, like "bridge", "main engineering room", "hangar", etc.; in this universe, an area is not necessarily a zone, but all zones are also areas; 
+
+lifeform remembers that it attacked something (and what)
+lifeform remembers that it was attacked (and by what)
+
+a memory can have contextual data/memories associated with it, for example, for a memory "attacked by rat" there could be contextual memory attached to it like "while minding my own business" or, "while cleaning the attic"
+
+usercmd: list your goal(s), game victory condition(s) (only those known), game loss condition(s) (only those known)
+
+usercmd: ask what an NPC is thinking (near you); if hey may tell you (in feedback) as long as he doesn't hate you or is too distrustful, etc.
+
+usercmd: look; reports on what's in your cell and adj cells; for each adj cell, the msg is like "To the north you see: <blah.", one msg line like this per adj cell
+
+memory: a memory has a strength number; strong memories are less likely to be forgotten over time than weak memories; when an app tells the MS to make a thing forget old memories, the MS will take into account both how long ago (the when/tock of the memory) the memory was formed, but also, it's strength; strong old memories may last longer than weak recent memories, for example; once strength upgrade in place, make sure that memories of being attacked are strong memories; the memory API lets app specify the strength of a memory when setting it
+
+if/when you see a thing type/subclass for the 1st time, you gain 1 xp in that knowledge skill (skill has name of the thing type/subclass); this goes for walls, monsters, person subclasses, etc.
+
+record history of things killed by you (only by you, not by any/all creatures or NPC's)
+    usercmd to report list of all things killed by you: type, qty
+
+if NPC lifeform is attacked, it will gain a trait that will make it either:
+    want to attack his attacker, when given the opportunity (every tick, after)
+    or
+    want to run away
+    so....go ahead make a simple impl for each of these behaviors
+
+the attack type should be passed in the execute attack event;
+    the attack type should also be the name of a skill
+    exercise that attack type's skill when executing the attack
+    if attacker has levels in that skill, he'll gain better chances of hitting and doing (more) damage in that attack attempt
+
+instead of calling sk.exercise_skill directly, I should post an event that requests the execution of exercise_skill; then have a listener that actually calls sk.exercise_skill; this scales much better; can have a helper method that hides the act of posting that event however, so it's still only one line of code to make it happen
+
+victim should gain XP for fighting when attacked too, though less than the attacker
+
+thing's IQ effects whether/howwell it gains skill xp through experience; the code will always call the exercise_skill method with the same xp value passed, but under-the-hood, the SS can ask the app plugin whether to truly award all those XP or not (inside the app plugin, it can adjust the XP downwards (or up?) based on that thing's IQ)
+
+usercmd: in feedback, list your goals: game victory goals; game loss conditions; particular plot or minigame goals (or loss conditions); progress towards each, what's left to do (or do next); it should tell you no more than what you would know normally if you had normal memory and had common sense (you would know that you would lose game if you die, for example)
+
+usercmd: you try to estimate the skills/levels of an NPC (user indicates who or in what rel direction that NPC is in); initially just print in feedback a list of all that NPC's skills with perfect accuracy and detail; later I should refactor to make it less omniscient
+
+skill: every time you fight/attack an enemy (or it attacks you), you gain experience fighting it; exercise a skill whose name is that enemy type/class's name; for example, 'guard' or 'zombie'
+
+skill: every time you move you exercise 'moving' skill
+skill: every time you attack you exercise 'fighting' skill (regardless of what type of attack, and regardless of what type of enemy or weapon
+
+usercmd: do_again - does last usercmd again; this is NOT autoui because I want to place it myself in fixed location, like near Wait button
+
+usercmd: in feedback list your skills, rewards, and effective/equiv skillbundles attained
+
+if an NPC is attacked, they become either afraid of the attacker, or angry at them; if afraid, they will try to move away from that attacker in future ticks; if angry, they will try to get close (adj) and attack them; even if angry, if their HP is too low they will not try to get closer and attacker and instead try to move away
+
+firstaid item, also 'f' like food; you can consume a firstaid item; it heals rnd 1-X HP, and is then consumed (deleted); you must be carrying it to use it
+
+every human/lifeform has 0+ skills; a skill is a name and a value, which is how good you are at it; for example, "swim 10" or "shoot 5"; every time that thing does something which exercises that skill, it accumulates XP towards that particular skill (not global XP, but skill-specific XP); when the XP accumulate for a skill crosses one of a set of thresholds, the skill level/value goes up by +1 point; the lowest skill levels (0,1,2 etc.) have low threshholds; the higher the skill level you have, the bigger the XP til the next threshold to gain a new skill point/level; there are skill bundles which is a set of skill name/value pairs, for example, there is a "German guard" skill bundle, and a "physicist" skill bundle; a person may be assigned a certain skill bundle when they're created; or, may acquire it during game play; despite whether/what skill bundle you start with your actual skill levels/values can change during play, typically up, but under exotic circumstances can go down (brain damage will lower many skills); there is a helper function like: def exercise_skill(thing, skillname, howmuch)
+
+two non-corpse Humans/Zombies should not be able to occupy the same cell
+
+make it so two Human and/or Zombie cannot be in same cell
+    two Thing instances that are either is_man_sized() Lifeforms, or a Wall
+    write a function that you can ask: can_these_two_things_be_in_same_cell(thing1, thing2) -- actually, take a list param of things
+    write a function that you can ask can a certain thing be in a certain cell/coord?
+
+regarding TextPools:
+    ability for app to claim/decaim an item in a pool/set
+    there should be a pool instance for "used person names" -- it's not pre-populated from a file; instead, once a person name has been randomly proposed for use (possibly using other pools for the pieces of it), the code checks to see if the desired name is already in use (claimed) in the pool of 'used person names'; if not, it puts it into that pool (if not already) and claims it; if it is claimed, the code has to try coming up with a different name.
+    also: a Pool should be able to be initialized by reading data from a file (one item per line)
+    create a few diff pool instances as POC (proof-of-concept) like: hair color (blonde, redhead, brunette), person height desc's (tall, short), colors (red, green, blue, etc.)
+
+create the IdSystem class
+    basically has a big dict from unique string ID keys to object ref values
+    every ID key is unique within the IdSystem instance
+    there are convenience methods for: id2obj(id), obj2id(obj), any2id(any), any2obj(any)
+    and methods that return a new/unused ID string
+    and method where you just give it the obj ref and it returns the ID key it will use internally for it; if the obj was already in the dict, it returns the existing ID key for it; else if obj was not, it determines what ID key to use for it (next unused one generally, in a sequence starting from 0), and puts it into t the dict with that ID as the key, and also returns that ID as the call return value
+    the IdSystem maintains one or more dictionaries, each represents a certain group/universe of things; and it has a string name; for example, one ID set for 'persons', one for 'items', etc. up to application to decide whether/how to use. The app can specify both the group name and the ID number when giving an ID key.The app can use an ID key value like "person0" or "person 0" and the IdSystem code will know that it is ID key 0 within the id group named 'person'.
+
+you_wait usercmd should allow optional param of tick qty (good for Console use)
+    also: timepass
+
+when you're dead, even though you can't perform any more actions, there should be a button to 'make time pass' - this lets you watch what happens to the world after you die, which is fun and interesting. The impl is similar to you_wait(). Basically just performs a tick
+
+attack buttons (one in each dir) so you can make attacks
+
+items: wood, stone
+scatter some wood and stone randomly around the starting map
+you can use wood to build a fence in adj cell
+you can use stone to build a wall in adj cell
+some fences and walls already exist on the starting map
+a fence is like a wall in that it blocks movement but only for zombies and animals; a human can move into/through a cell containing a fence as if it weren't there
+a wall and a fence can be attacked, damaged and destroyed (if hp reaches 0)
+wall has more HP than a fence
+fence is damaged by fire and may be destroyed by it
+wall is immune to fire
+walls block LOS
+fence does NOT block LOS
+to build a wall/fence, you don't have to be carrying wood/stone to do it, just in same cell with it; you also can use wood/stone being carried; if material both in your cell and carried, the game asks you which you want to use; if you can build either a wall or a fence (because you have both wood and stone avail), the game asks you which type you want to build; otherwise it assumes the obvious type (wall for stone, fence for wood)
+it takes 2+ ticks to build the wall, during which time you are busy and cant isssue new commands (you can of course be attacked or otherwise effected by the environment during that period, just like if you were wait()-ing for 1 tick)
+
+doors: if door is open, it's like an empty cell for movement purposes
+    if closed, it blocks movement into it or across it
+    you/lifeform can open/close door adj to you (but not in same cell)
+    door looks diff on map when open vs. closed
+    if door is closed and locked it may not be opened; it must be unlocked first
+    a door can be open but locked -- it's open for move purposes as normal, but if the door closes for any reason, it is locked
+    locked door state not seen on map, and not when you/NPC looks at it
+    if you try to open a door, and it's locked, the game will tell you
+    if you have a key, you can unlock it
+    if you have a lockpick set, you can use it to pick the lock to unlock it
+
+you can build/dig a pit in a cell (same or adj); takes X ticks to complete it, during which time you are busy but can be interrupted by outside forces (etc.); if the work is interrupted or aborted for any reason before completion, the game remembers that you made partial progress towards it in that cell, and how much progress was made, and this info persists; if you (or anyone else) were to resume digging/building a pit there at some later point, the game would let that person resume from that already achieved progress point (perhaps minus up to 20% ticks of lost progress (hard min of 1 tick of lost progress) as a penalty)
+    if a thing enters a cell with a completed pit, that thing 'falls into it' and will not be able to leave that cell unless they succeed in climbing back out of the pit; falling into it generally causes damage to the faller
+    a pit is seen on the map normally by you, NPC's, monsters, etc.
+    a pit may be covered or otherwise camouflaged: if so, it will normally NOT be seen! thus, someone may walk into the pit's cell thinking it's safe and be surprised by falling into the pit (after which, the pit's secret state is removed for them ONLY -- it's still a secret to others!)
+    the entity that covered/camouflaged or dug a pit will NOT see the pit if it is covered/camouflaged -- even if they SHOULD know it's there, we don't show it on the screen because we want them to be forced to remember where it was, and because it would be both funny and realistic if it's possible for them to accidentally stumble into it and fall down in the pit that they themselves dug or hid
+
+persist history per user of how his game sessions (per webhack game) ended; either by 'reset', or by 'killed by zombie', etc. like NetHack does; record counts and individual instances, including timestamp; consider have a site db table where this info is stored for ALL users, so it's a sort of global high scores table; data is only inserted into it when a game is ended (by reset, death, victory, loss, etc.); this data may be read and displayed on the normal site (outside the WH games) for any grogdjango website visitor to see; this serves as advertising/promotional material, causing user excitement and increase chance they want to play (and thus to subscribe if they must be a sub to play)
+
+a lifeform should accumulate a memory/record of fact that:
+    something attacked it
+        (who, when, how (atk type & weapon), where, result (hit/miss, dmg, other effects))
+    it attacked something (same info as above ^)
+
+most lifeforms will, if you attack them, try to attack you in the future (if in sight, in range, etc.)
+    dumb lifeforms will forget if you get far enough away or for long enough
+    smart lifeforms won't forget (or less likely to)
+
+a lifeform that is carrying too much (encumbered) moves slower than normal
+    diff degrees of encumbrance, each having diff degrees of speed penalty and other effects (like in NH)
+
+when randomly moving during the tick, NPC humans prefer to move away from nearest zombie if they see one and it's close enough (they're not omniscient about location of every zombie on the map)
+
+alarm: item, if it's on it blares an alarm sound every tick (everybody/hearer within range can hear it, sees a message describing what they hear); volume determines range heard, plus how good of hearing the candidate hearer has; may also be flashing a red light
+
+tripplate: if it's in a spot, and something moves into that spot, a trigger is fire which notifies everything connected to it (0+ other things) that it was tripped; i can connect a tripplate to an alarm so that when a tripplate is tripped it causes an alarm to turn on
+
+in WF, if any alarm is on, there is a random chance that 1 new Nazi is created near it each tick; impl: have a per-tick trigger that evaluates the world, evals every alarm in the world, etc.
+
+when human dies normally they are replaced with a corpse (instance of class HumanCorpse which subclasses Human and Corpse; if you, instance of class YouCorpse which subclasses You and Corpse)
+
+you see name of current region in the UI (unless you shouldn't for some reason, but by default you should see it); example region names: "deck 1", "2nd floor", "the bridge", "inside the starship Ganymede", "The Home of John Smith", "New York City"
+
+any two regions may or may not be on the same level/floor, in the same city or on the same planet, or in the same dimension or year (for example, one region may be in Denver 1938 and one in Denver 2005, useful for time travel games)
+
+if you enter a cell that's part of an area that has a description you'll see a desc of that area in the feedback. example: "You entered a store." An area is a set of one or more contiguous cells (specified by boundary coords, like row0, col0, width, height); area can be a list of 1+ rectangular zones, so it lets me define irregularly shaped areas
+
+stairway can be in a cell; if you're there, you can change your location to the map (region) that that stairway leads to; this requires converting the code to the regions system (regions = {}; region[0] = ...; region['bridge'] = ...; curregion = 'bridge'...; a region is: {'name':'', 'desc':'', 'cells':cells[H][W], 'statevar1':'', 'statevar2','', ...}; you.region; curregion is what is rendered though not necessarily where You are; curregion is where all state updates are performed by the engine (tick(), for example), all other regions are NOT updated, they are frozen, though maintain state when You are not on them)
+
+write python version of Bresenhem (may already did it in Ganymede.py or groglib.py)
+
+mine: item, if anything moves into it's location it blows up, destroying itself and damaging that thing (heavily) and all adjacent things (less so)
+
+abillity to pickup specific item(s) selected by user rather than all
+    and for drop!
+
+NPC's may pickup or drop things
+
+you can eat food
+    so can NPC humans and other lifeforms
+eating food adds to stomach food content
+    ditto for NPCs and other life
+over time, stomach food content slowly decreases
+when food content reaches 0, the lifeform dies
+
+zombie attack may wound you instead of turning you
+
+if human has major wound, he loses 1 HP every tick
+
+if human carrying a bandage, he can Use it to stop a major wound
+
+human can eat food, gives +1 HP
+
+item: timebomb
+player can activate timebomb item (whether it's carried or on ground)
+   will schedules to go off T ticks in the future from then
+if activated/on, time bomb blows up at certain tick #
+when time bomb blows up, it kills all zombies and humans in range, and deletes itself too
+
+link to page which describes everything seen in your map viewport (what each thing is, e.g. 'z' is a zombie, '@' is you, etc.)
+
+when new game started (including after a reset), the player should first see an intro story blurb ("The world is being taken over by zombies!!!", or "You were captured trying to sneak into Nazi Berlin and thrown in a dungeon prison under an old German castle in Bavaria. Try to escape or die trying!!!")
+
+help page or overlay with Webhack-generic and game-specific help info
+
+when multiple things in a cell, the biggest thing should be shown 'on top'; except that You @ is always shown on top if present; lifeforms on top of non-life (items, furniture)
+
+trigger system (which can serve as the basis for: traps, goal condition checking, plot event firing, etc.)
+
+use groglib.Groups to speed up tasks inside tick(), like eval all lifeforms for rnd movement, rather than having to evaluate every map cell on the level
+
+can fire a gun in a direction
+
+limited sight vs. omniscient knowledge (per wh game instance flag, but also toggleable by user with button if he's staff user)
+
+Console is shown on the main play page UI if game is in dev/debug mode and/or user is staff user; this console has one or more commands registered that are useful during development, like toggling flags like omniscience
+
+fire - in a cell; each tick new fire may be created in adj cells; each tick a fire may cease to exist, chance higher if no other things in same cell; each tick all things in same cell lose major HP, and things in adj cell lose minor HP
+
+possible for water to start filling up the map, starting from a water source in a single cell; every X ticks more water is created in adj cells, slowly spreading; water look like blue wave symbol (~) when rendered; eventually water has depth too, starting with a small depth,
+     then depth grows as more water is added, once water reaches a certain height then if that height is taller than a lifeform and that lifeform can't swim then that lifeform drowns to death; also if the water height equals the ceiling height of a level then lifeforms can drown too (even if that height is less than that lifeform's normal standing height, etc.); whether a level has a ceiling at all and if so what that ceiling height is can vary by level/region/floor, etc. there is a water-source thing class;
+     it has an (r,c), and an attrib which says how much water is coming out of it per tick (0 means it's off); water will spread into empty areas, but not into or past a wall cell; water will spread into a cell occupied by lifeforms or items, because they don't block it;
+     if lifeforms or items in cell with water they are normally visible on top of the water, unless the water there is deep enough that it's taller than that lifeform/item, and that lifeform/item can't float (naturally or via power/propulsion)
+
+some things are ethereal - you cannot normally see/hear/feel or otherwise bodily interact with them (your avatar or other lifeforms in the world)...this is useful to represent things like Plot trigger objects, that may have an (r,c) but are not physically real and so can be ignored for all purposes....actually, triggers better done another way, but a better example would be spawn points or monster generators....for example, a spot that generates one new enemy guard every X ticks....actually, that too can be done with a trigger....not sure about this
+
+site users/subscribers can create new scenarios/levels/worlds for any WH-based game by using a web UI on the site itself; it has friendly web UI input controls (widgets, buttons, select boxes, fields, etc.) and wizard flows to help him design a scenario or level, without submitting/writing any python code. for example, there's a button to 'create new world',
+     it goes to page where has a button to "add new region', which goes to page where he can give a name for that region, plus specify it's size (rows x cols x level count), he submits, it's created, it goes to a page where it shows him a rendering of the current state of that region,
+     and he has buttons/fields to add things to it (place a wall somewhere, place You somewhere, etc.), he can pick from a select box what Thing subclass/type he wants to place, and there is some convenient way for him to indicate the location (r,c) where it should go (worst case he has to enter coords in a text field, but ideally do something with javascript so he can 'click' on a spot on the map to indicate where it should be placed);
+     once a user has submitted a newly created scenario/world/region, it is not immediately available on the site; instead a staff must approve it first, and he can also edit it beforehand. This is considered to be given to us with no strings attached or rights retained.
+     If the scenario/world is offered in the real game we can display his username in order to credit him as the author of it. Advanced users may be allowed to submit Python code as part of a custom mod or trigger logic, for example. It would have to be pure Python, use the WebHack/GrogDjango API's (ideally just WebHack API), and have nothing 'evil' in it (malicious).
+     This too would have to be approved via staff workflow. User would have way to submit/upload that code, and have it be used/cited by a scenario/world he created. He could submit Thing subclasses, or trigger method bodies, etc.
+
+an NPC/lifeform/zombie may have a state/condition that means he/she wants to follow some other person/thing/lifeform around, every tick, if possible. Useful for a pet dog which follows his master human, for example. Or a fawning assistant to follow his/her boss.
+
+Console usercmd: 'event <eventname> [<eventparams as k=v pairs>]'
+Example: You could enter: 'event attack who=you relrow=1 relcol=-1'
+and it fires an event with those params
+
+Console: user has a command he can use to define aliases, syntax like: 'alias <aliasname> <commandtext>'
+if he types 'alias' with no params, it just lists all the defined aliases
+in an alias def body, user can use semi-colon to delimit several separate command chunks to be executed in sequence
+
+a usercmd_X fn can have an attrib indicating it's a dev-only command; this means that the dispatch_usercmd() function will not do the dispatch if (a) target fn is a dev-only command, and (b) game is not in dev/god mode (or the user has otherwise identified himself as dev/god)
+
+the Id system (class has instance field id2obj dict of string id's to objects they identify, with functions to convert from id to obj, obj to id, any to obj, any to id, etc.), and you can acquire a new id (registering an object with it), or, deregister/remove an entry too
+
+personality: every human (or lifeform) instance can have zero or more personality traits/labels, like "paranoid", "funny", 'fearful', 'kinky', etc. Having these traits effect what that person/creature does, says, chooses, acts, reacts, plans (or not), etc.
+    For example, if a person has the 'funny' trait, then, when the game makes them say something random aloud, there will be additional funny/comedic/silly things in their own personal randomspeechset. Personality traits can change over time: they can be gained, lost, etc. By default a lifeform has the personality traits of it's class, but it can also have it's own per-instance personality traits, which may start off identical to the class, but then can drift over time, as traits are added or removed.
+    For example, all Human instances have the "afraid of fire' trait by default because the Human class has it. But a particular Human instance may lose that trait, and/or gain additional ones beyond what he gets from his class. I can have whatever level of granularity I want for a trait, and there may be similar ones. For example, a 'fearful' trait means that thing/class is fearful in general. But there's also a 'afraid of bats' trait which means that thing/class is afraid of bats specifically.
+    A thing/class could have one or both of these traits. These traits effect what types of actions that lifeform performs when given the freedom to initiate actions. It effects what types of conversations they have with you or other lifeforms. It effects what you can convience them to do for you (or other NPC's). For example, if an NPC person is 'not trusting' then it's hard/impossible for you (the player) to convence them to join you as an ally/follower/employee/friend.
+
+a lifeform may have a serious wound; a serious wound may be created as an effect of being hit in combat, though more rare than normal case, and normally does not happen; it means that every X ticks it loses Y HP, which then may kill it; the frequency and amount lost can vary by case (the wound/lifeform). A lifeform may have one or more serious wounds, and they each have their own effects independently and cumulatively. Also, poison works the same way. A Lifeform may be poisoned.
+
+humans may die of old age; chance is zero when younger, but becomes non-zero at a certain min age (50?) and chance increases the older he gets
+
+a certain number of ticks equates to a certain mount of "real" time in the game world (seconds, minutes, etc.), so if you have a timespawn measure in game ticks/tocks, you can onvert that to seconds/minutes/years, etc. And vice versa.
+
+display the in-game-world time in the UI; like '8pm' or '8/4/1943'; it should be calculated from the world tock; the function that does it is a method of WH so each particular WH subclass can override to have their own time-to-tock equation; in WolfenHack, the in-world year should be in the 1940's; in Zombiehack, in the 1970's or 80's?
+
+once the engine supports notion of "real" time in the game world (day, time, etc.), then in WH schedule some real historical things to happen at certain dates. Events from the Russian front. Events from the war, etc. For example, when in the game it becomes say Mar 1, 1943, if there was some major real news/war event that happened then, that would be learnable by you inside the prison (through overhearing guards, hearing radio, etc.) then you really should learn about it.
+
+regarding npc random talk:
+    emit event indicating who said what, where, when, how
+    there should be a listener fn registered that listens for all sounds produced in the world; that lisener fn body then decides who/what should hear it (if at all), and if it decides a particular thing should hear it, it either calls method on that thing directly telling it what it is hearing, or, it emits another event which indicates that this should happen (I lean to the former of these two options currently); if an NPC hears something, it may not do anything; but if You hear something, it should show up in the feedback portion of the UI (thus, the sound desc text (notice the diff between speech and non-speech: '"Hello!"' or 'a moan' or '"My name is Bob."' or 'a sliterthing sound') should be passed to a call of self.feedback())
+    you should only hear it if within your hearing range (depends on volume of speech, how far away, and whether you can hear currently, and how strong is your hearing)
+    if the speaker is close enough to you, the feedback will tell you who said, like: Adolf Hitler said, "I rock."; otherwise, if he's too far away, or, you can't see that he said it, etc., you would just see this in feedback: "I rock."
+    if what is said ends in question mark '?', then the feedback would be like: Adolf asks, "Are you single?"
+if what is aid ends in !, then the feedback will be: Adolf exclaims, "Attack!"
+
+EOF
+

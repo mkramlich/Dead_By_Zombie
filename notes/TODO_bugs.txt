@@ -1,0 +1,21 @@
+TODO Bugs
+-------------------------
+
+BUG: if you die and become zombie, then move to route, do 'r' to travel route, it seems to move your body to the new level, but the UI POV is still on the previous level; you can issue walk commands as if on new level, e.g., but can't see yourself. Fix is to ensure the UI POV changes when to travel a route, even whe you're a zombie
+
+when i teleported using that toprightmost TP, and i appeared in the dest spot, it did NOT update visible cells, so i was surrounded by ?'s on the map..when i did a Wait, it then made them visible (as part of the normal tick(), of course) - fix this
+
+bug fix (if not already):
+    could not order NPC to follow me when NPC was in same cell with a corpse - the command just ignored me, no response, no feedback
+
+when this occurs, the game does not really end afterward -- user can continue playing unhinredered, is counter-intuitive:
+THERE ARE NO MORE POTENTIAL BREEDING PAIRS FOR HUMANITY LEFT. (THERE IS NO      
+LONGER AT LEAST ONE MAN AND ONE WOMAN ALIVE AND NON-ZOMBIE.) TOO MANY HAVE BEEN 
+LOST DURING THE ZOMBIE OUTBREAK. THE HUMAN RACE IS NOW DOOMED TO EXTINCTION!    
+YOU LOSE! GAME OVER! 
+
+ALSO after you see the above message about no more breeding pairs, if you do 't' to see goal status, it says ever=True now=True for that goal. I expected now=False
+
+when wield item, make it only let you wield 1 item at most
+... feels like bug that if you wield chainsaw, but already was knife, now wield chainsaw AND knife
+
