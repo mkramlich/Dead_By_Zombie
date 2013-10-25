@@ -19,8 +19,8 @@ elif sys.platform == 'win32':
 DBZ = '.'
 
 from deadbyzombie import webhack
-from webhack import FilePersister, deserialize
-from misc_lib import chance, HtmlColors, load_file_as_python_to_dict, rand_diff, rand_range, rand_success, read_file_lines, rnd_in_range, split_width
+from webhack import FilePersister, deserialize, HtmlColors
+from misc_lib import chance, load_file_as_python_to_dict, rand_diff, rand_range, rand_success, read_file_lines, rnd_in_range, split_width
 
 app_name = 'Dead By Zombie'
 
@@ -373,6 +373,7 @@ class DefaultMode(Mode):
                     color = fgcolordefault
                 if cell.is_this_here(you): #ensures You always visible
                     ch, color = you.render_char()
+                    color = HtmlColors.YOU
                 if color is None:
                     color = fgcolordefault
                 color_name = hc2name(color)
