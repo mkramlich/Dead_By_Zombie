@@ -1,8 +1,8 @@
-export GROGDJANGO=`dirname $0`
-#echo GROGDJANGO: $GROGDJANGO
-cd $GROGDJANGO
+export DBZ=`dirname $0`
+#echo DBZ: $DBZ
+cd $DBZ
 
-export PYTHONPATH=$GROGDJANGO/src:$PYTHONPATH
+export PYTHONPATH=$DBZ/src:$PYTHONPATH
 #echo PYTHONPATH: $PYTHONPATH
 
 # historical list of deprecation warning filters:
@@ -10,4 +10,4 @@ export PYTHONPATH=$GROGDJANGO/src:$PYTHONPATH
 # -W ignore:^raising*:DeprecationWarning:webhack:5352
 # -W ignore:^raising*:DeprecationWarning:deadbyzombie.webhack:8688
 
-/usr/bin/env python2.5 $GROGDJANGO/src/deadbyzombie/DeadByZombie.py
+/usr/bin/env python2.5 $DBZ/src/deadbyzombie/DeadByZombie.py

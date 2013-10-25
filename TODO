@@ -6,8 +6,6 @@ elim all refs/support for Windows (reminder: web32 refs in the code; my Console 
 
 elim remaining vestiges of the original web UI version (Django refs, HtmlColors, HTML snippets, web-somethings, etc.)
 
-elim/rename GROGDJANGO
-
 delete all commented-out code
 
 rename core engine from webhack

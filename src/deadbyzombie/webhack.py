@@ -35,7 +35,7 @@ from rectarea import RectArea
 
 
 def path_for_file_in_data(filename):
-    return envcfg('GROGDJANGO') + '/data/' + filename
+    return envcfg('DBZ') + '/data/' + filename
 
 def read_data_file(filename, linedelim='\n', lineprefix=None):
     lines = filecache.read_file_as_lines(path_for_file_in_data(filename))
@@ -116,8 +116,8 @@ def error(msg):
     pass
     #logger.error(msg)
 
-GROGDJANGO = '.' #TODO hack!
-DATADIR = GROGDJANGO + '/data/webhack/'
+DBZ = '.' #TODO hack!
+DATADIR = DBZ + '/data/webhack/'
 
 # Constants
 #TODO refactor to: class MetaKey: AUTOUI = 'autoui'; DEVONLY = 'devonly', etc.
@@ -1274,7 +1274,7 @@ class FilePersister(Persister):
         return self.get_savedirectory() + gamesubdir
 
     def get_savedirectory(self):
-        return GROGDJANGO + '/saves/webhack/'
+        return DBZ + '/saves/webhack/'
 
     def get_filename(self, user, game, tock, dtime):
         return self.form_filename(user.id,game.id,tock,dtime)

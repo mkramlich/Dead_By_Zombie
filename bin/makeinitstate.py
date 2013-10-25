@@ -41,7 +41,7 @@ if __name__ == '__main__':
         game_indicator = getattr(game_class,'init_state_file_indicator')
         mode_indicator = mode
         fname = 'state%s.%s.%s.gamestate' % (unique, game_indicator, mode_indicator)
-        app_root = os.environ['GROGDJANGO'] + '/'
+        app_root = os.environ['DBZ'] + '/'
         fpath = app_root + base + fname
     print 'gen new initstate and saving to file: ' + fpath
     webhack.gen_new_gamestate_and_save_to_file(game_class, mode_class, fpath, devmode_allowed)

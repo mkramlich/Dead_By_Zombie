@@ -16,7 +16,7 @@ elif sys.platform == 'win32':
     import Console_curses_wrapper as curses
     from Console_curses_wrapper import input_field
 
-GROGDJANGO = '.'
+DBZ = '.'
 
 from lib2 import chance, rand_diff, rand_range, rand_success, read_file_lines
 from lib import rnd_in_range, split_width
@@ -904,7 +904,7 @@ class FeedbackScreen(ThingsView):
         return ''
 
 def saves_location():
-    return '%s/%s' % (GROGDJANGO, 'saves')
+    return '%s/%s' % (DBZ, 'saves')
 
 def quick_save_location():
     return '%s/%s' % (saves_location(), 'quicksave')
