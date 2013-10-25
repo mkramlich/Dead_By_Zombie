@@ -7,5 +7,4 @@
 export SITELOGFILE="makeinitstate-site.log"
 export WHLOGFILE="makeinitstate-wh.log"
 
-makeinitstate.py ZombieHack demo default.zh.demo.gamestate
 makeinitstate.py ZombieHack full default.zh.full.gamestate

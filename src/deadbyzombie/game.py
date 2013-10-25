@@ -35,8 +35,6 @@ from groglib import load_file_as_python_to_dict
 
 app_name = 'Dead By Zombie'
 
-license_code = None
-
 class Obj: pass
 
 # Saved Game State
@@ -921,10 +919,7 @@ def quick_save_location():
     return '%s/%s' % (saves_location(), 'quicksave')
 
 def load_from_default_initstate():
-    if is_full_allowed():
-        load_fname_from_initstates('default.zh.full.gamestate')
-    else:
-        load_fname_from_initstates('default.zh.demo.gamestate')
+    load_fname_from_initstates('default.zh.full.gamestate')
 
 def load_state_from_fpath(fpath):
     wh = None
@@ -1084,7 +1079,6 @@ class IntroScreen(Mode):
             ('Resume Play',         'resume_play'),
             ('Continue Saved Game', 'continue_from_last_game'),
             ('Restart Game',        'restart_game'),
-            ('License',             'license'),
             ('About',               'about'),
             ('Quit',                'quit'))
         self.game_loaded = False
@@ -1137,9 +1131,6 @@ class IntroScreen(Mode):
         self.move_cursor_to_resume_play_choice()
         mode_push(DefaultMode())
 
-    def license(self):
-        mode_push(LicenseScreen())
-
     def about(self):
         mode_push(AboutScreen())
 
@@ -1179,80 +1170,14 @@ class AboutScreen(Mode):
             r += 1
         self.addstr(r+4,0,'Hit Any Key','black-white')
 
-
-def is_valid_license(code):
-    valid_codes = ('github-dbz1.1',)
-    return code is not None and code.lower() in valid_codes
-
-def persist_license():
-    with file('license','w') as f:
-        f.write(license_code)
-
-def load_license():
-    global license_code
-
-    try:
-        with file('license','r') as f:
-            license_code = f.read().strip()
-    except:
-        license_code = None
-    #raise 'license loaded "%s"' % license_code
-
 def is_full_allowed():
-    return is_valid_license(license_code)
+    return True
 
 def is_only_demo_allowed():
     return not is_full_allowed()
 
 def describe_version_unlocked():
-    val = is_valid_license(license_code)
-    return val and 'FULL' or 'DEMO'
-
-class LicenseScreen(Mode):
-    name = None
-    should_mode_pop_when_key_not_handled = True
-    code_disp_tmpl = 'License Code: %s'
-    code_disp_r = 2
-    license_validity = False
-    version_unlocked = ''
-
-    def __init__(self):
-        Mode.__init__(self)
-        self.validate_license()
-
-    def render(self):
-        self.addstr(0,0,'License')
-        r = self.code_disp_r
-        self.addstr(r,0, self.code_disp_tmpl % license_code)
-        r += 1
-        validity_desc = self.license_validity and 'VALID' or 'INVALID'
-        self.addstr(r,0,'Code Validity: %s' % validity_desc)
-        r += 1
-        ver_desc = describe_version_unlocked()
-        self.addstr(r,0,'Version Unlocked: %s' % ver_desc)
-        r += 2
-        self.addstr(r,0,"To submit or change the license code hit 'e', type it, then hit Enter")
-        r += 1
-        self.addstr(r,0,"It will then indicate whether it is valid and what version is approved.")
-
-    def enter_code(self):
-        global license_code
-        lic = license_code is None and '' or license_code
-
-        new_code = None
-        if sys.platform == 'darwin' or sys.platform.startswith('linux'):
-            subscr = curses.newwin(1, 20, self.code_disp_r, len(self.code_disp_tmpl)-2)
-            subscr.refresh()
-            tp = Textbox(subscr)
-            new_code = tp.edit().strip()
-        elif sys.platform == 'win32':
-            new_code = input_field(1, 20, self.code_disp_r, len(self.code_disp_tmpl)-2)
-        license_code = new_code
-        self.validate_license()
-        persist_license()
-
-    def validate_license(self):
-        self.license_validity = is_valid_license(license_code)
+    return 'FULL'
 
 def reset_world():
     global px, py, msgs 
@@ -1347,8 +1272,6 @@ def init(stdscr, *args):
     min_req_h = maph + 5
     if scr.getmaxyx()[1] < min_req_w or scr.getmaxyx()[0] < min_req_h:
         raise 'terminal window size must be at least %s cols by %s lines!' % (min_req_w, min_req_h)
-
-    load_license()
 
     mode = SplashScreen()
     mode.refresh_display()
