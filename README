@@ -133,7 +133,7 @@ To wield item in inventory, 'w', then move cursor to select the item, then SPACE
 
 To unwield item in inventory, 'u', then move cursor to select the item, then SPACEBAR to do it.
 
-Barricades are like walls in that they block movement. You can build a barricade with the 'b' key, followed by the direction to build it in. Like walls, barricades can be destroyed, though they are weaker than walls. They can be useful in providing shelter and protection from the zombie menace.
+Barricades are like walls in that they block movement. You can build a barricade with the 'b' key, followed by the direction to build it in. You must be carrying wood to build a barricade and one wood is consumed per barricaded cell you build. Like walls, barricades can be destroyed, though they are weaker than walls. They can be useful in providing shelter and protection from the zombie menace.
 
 Zombies can sneak up on you from almost anywhere. Well, almost anywhere. If you search and study a spot very carefully you can become sure that no zombies can appear there (hiding under a bed, or up through a trapdoor in floor, or from a ceiling vent, etc.). Use the 'Z' command followed by a direction arrow to search & secure a spot in this manner. This 'search & secure' activity is especially useful in combination with barricades you construct, especially if you want to seal off a shelter or add more living space to an existing building. Beware though: nothing is safe forever.
 

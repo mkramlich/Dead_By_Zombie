@@ -294,6 +294,7 @@ class FullGameMode(GameMode):
     def console_input_allowed(self): return True
     def ui_change_allowed(self): return True
 
+
 class ZombieHackDemoGameMode(DemoGameMode):
     def __init__(self, wh):
         DemoGameMode.__init__(self,wh)
@@ -486,7 +487,7 @@ class ZombieHackDemoGameMode(DemoGameMode):
         flyer = Flyer(wh,bodytext='Zion Research: call for volunteers for exciting experiments on the frontiers of biological science')
         letter_txt = "March 17, 19--.\nDear ---,\n  We are writing to you in response to your inquiry as to the result of last year's voyage, the one you read about in all the papers. The one with the strange circumstances. The official story was that our ship ran aground in a terrible storm, and that explained our disappearance from the charts and the loss of crew. But that was not the truth. Not the whole truth anyway.\nOur expedition had discovered an uncharted island and landed upon it. A week later, we fled back to the ship and sailed away with the survivors. Most of the crew had been murdered in horrible ways by an unseen demon on that cursed island. We pray that noone else ever sets foot there. What we encountered must never reach civilization."
         letter = Letter(wh,bodytext=letter_txt)
-        carried = (note, flyer, letter, Book(wh), Bread(wh), Cheese(wh), Knife(wh))
+        carried = (note, flyer, letter, Book(wh), Bread(wh), Cheese(wh), Knife(wh), Wood(wh))
         you.carry(carried)
         more_food = []
         for i in range(3):
@@ -501,6 +502,7 @@ class ZombieHackDemoGameMode(DemoGameMode):
         pm(Dog(wh), youloc.clone(r='-1', c='-1'))
         pm(Fruit(wh), youloc.clone(c='-1'))
         pm(FruitTree(wh), youloc.clone(r='+1'))
+        pm(Wood(wh), youloc.clone())
 
         flyer2 = Flyer(wh,bodytext='The League of Mad Scientists For a Better Tomorrow - next meeting to be held at the mansion of V. Venturius')
         pm(flyer2, youloc.clone(r='+1', c='-2'))
@@ -1278,6 +1280,16 @@ class HasInventory:
     def list_inventory_of_class(self, klass):
         return [x for x in self.inventory if isinstance(x,klass)]
 
+    def is_class_in_inventory(self, klass):
+        for th in self.inventory:
+            if isinstance(th,klass): return True
+        return False
+
+    def find_first_item_in_inventory_of_class(self, klass):
+        for th in self.inventory:
+            if isinstance(th,klass): return th
+        return None
+
     def wielded_set(self):
         return set(self.wielded)
 
@@ -1642,6 +1654,13 @@ class Thing(HasLocation,HasFacts,HasHP,AppHasID):
 
     def describe_damageness(self):
         return None
+
+
+class Wood(Thing):
+    char = '%'
+    charcolor = HtmlColors.BROWN
+    basebasedesc = 'wood'
+
 
 class Lifeform(Thing,HasMind,HasInventory,RndTalker,Eater):
     char = 'l'
@@ -5523,11 +5542,15 @@ class WebHack:
         if self.is_move_blocking_thing_there(barr_loc):
             self.feedback('you cannot build a barricade there because something is blocking it')
             return
-        #TODO require wood in inventory
-        #TODO consume a wood in inventory
+        if not self.you.is_class_in_inventory(Wood):
+            self.feedback('you cannot build a barricade because you are carrying no wood')
+            return
+        wood_used = self.you.find_first_item_in_inventory_of_class(Wood)
+        self.you.inventory_remove(wood_used)
         barr = Barricade(self)
         self.geo.put_on_map(barr, barr_loc)
-        self.feedback('You build some barricade')
+        self.feedback('You build a barricade')
+        #TODO emit event because, at a min, the activity causes sound & motion, which others might detect
         self.ev.tick_and_process_events()
     directional(usercmd_barricade)
 
