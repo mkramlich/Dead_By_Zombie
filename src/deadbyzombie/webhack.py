@@ -179,10 +179,6 @@ EOL = '<br/>\n'
 # WebHack - begin #
 ###################
 
-##################################
-# Website View Functions - begin #
-##################################
-
 class Plot:
     def __init__(self, wh):
         self.wh = wh
@@ -264,21 +260,11 @@ class GameMode:
     def get_tock_limit(self): pass
     def save_allowed(self): pass
     def may_watch_time_pass_after_death(self): pass
-    def is_restart_limit(self): pass #TODO max num of restarts allowed per user/visitor
-    def get_restart_limit(self): pass #TODO
-    def restart_throttle_rate(self): pass #TODO
-    def request_throttle_rate(self): pass #TODO
     def again_command_allowed(self): pass
     def console_input_allowed(self): pass
     #TODO: victory conditons
-    def advertising_enabled(self): pass #TODO
-    def scoreboard_recording(self): pass #TODO
     #TODO: in-game gameplay perks, differences, bonuses, content
     def ui_change_allowed(self): pass
-    def use_homebrew_content(self): pass #TODO
-    def submit_homebrew_content(self): pass #TODO
-    def bg_sound_allowed(self): pass 
-    def subscription_required(self): pass #TODO
 
 class DemoGameMode(GameMode):
     init_state_file_indicator = 'demo'
@@ -290,19 +276,9 @@ class DemoGameMode(GameMode):
     def get_tock_limit(self): return 500
     def save_allowed(self): return False
     def may_watch_time_pass_after_death(self): return False
-    def is_restart_limit(self): return True
-    def get_restart_limit(self): return 10
-    def restart_throttle_rate(self): return 60 # no more than once per 60 min
-    def request_throttle_rate(self): return 30 # no more than 30 requests per minute
     def again_command_allowed(self): return False
     def console_input_allowed(self): return False
-    def advertising_enabled(self): return True
-    def scoreboard_recording(self): return False
     def ui_change_allowed(self): return False
-    def use_homebrew_content(self): return False
-    def submit_homebrew_content(self): return False
-    def bg_sound_allowed(self): return False 
-    def subscription_required(self): return False
 
 class FullGameMode(GameMode):
     init_state_file_indicator = 'full'
@@ -314,19 +290,9 @@ class FullGameMode(GameMode):
     def get_tock_limit(self): return None #TODO raise ex?
     def save_allowed(self): return True
     def may_watch_time_pass_after_death(self): return True
-    def is_restart_limit(self): return False
-    def get_restart_limit(self): return None #TODO raise ex?
-    def restart_throttle_rate(self): return 10 # no more than once per 10 min
-    def request_throttle_rate(self): return 120 # no more than 120 requests per minute
     def again_command_allowed(self): return True
     def console_input_allowed(self): return True
-    def advertising_enabled(self): return False
-    def scoreboard_recording(self): return True
     def ui_change_allowed(self): return True
-    def use_homebrew_content(self): return True
-    def submit_homebrew_content(self): return True
-    def bg_sound_allowed(self): return True 
-    def subscription_required(self): return True
 
 class ZombieHackDemoGameMode(DemoGameMode):
     def __init__(self, wh):
@@ -921,164 +887,8 @@ class ZombieHackFullGameMode(FullGameMode, ZombieHackDemoGameMode):
             hum.add_to_rnd_speech(humspeechset)
         buildings = lev.get_zones_of_class(Building)
         zombies = pm2(zh_Zombie, fuzloc=floc(br=0,bc=0), minqty=5, maxqty=10, zones_disallowed=buildings)
+# end of class ZombieHackFullGameMode
 
-def is_devmode_allowed(request):
-    return is_staff(request.user)
-
-def is_devmode_allowed(request):
-    return False
-
-def wh_cacheper_content_report():
-    items = wh_cacheper_content_list()
-    s = 'size %s' % len(items)
-    if len(items) > 0:
-        s += EOL * 2
-        s += EOL.join(items)
-        s += EOL
-    return s
-
-def wh_cacheper_content_list():
-    items = []
-    for key in cache_per.cache:
-        wh = cache_per.cache[key]
-        modename = wh.gamemode.mode_name()
-        tock = wh.ev.tock
-        item = '%s: %s tock %s' % (key, modename, tock)
-        items.append(item)
-    return items
-
-def wh_saveallgames_viewfn(request):
-    #TODO consider moving most guts of this into a new method of CachePlusPersistStrategy (impl method) and PersistStrategy (interface meth/stub)
-    saved_keys = []
-    keys = cache_per.cache.keys()
-    for key in keys:
-        state = cache_per.cache[key]
-        if state.gamemode.is_demo_mode(): # we don't save demomode game states
-            continue
-        if is_saved_on_disk_already(key):
-            continue
-        tock = state.ev.tock
-        if tock == 0: # we don't save tock=0 game states
-            continue
-        fname, pstate_size = save_cache_entry_to_disk(key)
-        entry = '%s|%s|%s' % (key, fname, pstate_size)
-        saved_keys.append(entry)
-    return saved_keys
-
-def is_loggedin_perceived_by_admin_job(userid):
-    last_login_later_than_logout = True
-    has_session = True
-    return last_login_later_than_logout and has_session
-
-def wh_purge_inactive_games_from_cache(request):
-    purged = []
-    keys = cache_per.cache.keys()
-    for key in keys:
-        state = cache_per.cache[key]
-        user_id, game_id = cache_per.extract_userid_gameid_from_cache_key(key)
-        user = User.objects.get(id=user_id)
-        now = time.time()
-        if not is_loggedin_perceived_by_admin_job(user_id) or is_too_long_since_last_request(user_id):
-            if not is_saved_on_disk_already(key):
-                fname, pstate_size = save_cache_entry_to_disk(key)
-            log('purging %s from mem cache' % key)
-            del cache_per.cache[key]
-            purged.append(key)
-    return purged
-
-def save_cache_entry_to_disk(wh_cache_key):
-    state = cache_per.cache[wh_cache_key]
-    user_id, game_id = cache_per.extract_userid_gameid_from_cache_key(wh_cache_key)
-    tock = state.ev.tock
-    dtime = datetime.datetime.now()
-    fname = file_per.form_filename(user_id,game_id,tock,dtime)
-    gs = Game.objects.filter(id=game_id)
-    if len(gs) < 1:
-        return #TODO log error because row should've existed or id wrong
-    game = gs[0]
-    savedir = file_per.get_savedirectory_for_game(game)
-    fpath = savedir + '/' + fname
-    pstate_size = file_per.persist_state_with_filename(state,fpath)
-    return fname, pstate_size
-
-def is_saved_on_disk_already(wh_cache_key):
-    return False #TODO finish me, possibly check a tuple item in the cache entry's value; example: key -> (state, lastsavefilename, lastsavetimestamp)
-
-def is_too_long_since_last_request(user_id):
-    td = how_long_since_last_request(user_id)
-    # watchout: code assumes limit is always less than 1 day
-    #TODO get value from config:
-    limit_secs = 60 * 10 # 10 min
-    return td.days > 0 or td.seconds >= limit_secs
-
-def how_long_since_last_request(user_id):
-    ''' returns instance of datetime.timedelta class '''
-    lrts = LastRequestTime.objects.filter(user=user_id)
-    if len(lrts) > 0:
-        lastreq = lrts[0]
-        then = lastreq.when
-        now = datetime.datetime.now()
-        diff = now - then
-        return diff
-    else:
-        return datetime.timedelta() # 0 diff, which is nonsense but safe
-
-def wh_play_viewfn_helper(request, game, whsesskey, whsubclass, whhelp_viewfn, whusercmd_viewfn):
-    trace('wh_play_viewfn_helper()')
-    watch = StopWatch('wh_play_viewfn_helper(): ')
-    wh = None
-    s = None
-    try:
-        #TODO: WARNING: BE VERY CAREFUL WITH DISABLING GC!!!
-        if gc.isenabled(): gc.disable()
-        wh = None
-        devmode_allowed = is_devmode_allowed(request)
-        gameclass, modeclass = determine_gameclass_modeclass(request,game)
-        if not force_reset and does_persisted_state_exist(request,game,whsesskey):
-            wh = fetch_state(request,game,whsesskey)
-            set_devmode(wh,devmode_allowed)
-            set_gameclass_modeclass_for_reset(wh,gameclass,modeclass)
-        else:
-            debug('no persisted state found for game %s, user %s, so will load canned initstate', game.id, request.user.id)
-            wh = return_new_wh_from_canned_initstates_chosen_randomly(gameclass,modeclass)
-            wh.changed_since_last_render = True
-            set_devmode(wh,devmode_allowed)
-            set_gameclass_modeclass_for_reset(wh,gameclass,modeclass)
-            persist_state(request, game, whsesskey, wh, disk_persist=False)
-        wh.help_viewfn = whhelp_viewfn
-        wh.usercmd_viewfn = whusercmd_viewfn
-        s = wh.render_ui(game)
-    finally:
-        if not gc.isenabled(): gc.enable()
-    log(watch.stop())
-    return wh, s
-
-def set_gameclass_modeclass_for_reset(wh, gameclass, modeclass):
-    wh.set_cfg('reset_gameclass', gameclass)
-    wh.set_cfg('reset_modeclass', modeclass)
-
-def determine_gameclass_modeclass(request, game):
-    user = request.user
-    #TODO HACK - BEGIN
-    gameclass = None
-    modeclass = None
-    premium = is_loggedin(user) and (has_premium_access(user) or has_full_sub_benefits(user) or is_beta_tester(user))
-    if game.name == 'Dead By Zombie': #TODO bad way to do this
-        gameclass = ZombieHack
-        modeclass = (premium and ZombieHackFullGameMode) or ZombieHackDemoGameMode
-    elif game.name == 'WolfenHack':
-        gameclass = WolfenHack
-        modeclass = (premium and WolfenHackFullGameMode) or WolfenHackDemoGameMode
-    #TODO HACK - END
-    return gameclass, modeclass
-
-def determine_gameclass_modeclass(request, game):
-    return ZombieHack, ZombieHackFullGameMode
-
-def set_devmode(wh, devmode_allowed):
-    #TODO the above log msgs should be done automaticaly inside body of the set_cfg() method:
-    log('setting devmode_allowed to %s' % devmode_allowed)
-    wh.set_cfg('devmode_allowed', devmode_allowed)
 
 class Persister:
     def persist_state(self, wh, user, game, request=None, whsesskey=None):
@@ -1090,95 +900,6 @@ class Persister:
     def has_state(self, user, game, request=None, whsesskey=None):
         pass
 
-class SessionPersister(Persister):
-    def persist_state(self, wh, user, game, request, whsesskey):
-        putintogamesess(request, game.id, whsesskey, wh)
-
-    def fetch_state(self, user, game, request, whsesskey):
-        return getfromgamesess(request, game.id, whsesskey)
-
-    def has_state(self, user, game, request, whsesskey):
-        return isingamesess(request, game.id, whsesskey)
-
-class CachePersister(Persister):
-    STATE_CACHE_KEY = 'webhack'
-
-    def __init__(self):
-        self.cache = {}
-
-    def persist_state(self, wh, user, game, request=None, whsesskey=None):
-        debug('PERSIST TO CACHE')
-        cachekey = self._form_state_cache_key(user,game)
-        self.cache[cachekey] = wh
-
-    def fetch_state(self, user, game, request=None, whsesskey=None):
-        debug('FETCH FROM CACHE')
-        cachekey = self._form_state_cache_key(user,game)
-        return self.cache[cachekey]
-
-    def has_state(self, user, game, request=None, whsesskey=None):
-        debug('CHECK CACHE')
-        cachekey = self._form_state_cache_key(user,game)
-        return cachekey in self.cache
-
-    def _form_state_cache_key(self, user, game):
-        return '%s-%s-%s' % (self.STATE_CACHE_KEY, user.id, game.id)
-
-    def extract_userid_gameid_from_cache_key(self, cachekey):
-        toks = cachekey.split('-')
-        userid = int(toks[1])
-        gameid = int(toks[2])
-        return userid, gameid
-# CachePersister - end
-
-class DatabasePersister(Persister):
-    def __init__(self, pickle_protocol=0):
-        self.pickle_protocol = pickle_protocol
-
-    def persist_state(self, wh, user, game, request=None, whsesskey=None):
-        debug('PERSIST TO DATABASE')
-        gs = self.fetch_state(user, game)
-        if not gs:
-            gs = GameState()
-            gs.user = user
-            gs.game = game
-        wh_pickled = serialize(wh,'wh',protocol=self.pickle_protocol)
-        gs.data = wh_pickled
-        size = len(wh_pickled)
-        gs.datasize = size
-        watch = StopWatch('gs.save() to database with gs.datasize %s: ' % size)
-        gs.save()
-        debug(watch.stop())
-        return size
-
-    def has_state(self, user, game, request=None, whsesskey=None):
-        gss = GameState.objects.filter(user=user, game=game)
-        return len(gss) > 0
-
-    def fetch_gs(self, user, game):
-        gs = None
-        watch = StopWatch('fetch_state_from_database(): user=%s, game=%s: ' % (user.id, game.id))
-        gss = GameState.objects.filter(user=user, game=game)
-        found_gs = len(gss) > 0
-        if found_gs:
-            gs = gss[0]
-        debug(watch.stop())
-        return gs
-
-    def fetch_state(self, user, game, request=None, whsesskey=None):
-        debug('FETCH FROM DATABASE')
-        wh = None
-        gs = self.fetch_gs(user,game)
-        if gs:
-            wh = deserialize(gs.data,'wh',protocol=self.pickle_protocol)
-            wh.size = gs.datasize
-            gc_enabled_before = gc.isenabled()
-            gc.enable()
-            #ogr = ObjGraphReporter(10)
-            #wh.objreport = ogr.report(wh)
-            if not gc_enabled_before: gc.disable()
-        return wh
-# DatabasePersister - end
 
 class FilePersister(Persister):
     def __init__(self, pickle_protocol=2):
@@ -1296,56 +1017,6 @@ class FilePersister(Persister):
         return 'gamestate-g%s-u%s-t%s-%s-%s.dat' % (gameid, userid, tock, date, time)
 # FilePersister - end
 
-class PersistStrategy:
-    def does_persisted_state_exist(self, user, game, request, whsesskey):
-        pass
-
-    def fetch_state(self, user, game, request, whsesskey):
-        pass
-
-    def persist_state(self, user, game, request, whsesskey, wh, disk_persist=True):
-        pass
-
-class SessPersistStrategy(PersistStrategy):
-    def does_persisted_state_exist(self, user, game, request, whsesskey):
-        return sess_per.has_state(user,game,request,whsesskey)
-
-    def fetch_state(self, user, game, request, whsesskey):
-        return sess_per.fetch_state(user,game,request,whsesskey)
-
-    def persist_state(self, user, game, request, whsesskey, wh, disk_persist=True):
-        sess_per.persist_state(wh,user,game,request,whsesskey)
-
-class CachePlusPersistStrategy(PersistStrategy):
-    def __init__(self, main_per, cache_per):
-        self.main_per = main_per
-        self.cache_per = cache_per
-
-    def does_persisted_state_exist(self, request, game, whsesskey):
-        user = request.user
-        if self.cache_per.has_state(user,game): return True
-        return self.main_per.has_state(user,game)
-
-    def fetch_state(self, request, game, whsesskey):
-        wh = None
-        user = request.user
-        if self.cache_per.has_state(user,game):
-            wh = self.cache_per.fetch_state(user,game)
-        else: # state not in cache, so fetch from database, and cache it:
-            wh = self.main_per.fetch_state(user,game)
-            self.cache_per.persist_state(wh,user,game)
-        return wh
-
-    def persist_state(self, request, game, whsesskey, wh, disk_persist=True):
-        record_session_size(request,wh)
-        user = request.user
-        should_main_persist = disk_persist
-        if should_main_persist:
-            wh.size = self.main_per.persist_state(wh,user,game)
-            #ogr = ObjGraphReporter(10)
-            #wh.objreport = ogr.report(wh)
-        self.cache_per.persist_state(wh,user,game)
-# CachePlusPersistStrategy - end
 
 # called by bin/makeinitstate.py:
 def gen_new_gamestate_and_save_to_file(webhacksubclass, gamemodeclass, filename, devmode_allowed):
@@ -1380,38 +1051,8 @@ def return_new_wh_from_canned_initstates_chosen_randomly(gameclass, modeclass):
     debug('load success. wh.size: %s', wh.size)
     return wh
 
-sess_per = SessionPersister()
-cache_per = CachePersister()
-db_per = DatabasePersister()
+
 file_per = FilePersister()
-sess_stgy = SessPersistStrategy()
-dbcache_stgy = CachePlusPersistStrategy(db_per,cache_per)
-filecache_stgy = CachePlusPersistStrategy(file_per,cache_per)
-
-per_stgy = filecache_stgy
-
-
-def does_persisted_state_exist(request, game, whsesskey):
-    debug('does_persisted_state_exist()')
-    debug('persist strategy: %s' % per_stgy.__class__.__name__)
-    return per_stgy.does_persisted_state_exist(request,game,whsesskey)
-
-def fetch_state(request, game, whsesskey):
-    trace('fetch_state()')
-    debug('persist strategy: %s' % per_stgy.__class__.__name__)
-    wh = per_stgy.fetch_state(request,game,whsesskey)
-    if not hasattr(wh,'sess_size'): #TODO TMP HACK to workaround bug, should eventually be removed
-        wh.sess_size = 1
-    return wh
-
-def persist_state(request, game, whsesskey, wh, disk_persist=True):
-    trace('persist_state()')
-    debug('persist strategy: %s' % per_stgy.__class__.__name__)
-    per_stgy.persist_state(request,game,whsesskey,wh,disk_persist)
-
-def record_session_size(request, wh):
-    sess_pickled = serialize(request.session,'session')
-    wh.sess_size = len(sess_pickled)
 
 default_pickle_protocol = 0
 
@@ -1432,142 +1073,6 @@ def deserialize(obj_ser, objname, protocol=None):
     debug(watch.stop())
     debug('serialized %s len: %s bytes (protocol %s)' % (objname, len(obj_ser), protocol))
     return obj
-
-def wh_usercmd_viewfn_helper(request, whsesskey):
-    trace('wh_usercmd_viewfn_helper()')
-    response = None
-    watchmsgpre = 'wh_usercmd_viewfn_helper(): '
-    watch_total = StopWatch(watchmsgpre)
-    try:
-        #TODO: WARNING: BE VERY CAREFUL WITH DISABLING GC!!!
-        if gc.isenabled(): gc.disable()
-        response, watchmsgsuf = subfn_wh_usercmd_viewfn_helper(request,whsesskey,watchmsgpre)
-    finally:
-        if not gc.isenabled(): gc.enable()
-    log(watch_total.stop(watchmsgpre,watchmsgsuf))
-    return response
-
-def subfn_wh_usercmd_viewfn_helper(request, whsesskey, watchmsgpre):
-    devmode_allowed = is_devmode_allowed(request)
-
-    if not is_loggedin(request.user):
-        s = 'you are not logged in. you must be logged in to play.' 
-        response = HttpResponse(s)
-        watchmsgsuf = ' BUT IN CASE where returned early without doing anything due to user not logged in'
-        return response, watchmsgsuf
-    #TODO also check in GET, decide which is used then only use the params in that one ignoring the other
-
-    watch = StopWatch('get cmd and gameid from req POST: ')
-    paramsrc = None
-    if 'gameid' in request.POST:
-        paramsrc = request.POST
-    else:
-        paramsrc = request.GET
-    gameid = int(paramsrc['gameid'])
-    cmd = paramsrc['cmd']
-    log(watch.stop())
-
-    watch = StopWatch('fetch Game row from db: ')
-    game = Game.objects.get(id=gameid) #doing early so can puke early
-    xxx = game.id
-    log(watch.stop())
-
-    wh = None
-    if does_persisted_state_exist(request,game,whsesskey):
-        wh = fetch_state(request,game,whsesskey)
-    else:
-        s = no_persisted_state_found_msg(request.user,game)
-        return HttpResponse(s), ''
-
-    # Signal to the UI that it should re-render the page on next page request
-    wh.changed_since_last_render = True
-
-    set_devmode(wh,devmode_allowed)
-
-    watch = StopWatch('building cmd params from req POST params: ')
-    params = {}
-    was_rel_dir_cmd_submit = False
-    for k in request.POST:
-        if k == 'gameid' or k == 'cmd':
-            continue
-        pre = SUBMIT_STYLE_PARAMS_PREFIX
-        if k.startswith(pre):
-            was_rel_dir_cmd_submit = True
-            log('found POST param starting with "%s": %s' % (pre,k))
-            paramspart = k[len(pre):]
-            prms = eval(paramspart)
-            log('we parsed it into: %s  type %s' % (prms,type(prms)))
-            params.update(prms)
-        else:
-            params[k] = request.POST[k]
-    if was_rel_dir_cmd_submit:
-        command = params['command']
-        setname = None
-        if command in wh.get_directional_move_usercmds_bare():
-            setname = 'move'
-        elif command in wh.get_directional_nonmove_usercmds_bare():
-            setname = 'nonmove'
-        wh.rel_dir_cmd_last_submitted[setname] = params['command']
-    log(watch.stop())
-
-    log('params: %s' % params)
-
-    watch = StopWatch('dispatch_usercmd(\''+str(cmd)+'\',...): ')
-    success, reason, should_persist_to_disk, replace_wh_with = wh.dispatch_usercmd(cmd,params)
-    log(watch.stop())
-
-    new_wh_desc = None 
-    if replace_wh_with is None:
-        new_wh_desc = 'None'
-    else:
-        new_wh_desc = 'id(): ' + str(id(replace_wh_with)) + ' wh.size: %s' % replace_wh_with.size
-    log('success returned: %s',success)
-    log('replace_wh_with returned: %s', new_wh_desc)
-
-    response = None
-    watchmsgsuf = None
-    if success:
-        if replace_wh_with is not None:
-            log('replacing wh with new instance, before persisting; wh.size: %s',wh.size)
-            wh = replace_wh_with
-            should_persist_to_disk = False
-    
-        persist_state(request, game, whsesskey, wh, disk_persist=should_persist_to_disk)
-        watch = StopWatch('build redirect to play view: ')
-        response = redirect(views.playwebgame.makeviewurlfn(game))
-        log(watch.stop())
-    else:
-        watchmsgsuf = ' BUT IN CASE where dispatch returned failure'
-        response = HttpResponse(reason)
-
-    return response, watchmsgsuf
-
-def no_persisted_state_found_msg(user, game):
-    s = 'no persisted state found for this combination of user and game (user: %s (%s) game: %s (%s))' % (user.username, user.id, game.name, game.id)
-    return s
-
-def wh_help_viewfn_helper(request, whsesskey):
-    trace('wh_help_viewfn_helper()')
-    #views = groglogic.mainapp.views
-    try:
-        #TODO: WARNING: BE VERY CAREFUL WITH DISABLING GC!!!
-        if gc.isenabled(): gc.disable()
-        gameid = int(request.GET['gameid'])
-        game = Game.objects.get(id=gameid)
-        s = header(request, views.playwebgame, title=game.name) + EOL
-        if does_persisted_state_exist(request,game,whsesskey):
-            wh = fetch_state(request,game,whsesskey)
-            s += wh.get_help_blurb() + EOL + EOL
-            s += link(site_url(views.playwebgame.makeviewurlfn(game)),'back') + EOL
-        else:
-            s = no_persisted_state_found_msg(request.user,game)
-    finally:
-        if not gc.isenabled(): gc.enable()
-    return HttpResponse(s)
-
-################################
-# Website View Functions - end #
-################################
 
 
 # Global Functions
@@ -4107,7 +3612,7 @@ class WebHack:
 
         s += space(4) + '<b>Miscellaneous Actions &amp; Commands:</b>' + EOL
         #TODO these cmds shouldn't be listed here hardcoded; instead, each usercmd fn should have an attrib/quality which indicates whether it should appear in the Help doc or not:
-        usercmds = ('again','change_ui','clear','commands','desc_self','drop_all','inventory','jump','look_here','memories','pickup_all','route','say_hello','skills','sound_toggle','stairs','story','thing_classes','things_here','wait','wave_arms','yell','reset')
+        usercmds = ('again','change_ui','clear','commands','desc_self','drop_all','inventory','jump','look_here','memories','pickup_all','route','say_hello','skills','stairs','story','thing_classes','things_here','wait','wave_arms','yell','reset')
         cmds2 = []
         for cmd in usercmds:
             label = self.label_for_usercmd(cmd)
@@ -5777,16 +5282,6 @@ class WebHack:
                         v = True
                     params[k] = v
         return cmd, params
-
-    def usercmd_sound_toggle(self):
-        '''toggles on/off the playing of bg music and sound effects'''
-        if not self.gamemode.bg_sound_allowed():
-            self.feedback("bg sound not allowed in %s gamemode so no point toggling it on/off for you" % self.gamemode.mode_name())
-            return
-
-        v = self.toggle_cfg('bgmusic')
-        self.feedback('play bg sounds: ' + str(v))
-    autoui(usercmd_sound_toggle)
 
     def usercmd_change_ui(self):
         '''toggles UI style and layout; currently two choices: ClassicUI and AltUI (the default)'''
@@ -8816,4 +8311,4 @@ for cl in thing_classes:
 
 add_thing_class_to_group(Book,'library_material')
 
-#EOF
+#meModeEOF
