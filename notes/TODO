@@ -4,12 +4,13 @@ topmost issues are generally highest priority and/or coming up next in my work q
 
 ------------------------------------
 
-fix any imperfections that happen after you die
-
-fix all known bugs
-
 you should need some kind of material/resource to build a barricade; right now it's magic and can build an infinite amount of barricades
     also: way for player to destroy or disassemble a barricade
+
+you can eat a human corpse (it provides nutrition)
+
+when you're dead (human corpse) don't show Stomach in UI, and instead of HP value say DEAD
+    similar: when you're a zombie, don't show Stomach, do show HP, but also say ZOMBIE
 
 a way for player to learn about the status of the world, what's happening with the zombie apocalypse
 
@@ -42,3 +43,14 @@ when you hit 'S' to save, the app pauses mysteriously (the save is executing) fr
 elim all the dead code (some still leftover from the original webapp version of DBZ)
 
 fix 'has' to 'have' and capitalize 'you': "you lost 1 hp due to starvation and now has 0 hp"
+
+fix any imperfections that happen after you die
+
+fix all known bugs
+
+NPC humans digest and can starve to death
+
+NPC humans can choose to eat human corpses in same cell if they are otherwise starving; likewise, if human corpse not in same cell, they'll move toward the nearest expected one
+    NPC humans can pickup food; can move toward nearest expected food (to pick it up, and eventually eat it)
+
+
