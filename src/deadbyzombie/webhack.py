@@ -2077,7 +2077,7 @@ class Dog(Animal):
 #######################
 
 class Human(Lifeform):
-    char = 'P'
+    char = '@'
     bitesize_max = 5
     basebasedesc = 'person'
     render_importance = 10

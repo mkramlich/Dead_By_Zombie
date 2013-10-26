@@ -53,4 +53,5 @@ NPC humans digest and can starve to death
 NPC humans can choose to eat human corpses in same cell if they are otherwise starving; likewise, if human corpse not in same cell, they'll move toward the nearest expected one
     NPC humans can pickup food; can move toward nearest expected food (to pick it up, and eventually eat it)
 
+add a CLI client for playing the game (or at least running admin & analysis tasks against a world state); would have beneficial effect on the architecture; and be consistent with CLIFMO
 
