@@ -4,6 +4,20 @@ topmost issues are generally highest priority and/or coming up next in my work q
 
 ------------------------------------
 
+script to convert the sshot tiffs to png
+
+way to read old feedbacks, in case you missed something (like you noticed your a zombie now, want to see the feedback from recently pass tocks to learn exactly how it happened)
+
+finish bomb code
+
+every tock chance WarriorDoll says eerie things like "dead by dawn..." and chance it wiggles (fact that you feel wiggling sensation coming from your pocket/pack is mentioned in the feedback). is chance while on ground he effectively TP's to farther cell whenver player can't see him?
+
+a way to use radio/internet/loudspeakers to send a broadcast telling the general public (other survivors) to go to a certain location (coords) if they need helper/shelter/protection. easy to specify your current location coords but you can also instead specify arbitrary coords/level/region; some/all NPCs can hear/see/receieve this (with approp devices & word-of-mouth) and will actually begin moving toward and/or simply appearing (TP or genesis) at/near the identified location
+
+timebomb - you can enable/disable it; when you enable it it will explode in T tocks from that moment; when it explodes it destroys all things in radius R
+
+mine - you can enable it; if on ground and enabled, and a creature moves into it's cell it explodes
+
 way for player to destroy or disassemble a barricade; if wielding a weapon you can destroy a barricade but you cannot destroy a buildling Wall
 
 if wielding axe/chainsaw, can chop down a tree (reldir action), whcih destroys the tree and creates wood on the ground there
@@ -13,7 +27,9 @@ you can eat a human corpse (it provides nutrition)
 when you're dead (human corpse) don't show Stomach in UI, and instead of HP value say DEAD
     similar: when you're a zombie, don't show Stomach, do show HP, but also say ZOMBIE
 
-fire; figure out the mechanics/lifecycle first; at a min, trees and wooden barricades can catch on fire if fire adjacent; rain can happen and tends to put out fires; how can fire be started? (player action using a lighter/matchsticks is one way)
+when a zombie attacks, even if it doesn't kill, there's a chance it spreads the zombie infection to the victim (player or NPC); if a human has the zombie infection (but not yet a zombie) then each subsequent tock is small chance he'll become a Zombie
+
+fire (on map: red caret); figure out the mechanics/lifecycle first; at a min, trees and wooden barricades can catch on fire if fire adjacent; rain can happen and tends to put out fires; how can fire be started? (player action using a lighter/matchsticks is one way)
  
 explosives
 
@@ -62,4 +78,4 @@ add a CLI client for playing the game (or at least running admin & analysis task
 
 consolidate ZombieHackDemoGameMode with ZombieHackFullGameMode
 
-
+there is a chance that a civil emergency siren (aka, air raid siren) will begin to play. the fact that its playing will be described always until/unless it stops playing

@@ -487,7 +487,7 @@ class ZombieHackDemoGameMode(DemoGameMode):
         flyer = Flyer(wh,bodytext='Zion Research: call for volunteers for exciting experiments on the frontiers of biological science')
         letter_txt = "March 17, 19--.\nDear ---,\n  We are writing to you in response to your inquiry as to the result of last year's voyage, the one you read about in all the papers. The one with the strange circumstances. The official story was that our ship ran aground in a terrible storm, and that explained our disappearance from the charts and the loss of crew. But that was not the truth. Not the whole truth anyway.\nOur expedition had discovered an uncharted island and landed upon it. A week later, we fled back to the ship and sailed away with the survivors. Most of the crew had been murdered in horrible ways by an unseen demon on that cursed island. We pray that noone else ever sets foot there. What we encountered must never reach civilization."
         letter = Letter(wh,bodytext=letter_txt)
-        carried = (note, flyer, letter, Book(wh), Bread(wh), Cheese(wh), Knife(wh), Wood(wh))
+        carried = (note, flyer, letter, Book(wh), Bread(wh), Cheese(wh), Knife(wh), Wood(wh), Bomb(wh))
         you.carry(carried)
         more_food = []
         for i in range(3):
@@ -499,10 +499,11 @@ class ZombieHackDemoGameMode(DemoGameMode):
         geo.add_to_cell_desc('This is where you started.',youloc.level,youloc.r,youloc.c)
         geo.activelevel = youloc.level
 
-        pm(Dog(wh), youloc.clone(r='-1', c='-1'))
-        pm(Fruit(wh), youloc.clone(c='-1'))
-        pm(FruitTree(wh), youloc.clone(r='+1'))
-        pm(Wood(wh), youloc.clone())
+        pm( Dog(wh), youloc.clone(r='-1', c='-1'))
+        pm( Fruit(wh), youloc.clone(c='-1'))
+        pm( FruitTree(wh), youloc.clone(r='+1'))
+        pm( Wood(wh), youloc.clone())
+        pm( WarriorDoll(wh), youloc.clone(r='-1'))
 
         flyer2 = Flyer(wh,bodytext='The League of Mad Scientists For a Better Tomorrow - next meeting to be held at the mansion of V. Venturius')
         pm(flyer2, youloc.clone(r='+1', c='-2'))
@@ -1660,6 +1661,27 @@ class Wood(Thing):
     char = '%'
     charcolor = HtmlColors.BROWN
     basebasedesc = 'wood'
+
+
+class Bomb(Thing):
+    char = 'b'
+    charcolor = HtmlColors.RED
+    basebasedesc = 'bomb'
+
+    def __init__(self, wh, mind2use=None):
+        Thing.__init__(self,wh)
+        self.tock_when_explodes = -1 # -1 indicates is not activated
+
+    def handle_event_tick(self, event):
+        Thing.handle_event_tick(self,event)
+        if (self.tock_when_explodes != -1) and self.wh.ev.tock == self.tock_when_explodes:
+            self.wh.feedback('BOOM!')
+            #TODO emit sound event
+            #TODO destroy or damage stuff within blast radius
+
+    def activate(self):
+        self.tock_when_explodes = self.wh.ev.tock + 10
+        #TODO add user command for activating/deactivating a bomb
 
 
 class Lifeform(Thing,HasMind,HasInventory,RndTalker,Eater):
@@ -2856,7 +2878,7 @@ class Flyer(Thing,Readable,RndStuff):
     char = 'f'
     basebasedesc = 'flyer'
     textchoices = (\
-        'Save the whales. Feed the kittens. Kittens like whale meat.',
+        'Save the whales. Feed the kittens. Kittens like whale meat. Paradox?',
         'SUPER SALE! EVERYTHING MUST GO! BRING THIS TO YOUR CLOSEST LOCATION FOR 20% OFF! NOT AVAILABLE IN ALL LOCATIONS. MAY EXPIRE AT ANY TIME. ILLEGAL IN SOME STATES. NO CLAIMS EXPRESSED OR IMPLIED. DOES NOT CONSTRUE LEGAL ADVICE. CONSULT YOUR DOCTOR.',
         )
 
@@ -8222,15 +8244,11 @@ class WarriorDoll(Lifeform):
         #self.mind_content_load('zh_Zombie','zombiehack/')
         self.render_importance = 15
 
-    def does_self_block_adding_thing_to_self_cell(self):
-        return True
+    def does_self_block_adding_thing_to_self_cell(self): return False
 
-    def is_capable_of_speech(self):
-        return False
-        #return self.is_alive()
+    def is_capable_of_speech(self): return False
 
-    def can_be_picked_up(self):
-        return False
+    def can_be_picked_up(self): return True
 
     def get_odds_of_rnd_move(self):
         return 3,4 # 33% chance of rnd movement per tick

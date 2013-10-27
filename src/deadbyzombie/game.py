@@ -1137,21 +1137,18 @@ class AboutScreen(Mode):
         ver = 1.1
         txt = (app_name,
             '',
-            'version %s' % ver,
-            '',
-            'https://github.com/mkramlich/Dead_By_Zombie',
-            'http://synisma.neocities.org/deadbyzombie.html',
             '',
             'design, writing & programming by Mike Kramlich',
+            '    https://github.com/mkramlich/Dead_By_Zombie',
+            '    http://synisma.neocities.org/deadbyzombie.html',
             '',
             'promotional artwork by Richard Pace',
-            "    Richard's website and online gallery:",
             '    http://richardpace.deviantart.com')
         r = 0
         for ln in txt:
             self.addstr(r,0,ln)
             r += 1
-        self.addstr(r+4,0,'Hit Any Key','black-white')
+        self.addstr(r+3,0,'Hit Any Key','black-white')
 
 def is_full_allowed():
     return True
