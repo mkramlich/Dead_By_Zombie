@@ -14,11 +14,9 @@ This is an open source snapshot of my 100% originally-created but previously clo
 
     https://github.com/mkramlich/Dead_By_Zombie
 
-I'm not taking code contributations at the moment, so don't bother issuing pull requests. That may change in the future. Feel free to email with questions, suggestions or requests.
+I'm not taking code contributions at the moment, so don't bother issuing pull requests. Feel free to email with questions, suggestions or requests.
 
 We also used to officially support Windows but have dropped that platform as not worth the effort. The creator prefers and therefore focuses on the Linux and Mac ecosystems. Trust me: life's better with Mac or Linux.
-
-We're going to begin implementing a series of upgrades to the game and the core engine as we have time, and making those changes available here in the open sourced repo on GitHub.
 
 Feel free to play it. And feel free to make modifications to the code that run only on your own machine. You may not distribute this game, its code or your own modified versions of it to other parties without my explicit prior permission. Feel free to throw money at me (via PayPal to my email address). I also love LEGO. And Advanced Squad Leader.
 
@@ -224,7 +222,7 @@ creator's general portfolio website:
 
 If you'd like to be added to our mailing list, used to announce major news or new releases of the game, drop us a line saying so at:
     groglogic@gmail.com
-We promise not to spam you or give your address out to any other party. And if you ever want to stop receiving our emails, just let us know and thy will will be done. ("By your command," as an 80's Cylon would say.)
+We promise not to spam you or give your address out to any other party. And if you ever want to stop receiving our emails, just let us know.
 
 If you have any other questions, suggestions, ideas, complaints or feedback, also feel free to email us as well.
 
