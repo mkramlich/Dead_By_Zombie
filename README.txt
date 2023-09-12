@@ -18,9 +18,9 @@ I'm not taking code contributions at the moment, so don't bother issuing pull re
 
 We also used to officially support Windows but have dropped that platform as not worth the effort. The creator prefers and therefore focuses on the Linux and Mac ecosystems. Trust me: life's better with Mac or Linux.
 
-Feel free to play it. And feel free to make modifications to the code that run only on your own machine. You may not distribute this game, its code or your own modified versions of it to other parties without my explicit prior permission. Feel free to throw money at me (via PayPal to my email address). I also love LEGO. And Advanced Squad Leader.
+Feel free to play it. And feel free to make modifications to the code that run only on your own machine. You may not distribute this game, its code or your own modified versions of it to other parties without my explicit prior permission. Feel free to throw compliments/insults at me to my email address). I also love LEGO. And Advanced Squad Leader. I hate mustard. Best compliment is LEGO. Worst insult is mustard. Though technically I can eat mustard, so maybe that's only the 2nd worst insult?
 
-All rights reserved worldwide.
+All rights reserved worldwide. (This means you, Kansas. *cough*)
 
 
 Requirements:
@@ -213,18 +213,8 @@ HOW TO PURCHASE THE GAME
 
 You no longer can. You may see refs to Demo vs Premium/License but we'll be removing that distinction over time.
 
+However, if you would like to throw a tip/donation at me, or otherwise support my development of new Rogue-like game play, check out my new "Slartboz" project. More details on that down below.
 
-the official/main website for Dead By Zombie:
-    http://synisma.neocities.org/deadbyzombie.html
-
-creator's general portfolio website:
-    http://synisma.neocities.org
-
-If you'd like to be added to our mailing list, used to announce major news or new releases of the game, drop us a line saying so at:
-    groglogic@gmail.com
-We promise not to spam you or give your address out to any other party. And if you ever want to stop receiving our emails, just let us know.
-
-If you have any other questions, suggestions, ideas, complaints or feedback, also feel free to email us as well.
 
 thanks,
 
@@ -233,21 +223,40 @@ Dead By Zombie's Chief Mad Scientist
 
 --------------------------------------------------
 
+UPDATE: 2023 September 12
 
-((**))   The Dread Space Pirate Richard   ((**))
+About 15 years after releasing my first commercial Rogue-like game I've returned to the field.
 
+Slartboz is my new Rogue-like game, under active development, and my de facto sequel and successor to Dead By Zombie (DBZ). Please check it out, starting over at:
 
-I also write a series of sci-fi romantic comedy novellas.
+    https://github.com/mkramlich/slartboz-pub
 
-It involves pirates. And space. And some kind of dread is involved on occasion. And a guy named Richard.
-Starships. Mad computers. Quite mad, really. Bounty hunters. Wealthy buxom porn stars. Androids. Rebels against an evil Galactic Empire. Warm chocolate chip cookies. This last thing is the only thing I've lied about so far.
+FAQ
 
-To learn more about it visit this group on Reddit:
-    http://www.reddit.com/r/DSPR
+Q1. how is Slartboz (SB) diff from DBZ?
+    * SB is written in Golang. DBZ in Python
+    * SB has a real-time engine. NOT a turn-based/you-go-they-go like in DBZ
+    * richer color palette used (millions of hues/shades, all across the spectrum -- NOT just the 8 or so "Terminal screen colors" used in DBZ)
+    * UI uses Unicode/UTF-8 glyphs, in *addition* to ASCII/ANSI
+    * has sound & music
+    * private code base, closed source
+    * however... small pieces of the code WILL be shared as new, standalone, public FOSS repos, and where their functionality is generic enough. NOT the full source to SB, like I ultimately did with DBZ. The first little piece HAS been shared out, already (a 100% FREE Golang lib for latency instrumentation and reporting), over at: https://github.com/mkramlich/latlearn
+    * sci-fi, future, post-apoc setting. Normerika in the year 2100 CE. A weird, terrifying but Fun (TM) world replate with Lazers! Mutants! Robots! Mad AI's! Gigantic Cybernetic Battle Tanks! Wacky Rube Goldberg Devices And Ouroboros Contraptions! Orwellian Levels of Creepy, Dystopic Propaganda Cults! Surveillance Capitalism Gone Overboard! Democracy Collapse! Climate Out of Control! Elong Mux Actually On The Planet Mars! A Certain Ex-President/Ex-Con Living The High Un-Life in Secret Traitorous Exile Somewhere in Grussia ("Sad! Everybody is saying so! Big men, they come up to me! Straight out of central casting!" *shamble-shamble-groan-drool*)
 
-Buy (or read FREE samples from!) the 1st book published here:
-    http://www.smashwords.com/books/view/324775
+Q2. ok... but what is the same?
+    * I made it
+    * homegrown engine
+    * Rogue-like
+    * some randomly-generated (at runtime) content AND some procedurally-generated
+    * some plots and some sandbox play
+    * UI composed mainly of ASCII glyphs, and runs assuming in a Terminal. like a typical curses-based program (like vim and top). like NetHack, and (the original) Dwarf Fortress
+    * I could NOT in good faith call it my de facto "sequel" to DBZ without SB having, oh, say, I dunno... absolutely M-M-M-MASSIVE Z-Z-Z-ZOMBIE H-H-H-HERDS!!!
+    * and so.. it does! :-P
 
----------------------------------------------------------
+------------------------------------------------
 
+SLARTBOZ: Fazzmagik Tales in The Sleen Groove
+    coming soon to theaters near you (*)
+
+    (*) not legal in all jurisdictions (*glares at the remote Pacific island of Kiwi, always the rebel*)
 
